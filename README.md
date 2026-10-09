@@ -12,7 +12,7 @@
 - **Mini-Game Vui Nhộn**: Trò chơi gõ thìa vào củ khoai tây né tránh trong 10s để nhận lượt quay Vòng Quay May Mắn trúng eVoucher hấp dẫn (5%, 10%, 15%).
 - **Tích Hợp Chat Telegram Trực Tuyến**: Khách hàng chat trực tiếp trên web, tin nhắn cùng số điện thoại chuyển tiếp ngay về Telegram Bot cho đội ngũ trực hỗ trợ.
 - **Trang Quản Trị Admin Riêng (`admin.html`)**: Quản lý đơn hàng, duyệt thanh toán MoMo QR, thống kê doanh thu và quản lý danh sách khách cần hỗ trợ (Leads). Đăng nhập an toàn qua popup tài khoản.
-- **Chính Sách & Tiêu Chuẩn ATTP (`chinh-sach.html`)**: Đầy đủ cam kết chất lượng chuẩn Bộ Y Tế.
+- **Chính Sách Bán Hàng & Giao Nhận (`chinh-sach.html`)**: Đầy đủ quy định đồng kiểm, đổi trả 100%, bảo mật và phương thức thanh toán.
 
 ---
 
@@ -58,7 +58,7 @@ python3 -m http.server 3000
 themammam/
 ├── index.html                  # Trang bán hàng & đặt món chính
 ├── admin.html                  # Trang quản trị đơn hàng & quản lý
-├── chinh-sach.html             # Chính sách chất lượng & ATTP
+├── chinh-sach.html             # Chính sách bán hàng & giao nhận
 ├── config.json                 # Cấu hình Store & Telegram Bot
 ├── server.py                   # Server Python dev & webhook Telegram
 ├── TELEGRAM_SETUP_GUIDE.md     # Hướng dẫn chi tiết cấu hình Telegram

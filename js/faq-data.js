@@ -3,7 +3,7 @@
  * Trợ lý ảo AI & Điều hướng hỏi đáp nhanh
  * Danh mục:
  * 1. Món Bán Chạy & Hương Vị (Q1 - Q15)
- * 2. Nguyên Liệu & Nguồn Gốc VietGAP (Q16 - Q28)
+ * 2. Nguyên Liệu & Nguồn Gốc Tự Nhiên (Q16 - Q28)
  * 3. Hạn Sử Dụng & Hướng Dẫn Bảo Quản (Q29 - Q42)
  * 4. Dinh Dưỡng, Ăn Kiêng & Sức Khỏe (Q43 - Q55)
  * 5. Đóng Gói & Vận Chuyển 63 Tỉnh Thành (Q56 - Q70)
@@ -157,7 +157,7 @@ const MAMMAM_FAQ_DATA = {
       category: "ingredients",
       question: "Khoai tây làm sấy giòn có nguồn gốc từ đâu?",
       keywords: ["nguon goc khoai tay", "khoai tay o dau", "xuat xu"],
-      answer: "100% khoai tây tươi của The Măm Măm được trồng tại các nông trại đối tác ở Đà Lạt và Đơn Dương (Lâm Đồng), thu hoạch theo chuẩn VietGAP, củ to chắc ruột vàng ngọt bùi tự nhiên.",
+      answer: "100% khoai tây tươi của The Măm Măm được trồng tại các nông trại đối tác ở Đà Lạt và Đơn Dương (Lâm Đồng) theo quy trình canh tác sạch tự nhiên, củ to chắc ruột vàng ngọt bùi tự nhiên.",
       relatedIds: [17, 18, 26]
     },
     {
@@ -173,7 +173,7 @@ const MAMMAM_FAQ_DATA = {
       category: "ingredients",
       question: "Sản phẩm của The Măm Măm có dùng chất bảo quản công nghiệp không?",
       keywords: ["chat bao quan", "phu gia", "chat hoa hoc"],
-      answer: "Tuyệt đối KHÔNG có chất bảo quản hóa học! Tiệm áp dụng công nghệ sấy chân không, đóng gói kín khí màng nhôm và gói hút ẩm tự nhiên để bảo quản chất lượng thực phẩm theo chuẩn an toàn Bộ Y Tế.",
+      answer: "Tuyệt đối KHÔNG có chất bảo quản hóa học! Tiệm áp dụng công nghệ sấy chân không, đóng gói kín khí màng nhôm và gói hút ẩm tự nhiên để giữ trọn vẹn độ tươi giòn và hương vị mộc.",
       relatedIds: [19, 20, 25]
     },
     {
@@ -227,27 +227,25 @@ const MAMMAM_FAQ_DATA = {
     {
       id: 25,
       category: "ingredients",
-      question: "The Măm Măm có Giấy chứng nhận Vệ sinh An toàn Thực phẩm (ATTP) không?",
-      keywords: ["giay attp", "ve sinh an toan thuc pham", "chung nhan"],
-      answer: "Có đầy đủ 100%! Cơ sở sản xuất The Măm Măm đạt Giấy chứng nhận cơ sở đủ điều kiện An toàn thực phẩm và công bố tiêu chuẩn chất lượng theo đúng Nghị định 15/2018/NĐ-CP của Chính phủ.",
-      relatedIds: [26, 27, 28],
-      action: { type: "policy", label: "Xem Chi Tiết Quy Chuẩn Y Tế ➔" }
+      question: "Bánh tươi tại The Măm Măm được làm và nướng như thế nào?",
+      keywords: ["banh tuoi", "nuong moi ngay", "quy trinh lam banh"],
+      answer: "Toàn bộ bánh tươi tại The Măm Măm đều được nhào nặn và nướng mới mỗi sáng từ nguyên liệu tự nhiên chọn lọc, không dùng chất bảo quản hóa học, thơm ngon nóng hổi giao tận tay khách hàng.",
+      relatedIds: [24, 28, 29]
     },
     {
       id: 26,
       category: "ingredients",
-      question: "Sản phẩm có tuân thủ các Quy chuẩn Kỹ thuật Quốc gia (QCVN) Bộ Y Tế không?",
-      keywords: ["qcvn", "bo y te", "tieu chuan chat luong"],
-      answer: "Sản phẩm tuân thủ đầy đủ các QCVN của Bộ Y Tế: QCVN 8-1:2011/BYT (độc tố vi nấm), QCVN 8-2:2011/BYT (kim loại nặng), QCVN 8-3:2012/BYT (vi sinh vật ô nhiễm thực phẩm).",
-      relatedIds: [25, 27, 28],
-      action: { type: "policy", label: "Xem Bảng QCVN Bộ Y Tế ➔" }
+      question: "Quy trình đóng gói các món ăn vặt và bánh tại tiệm ra sao?",
+      keywords: ["dong goi", "quy trinh dong goi", "bao quan mon an"],
+      answer: "Tiệm sử dụng bao bì hũ nắp nhôm xé tiện lợi và túi zip tráng bạc 3 lớp kín khí, kèm gói hút ẩm chuyên dụng giúp giữ nguyên độ giòn ngon và hương vị thơm lừng.",
+      relatedIds: [25, 28, 58]
     },
     {
       id: 27,
       category: "ingredients",
-      question: "Nông sản Đà Lạt của tiệm có đạt chuẩn VietGAP không?",
-      keywords: ["vietgap", "nong san sach", "chuan vietgap"],
-      answer: "Các nguồn nguyên liệu củ quả tươi (khoai tây, dâu tây, rau củ, búp atiso) đều được thu mua trực tiếp từ các hợp tác xã nông nghiệp Đà Lạt đạt chứng nhận canh tác sạch VietGAP.",
+      question: "Nông sản Đà Lạt được The Măm Măm chọn lọc từ đâu?",
+      keywords: ["nguon goc nong san", "nong san da lat", "nguyen lieu tuoi"],
+      answer: "Các nguồn nguyên liệu củ quả tươi (khoai tây, dâu tây, rau củ quả, búp atiso) đều được thu hoạch trực tiếp từ các nhà vườn và nông trại sạch tại Đà Lạt, Đơn Dương và Lạc Dương, đảm bảo tươi ngon và chất lượng tự nhiên.",
       relatedIds: [16, 24, 28]
     },
     {
@@ -502,7 +500,7 @@ const MAMMAM_FAQ_DATA = {
       category: "shipping",
       question: "Quy cách đóng gói hũ nắp nhôm và túi zip của tiệm thế nào?",
       keywords: ["quy cach hu", "hu pet", "tui zip", "dong goi"],
-      answer: "Tiệm sử dụng hũ nhựa nguyên sinh PET chuẩn an toàn thực phẩm nắp nhôm xé tiện lợi, kèm nắp nhựa đậy ngoài để bảo quản lại sau khi mở. Túi zip tráng bạc 3 lớp dày dặn ngăn ngừa độ ẩm và tia UV tuyệt đối.",
+      answer: "Tiệm sử dụng hũ nhựa nguyên sinh PET cao cấp nắp nhôm xé tiện lợi, kèm nắp nhựa đậy ngoài để bảo quản lại sau khi mở. Túi zip tráng bạc 3 lớp dày dặn ngăn ngừa độ ẩm và tia UV tuyệt đối.",
       relatedIds: [6, 30, 57]
     },
     {

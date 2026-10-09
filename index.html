@@ -207,21 +207,29 @@
     </div>
   </div>
 
-  <!-- ═══════════════ HERO SECTION ═══════════════ -->
-  <section class="hero-section" id="hero">
-    <div class="hero-header-wrap">
-      <h1 class="hero-title">THE MĂM MĂM</h1>
-    </div>
-
-    <!-- Centerpiece Center Image: Khoai Tây Sấy Giòn -->
-    <div class="hero-centerpiece-wrap">
-      <div class="hero-centerpiece-card">
-        <img class="hero-centerpiece-img" src="assets/khoai-tay-say-gion.png" alt="Khoai Tây Sấy Giòn Rong Biển Đà Lạt - The Măm Măm" />
-        <div class="hero-best-seller-badge font-modak">🔥 BEST SELLER SỐ 1</div>
+  <!-- ═══════════════ HERO SECTION: MASCOT FACE WITH EYE TRACKING + KHÁM PHÁ MENU ═══════════════ -->
+  <section class="hero-section bg-mustard text-black" id="hero">
+    <!-- Interactive Potato Chip Mascot with Moving Eyes at the Top of Homepage -->
+    <div class="face-mascot-box hero-face-mascot" id="faceMascotInteractiveBox" title="Click vào củ khoai tây để bắt đầu thử thách!">
+      <!-- Click Hint Tooltip -->
+      <div class="mascot-click-challenge-hint">
+        <span>🥄 Click vào mình để đập thử xem! Né cực đỉnh đấy 😜</span>
       </div>
+
+      <!-- Interactive Pupils Following Mouse -->
+      <div class="interactive-eyes">
+        <div class="eye-socket">
+          <div class="eye-pupil"></div>
+        </div>
+        <div class="eye-socket">
+          <div class="eye-pupil"></div>
+        </div>
+      </div>
+
+      <img src="assets/potato-chip-mascot.png" alt="The Măm Măm Potato Chip Mascot" style="width:100%; height:auto;" />
     </div>
 
-    <!-- Bottom Row Information -->
+    <!-- Mục Khám Phá Menu ngay bên dưới miếng khoai tây -->
     <div class="hero-bottom-grid">
       <div class="hero-col">
         <p class="text-black">
@@ -246,15 +254,15 @@
     </div>
   </section>
 
-  <!-- Jelly Wave Divider: Hero -> Mascot -->
+  <!-- Jelly Wave Divider: Hero (Mustard) -> Game (Beige) -->
   <div class="jelly-divider">
     <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
-      <path d="M0,0 C450,150 900,30 1350,130 L1536,110 L1536,200 L0,200 Z" fill="#FFD750"></path>
+      <path d="M0,0 C450,150 900,30 1350,130 L1536,110 L1536,200 L0,200 Z" fill="#FBF2E6"></path>
     </svg>
   </div>
 
-  <!-- ═══════════════ SECTION: MASCOT FACE WITH EYE TRACKING ═══════════════ -->
-  <section class="face-section bg-mustard text-black" id="mascotSection">
+  <!-- ═══════════════ SECTION: GAME BANNER & THỬ THÁCH ═══════════════ -->
+  <section class="game-section text-black" id="potatoGame">
     <p class="section-label text-red -rotate-7">ĐẶC SẢN PHỐ NÚI</p>
     <h2 class="mascot-section-title">
       MIẾNG NÀO CŨNG GIÒN RỤM
@@ -287,25 +295,6 @@
       </div>
     </div>
 
-    <div class="face-mascot-box" id="faceMascotInteractiveBox" title="Click vào củ khoai tây để bắt đầu thử thách!">
-      <!-- Click Hint Tooltip -->
-      <div class="mascot-click-challenge-hint">
-        <span>🥄 Click vào mình để đập thử xem! Né cực đỉnh đấy 😜</span>
-      </div>
-
-      <!-- Interactive Pupils Following Mouse -->
-      <div class="interactive-eyes">
-        <div class="eye-socket">
-          <div class="eye-pupil"></div>
-        </div>
-        <div class="eye-socket">
-          <div class="eye-pupil"></div>
-        </div>
-      </div>
-
-      <img src="assets/potato-chip-mascot.png" alt="The Măm Măm Potato Chip Mascot" style="width:100%; height:auto;" />
-    </div>
-
     <div class="face-badges-row">
       <span>🥔 KHOAI TÂY VÀNG GIÒN</span>
       <span>•</span>
@@ -315,7 +304,7 @@
     </div>
   </section>
 
-  <!-- Jelly Wave Divider: Mascot -> Menu -->
+  <!-- Jelly Wave Divider: Game -> Menu -->
   <div class="jelly-divider">
     <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
       <path d="M0,0 C380,120 780,20 1200,100 L1536,80 L1536,200 L0,200 Z" fill="#FBF2E6"></path>

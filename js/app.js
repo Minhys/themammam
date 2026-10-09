@@ -696,6 +696,30 @@
     state.orders.unshift(newOrder);
     saveOrders();
 
+    // Đồng bộ đơn hàng lên Cloudflare D1 Database & gửi Telegram bảo mật từ Server
+    try {
+      fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: name,
+          phone,
+          city,
+          address,
+          note,
+          items: newOrder.items,
+          voucherCode: newOrder.voucherCode,
+          paymentMethod: payMethod
+        })
+      }).then(res => res.json()).then(data => {
+        if (data && data.success) {
+          console.log('✅ Đơn hàng đã được lưu an toàn vào Cloudflare D1:', data.orderCode);
+        }
+      }).catch(err => {
+        console.warn('Cloudflare D1 edge sync notice:', err);
+      });
+    } catch (e) {}
+
     // Clear cart and voucher
     state.cart = [];
     state.voucher = null;
@@ -1356,6 +1380,19 @@
     } catch (e) {
       console.warn('Could not save lead to localStorage', e);
     }
+
+    // Đồng bộ tin nhắn khách lên Cloudflare D1 Serverless API
+    try {
+      fetch('/api/chat-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          phone: cleanPhone,
+          message: msg
+        })
+      }).catch(e => console.warn('D1 Lead API sync notice:', e));
+    } catch (e) {}
 
     // Load Telegram Configuration
     let tgConfig = null;

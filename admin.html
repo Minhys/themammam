@@ -853,18 +853,46 @@
       const pass = document.getElementById('adminLoginPassword').value;
       const creds = getAdminCredentials();
 
-      if (user === creds.username && pass === creds.password) {
-        sessionStorage.setItem('mammam_admin_logged', 'true');
-        showAdminToast('Đăng nhập Quản Trị Viên thành công! 🔐', 'success');
-        checkAdminSession();
-      } else {
-        showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
-      }
+      // Thử xác thực với Cloudflare Serverless Edge API
+      fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.success && data.token) {
+          sessionStorage.setItem('mammam_admin_logged', 'true');
+          sessionStorage.setItem('mammam_admin_token', data.token);
+          showAdminToast('Đăng nhập Quản Trị Viên an toàn thành công! 🔐', 'success');
+          checkAdminSession();
+          return;
+        }
+        // Fallback kiểm tra cục bộ
+        if (user === creds.username && pass === creds.password) {
+          sessionStorage.setItem('mammam_admin_logged', 'true');
+          showAdminToast('Đăng nhập Quản Trị Viên thành công! 🔐', 'success');
+          checkAdminSession();
+        } else {
+          showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
+        }
+      })
+      .catch(() => {
+        // Fallback khi chạy không có worker
+        if (user === creds.username && pass === creds.password) {
+          sessionStorage.setItem('mammam_admin_logged', 'true');
+          showAdminToast('Đăng nhập Quản Trị Viên (chế độ cục bộ) thành công! 🔐', 'success');
+          checkAdminSession();
+        } else {
+          showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
+        }
+      });
     }
 
     function handleAdminLogout() {
       if (confirm('Bạn có chắc muốn đăng xuất khỏi trang Quản Trị Admin?')) {
         sessionStorage.removeItem('mammam_admin_logged');
+        sessionStorage.removeItem('mammam_admin_token');
         localStorage.removeItem('mammam_admin_logged');
         showAdminToast('Đã đăng xuất an toàn.');
         checkAdminSession();
@@ -902,6 +930,41 @@
 
     function loadAdminData() {
       currentOrders = getStoredOrders();
+
+      // Nếu có token Admin, đồng bộ danh sách đơn hàng thực tế từ Cloudflare D1
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (token) {
+        fetch('/api/admin/orders', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.success && data.orders && data.orders.length) {
+            const d1Orders = data.orders.map(row => ({
+              code: row.id,
+              createdAt: row.created_at,
+              customerName: row.customer_name,
+              phone: row.phone,
+              address: row.address,
+              city: row.city,
+              note: row.note,
+              items: JSON.parse(row.items_json || '[]'),
+              subtotal: row.subtotal,
+              shippingFee: row.shipping_fee,
+              discount: row.discount_amount,
+              total: row.total_amount,
+              voucherCode: row.voucher_code,
+              paymentMethod: row.payment_method,
+              paymentStatus: row.status === 'completed' ? 'paid' : 'pending',
+              orderStatus: row.status
+            }));
+            currentOrders = d1Orders;
+            saveStoredOrders(currentOrders);
+            renderAdminDashboard();
+          }
+        })
+        .catch(err => console.warn('D1 Orders fetch error, using local:', err));
+      }
 
       // Prepopulate default sample order if none exists
       if (!currentOrders.length) {

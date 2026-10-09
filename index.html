@@ -9,8 +9,82 @@
   <!-- Favicon -->
   <link rel="icon" href="assets/cheese-logo.webp" type="image/webp" />
   
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
+  <!-- CSS Stylesheet (Cache-busting version v2.2) -->
+  <link rel="stylesheet" href="css/style.css?v=20261009-v3" />
+
+  <!-- Critical Safeguard Styles for AI FAQ Bot (Ngăn chặn hoàn toàn lỗi vỡ layout ảnh to trên iOS Mobile) -->
+  <style id="faqBotCriticalMobileStyles">
+    .faq-mascot-avatar, .bot-avatar-wrap {
+      width: 46px !important;
+      height: 46px !important;
+      max-width: 46px !important;
+      max-height: 46px !important;
+      min-width: 46px !important;
+      min-height: 46px !important;
+      border-radius: 50% !important;
+      overflow: hidden !important;
+      flex-shrink: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+    }
+    .faq-mascot-img, .bot-avatar-img {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 46px !important;
+      max-height: 46px !important;
+      border-radius: 50% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+    .faq-bot-card {
+      max-width: 720px;
+      width: 95vw;
+      height: 86vh;
+      max-height: 820px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0 !important;
+      border-radius: 24px;
+    }
+    .faq-bot-header {
+      background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%) !important;
+      color: #ffffff !important;
+      padding: 0.9rem 3.4rem 0.9rem 1.2rem !important;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3.5px solid #1b1b1b;
+    }
+    .faq-header-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-header-title {
+      font-family: var(--font-modak), cursive, sans-serif !important;
+      font-size: 1.5rem !important;
+      color: #ffd166 !important;
+      line-height: 1.1;
+      margin: 0;
+    }
+    @media (max-width: 640px) {
+      .faq-bot-card {
+        width: 96vw !important;
+        height: 92vh !important;
+        border-radius: 18px !important;
+      }
+      .faq-header-title {
+        font-size: 1.25rem !important;
+      }
+      .faq-view-switch-tabs {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -1064,9 +1138,9 @@
       <!-- Modal Header -->
       <div class="faq-bot-header">
         <div class="faq-header-profile">
-          <div class="faq-mascot-avatar">
-            <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="faq-mascot-img" />
-            <span class="faq-online-dot"></span>
+          <div class="faq-mascot-avatar" style="position:relative; width:46px; height:46px; min-width:46px; max-width:46px; min-height:46px; max-height:46px; border-radius:50%; background:#fff; border:2px solid #1b1b1b; box-shadow:2px 3px 0 #1b1b1b; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">
+            <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="faq-mascot-img" width="46" height="46" style="width:100%; height:100%; max-width:46px; max-height:46px; border-radius:50%; object-fit:cover; display:block;" />
+            <span class="faq-online-dot" style="position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#25d366; border-radius:50%; border:2px solid #fff;"></span>
           </div>
           <div class="faq-header-info">
             <h2 id="faqBotModalTitle" class="faq-header-title">TRỢ LÝ ẢO THE MĂM MĂM</h2>
@@ -1345,11 +1419,11 @@
   <!-- Toast Notification Container -->
   <div id="toastContainer"></div>
 
-  <!-- Application Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/faq-data.js"></script>
-  <script src="js/faq-bot.js"></script>
-  <script src="js/voucher-security.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Application Scripts (Cache-busting version v2.2) -->
+  <script src="js/data.js?v=20261009-v3"></script>
+  <script src="js/faq-data.js?v=20261009-v3"></script>
+  <script src="js/faq-bot.js?v=20261009-v3"></script>
+  <script src="js/voucher-security.js?v=20261009-v3"></script>
+  <script src="js/app.js?v=20261009-v3"></script>
 </body>
 </html>

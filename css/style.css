@@ -4171,23 +4171,31 @@ a {
 
 .faq-mascot-avatar {
   position: relative;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  border-radius: 50% !important;
   background: #fff;
   border: 2px solid #1b1b1b;
   box-shadow: 2px 3px 0px #1b1b1b;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
 }
 
 .faq-mascot-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 .faq-online-dot {
@@ -4379,24 +4387,32 @@ a {
 }
 
 .bot-avatar-wrap {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 38px !important;
+  height: 38px !important;
+  max-width: 38px !important;
+  max-height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  border-radius: 50% !important;
   background: #ffd166;
   border: 1.5px solid #1b1b1b;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
   box-shadow: 1px 2px 0px #1b1b1b;
   position: relative;
 }
 
 .bot-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 38px !important;
+  max-height: 38px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 .bot-status-dot {

@@ -285,9 +285,9 @@
 
     const greetingHTML = `
       <div class="faq-chat-msg bot-msg">
-        <div class="bot-avatar-wrap">
-          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" />
-          <span class="bot-status-dot"></span>
+        <div class="bot-avatar-wrap" style="width:38px; height:38px; min-width:38px; max-width:38px; min-height:38px; max-height:38px; border-radius:50%; flex-shrink:0; overflow:hidden; position:relative; box-shadow:1px 2px 0 #1b1b1b; background:#ffd166; border:1.5px solid #1b1b1b;">
+          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" width="38" height="38" style="width:100%; height:100%; max-width:38px; max-height:38px; border-radius:50%; object-fit:cover; display:block;" />
+          <span class="bot-status-dot" style="position:absolute; bottom:0; right:0; width:8px; height:8px; background:#25d366; border-radius:50%; border:1.5px solid #fff;"></span>
         </div>
         <div class="msg-bubble-wrap">
           <div class="msg-sender-name">Bé Măm Măm 🥔 (Trợ Lý Ảo AI)</div>
@@ -460,9 +460,9 @@
 
     const botMsgHTML = `
       <div class="faq-chat-msg bot-msg">
-        <div class="bot-avatar-wrap">
-          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" />
-          <span class="bot-status-dot"></span>
+        <div class="bot-avatar-wrap" style="width:38px; height:38px; min-width:38px; max-width:38px; min-height:38px; max-height:38px; border-radius:50%; flex-shrink:0; overflow:hidden; position:relative; box-shadow:1px 2px 0 #1b1b1b; background:#ffd166; border:1.5px solid #1b1b1b;">
+          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" width="38" height="38" style="width:100%; height:100%; max-width:38px; max-height:38px; border-radius:50%; object-fit:cover; display:block;" />
+          <span class="bot-status-dot" style="position:absolute; bottom:0; right:0; width:8px; height:8px; background:#25d366; border-radius:50%; border:1.5px solid #fff;"></span>
         </div>
         <div class="msg-bubble-wrap">
           <div class="msg-sender-name">Bé Măm Măm 🥔</div>
@@ -484,8 +484,8 @@
 
     const typingHTML = `
       <div class="faq-chat-msg bot-msg" id="faqTypingIndicator">
-        <div class="bot-avatar-wrap">
-          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" />
+        <div class="bot-avatar-wrap" style="width:38px; height:38px; min-width:38px; max-width:38px; min-height:38px; max-height:38px; border-radius:50%; flex-shrink:0; overflow:hidden; position:relative; box-shadow:1px 2px 0 #1b1b1b; background:#ffd166; border:1.5px solid #1b1b1b;">
+          <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="bot-avatar-img" width="38" height="38" style="width:100%; height:100%; max-width:38px; max-height:38px; border-radius:50%; object-fit:cover; display:block;" />
         </div>
         <div class="msg-bubble-wrap">
           <div class="msg-bubble typing-bubble">

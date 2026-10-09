@@ -82,7 +82,6 @@
       <a href="#hero" class="nav-pill active">Trang Chủ</a>
       <a href="#menu" class="nav-pill">Thực Đơn (106)</a>
       <a href="#about" class="nav-pill">Câu Chuyện</a>
-      <a href="#delivery" class="nav-pill">Giao Hàng</a>
       <a href="chinh-sach.html" class="nav-pill" style="border-color:rgba(76,174,79,0.35); color:#2e7d32;" title="Chính Sách & Tiêu Chuẩn Chất Lượng">
         <span>🛡️</span> <span>Chính Sách</span>
       </a>
@@ -115,7 +114,6 @@
       <a href="#hero" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Trang Chủ</a>
       <a href="#menu" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Thực Đơn (106 Món)</a>
       <a href="#about" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Câu Chuyện</a>
-      <a href="#delivery" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Giao Hỏa Tốc</a>
       <a href="chinh-sach.html" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Chính Sách Chất Lượng</a>
       <div style="margin-top:auto; display:flex; flex-direction:column; gap:0.8rem;">
         <button class="nav-pill" onclick="window.mammamApp.closeModal('mobileDrawer'); document.getElementById('navUserBtn').click();" style="justify-content:center; background:#fff; color:var(--black); font-weight:700;">
@@ -357,54 +355,7 @@
     </p>
   </section>
 
-  <!-- Jelly Wave Divider: Nguyên Liệu -> Giao Hàng -->
-  <div class="jelly-divider">
-    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
-      <path d="M0,0 C350,130 800,40 1250,120 L1536,90 L1536,200 L0,200 Z" fill="#FFD750"></path>
-    </svg>
-  </div>
-
-  <!-- ═══════════════ SECTION: DELIVERY MAP & PACKAGING ═══════════════ -->
-  <section class="delivery-section" id="delivery">
-    <p class="section-label text-red -rotate-5">GIAO HÀNG HỎA TỐC</p>
-    <h2 class="heading300 text-stroke-180-mustard text-white">
-      ĐẶC SẢN ĐÀ LẠT ĐẾN TẬN TAY BẠN
-    </h2>
-    <p class="text40" style="max-width:700px; margin:1rem auto 0; text-align:center;">
-      Đóng gói hũ nắp nhôm & túi zip chống ẩm tiêu chuẩn cao, bảo quản giòn rụm thơm lừng. Giao nhanh toàn quốc!
-    </p>
-
-    <!-- Cities Grid -->
-    <div class="cities-route-grid">
-      <div class="city-card">
-        <img class="city-card-img" src="assets/city_dalat.webp" alt="Biểu tượng Đà Lạt - Quảng trường Lâm Viên" />
-        <div class="city-name">ĐÀ LẠT</div>
-        <div class="city-time">15–30 Phút</div>
-      </div>
-      <div class="city-card">
-        <img class="city-card-img" src="assets/city_saigon.webp" alt="Biểu tượng Sài Gòn - Chợ Bến Thành" />
-        <div class="city-name">SÀI GÒN</div>
-        <div class="city-time">Trong Ngày / 24h</div>
-      </div>
-      <div class="city-card">
-        <img class="city-card-img" src="assets/city_hanoi.webp" alt="Biểu tượng Hà Nội - Khuê Văn Các" />
-        <div class="city-name">HÀ NỘI</div>
-        <div class="city-time">Hỏa Tốc 24h</div>
-      </div>
-      <div class="city-card">
-        <img class="city-card-img" src="assets/city_danang.webp" alt="Biểu tượng Đà Nẵng - Cầu Rồng" />
-        <div class="city-name">ĐÀ NẴNG</div>
-        <div class="city-time">24–36 Giờ</div>
-      </div>
-      <div class="city-card">
-        <img class="city-card-img" src="assets/city_cantho.webp" alt="Biểu tượng Cần Thơ - Chợ Nổi Cái Răng" />
-        <div class="city-name">CẦN THƠ</div>
-        <div class="city-time">24–36 Giờ</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Jelly Wave Divider: Giao Hàng -> CTA Banner -->
+  <!-- Jelly Wave Divider: Nguyên Liệu -> CTA Banner -->
   <div class="jelly-divider">
     <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
       <path d="M0,0 C400,120 850,20 1300,110 L1536,95 L1536,200 L0,200 Z" fill="#FBF2E6"></path>
@@ -445,7 +396,6 @@
       <a href="#hero" class="footer-link">Trang Chủ</a>
       <a href="#menu" class="footer-link">Thực Đơn Đặc Sản (106 Món)</a>
       <a href="#about" class="footer-link">Câu Chuyện</a>
-      <a href="#delivery" class="footer-link">Giao Hàng</a>
       <a href="chinh-sach.html" class="footer-link" style="color:var(--red);">🛡️ Chính Sách & Tiêu Chuẩn Bộ Y Tế</a>
     </div>
 
@@ -556,12 +506,76 @@
           <div>
             <label class="form-label">Tỉnh / Thành phố</label>
             <select id="checkoutCity" class="form-select">
-              <option value="Đà Lạt">Đà Lạt (Giao nhanh)</option>
-              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-              <option value="Hà Nội">Hà Nội</option>
-              <option value="Đà Nẵng">Đà Nẵng</option>
-              <option value="Cần Thơ">Cần Thơ</option>
-              <option value="Khác">Tỉnh thành khác</option>
+              <optgroup label="⭐ Tỉnh / Thành Phố Ưu Tiên (Giao Nhanh)">
+                <option value="Hà Nội">Hà Nội (Hỏa tốc 24h)</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh (Giao trong ngày / 24h)</option>
+                <option value="Lâm Đồng">Lâm Đồng - Đà Lạt (Gốc tiệm The Măm Măm)</option>
+              </optgroup>
+              <optgroup label="── 63 Tỉnh Thành Toàn Quốc (A - Z) ──">
+                <option value="An Giang">An Giang</option>
+                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                <option value="Bắc Giang">Bắc Giang</option>
+                <option value="Bắc Kạn">Bắc Kạn</option>
+                <option value="Bạc Liêu">Bạc Liêu</option>
+                <option value="Bắc Ninh">Bắc Ninh</option>
+                <option value="Bến Tre">Bến Tre</option>
+                <option value="Bình Định">Bình Định</option>
+                <option value="Bình Dương">Bình Dương</option>
+                <option value="Bình Phước">Bình Phước</option>
+                <option value="Bình Thuận">Bình Thuận</option>
+                <option value="Cà Mau">Cà Mau</option>
+                <option value="Cần Thơ">Cần Thơ</option>
+                <option value="Cao Bằng">Cao Bằng</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Đắk Lắk">Đắk Lắk</option>
+                <option value="Đắk Nông">Đắk Nông</option>
+                <option value="Điện Biên">Điện Biên</option>
+                <option value="Đồng Nai">Đồng Nai</option>
+                <option value="Đồng Tháp">Đồng Tháp</option>
+                <option value="Gia Lai">Gia Lai</option>
+                <option value="Hà Giang">Hà Giang</option>
+                <option value="Hà Nam">Hà Nam</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Hà Tĩnh">Hà Tĩnh</option>
+                <option value="Hải Dương">Hải Dương</option>
+                <option value="Hải Phòng">Hải Phòng</option>
+                <option value="Hậu Giang">Hậu Giang</option>
+                <option value="Hòa Bình">Hòa Bình</option>
+                <option value="Hưng Yên">Hưng Yên</option>
+                <option value="Khánh Hòa">Khánh Hòa</option>
+                <option value="Kiên Giang">Kiên Giang</option>
+                <option value="Kon Tum">Kon Tum</option>
+                <option value="Lai Châu">Lai Châu</option>
+                <option value="Lâm Đồng">Lâm Đồng</option>
+                <option value="Lạng Sơn">Lạng Sơn</option>
+                <option value="Lào Cai">Lào Cai</option>
+                <option value="Long An">Long An</option>
+                <option value="Nam Định">Nam Định</option>
+                <option value="Nghệ An">Nghệ An</option>
+                <option value="Ninh Bình">Ninh Bình</option>
+                <option value="Ninh Thuận">Ninh Thuận</option>
+                <option value="Phú Thọ">Phú Thọ</option>
+                <option value="Phú Yên">Phú Yên</option>
+                <option value="Quảng Bình">Quảng Bình</option>
+                <option value="Quảng Nam">Quảng Nam</option>
+                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                <option value="Quảng Ninh">Quảng Ninh</option>
+                <option value="Quảng Trị">Quảng Trị</option>
+                <option value="Sóc Trăng">Sóc Trăng</option>
+                <option value="Sơn La">Sơn La</option>
+                <option value="Tây Ninh">Tây Ninh</option>
+                <option value="Thái Bình">Thái Bình</option>
+                <option value="Thái Nguyên">Thái Nguyên</option>
+                <option value="Thanh Hóa">Thanh Hóa</option>
+                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                <option value="Tiền Giang">Tiền Giang</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                <option value="Trà Vinh">Trà Vinh</option>
+                <option value="Tuyên Quang">Tuyên Quang</option>
+                <option value="Vĩnh Long">Vĩnh Long</option>
+                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                <option value="Yên Bái">Yên Bái</option>
+              </optgroup>
             </select>
           </div>
         </div>
@@ -737,11 +751,76 @@
         <div class="form-group">
           <label class="form-label">Khu vực</label>
           <select id="regCity" class="form-select">
-            <option value="Đà Lạt">Đà Lạt</option>
-            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-            <option value="Hà Nội">Hà Nội</option>
-            <option value="Đà Nẵng">Đà Nẵng</option>
-            <option value="Cần Thơ">Cần Thơ</option>
+            <optgroup label="⭐ Tỉnh / Thành Phố Ưu Tiên (Giao Nhanh)">
+              <option value="Hà Nội">Hà Nội (Hỏa tốc 24h)</option>
+              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh (Giao trong ngày / 24h)</option>
+              <option value="Lâm Đồng">Lâm Đồng - Đà Lạt (Gốc tiệm The Măm Măm)</option>
+            </optgroup>
+            <optgroup label="── 63 Tỉnh Thành Toàn Quốc (A - Z) ──">
+              <option value="An Giang">An Giang</option>
+              <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+              <option value="Bắc Giang">Bắc Giang</option>
+              <option value="Bắc Kạn">Bắc Kạn</option>
+              <option value="Bạc Liêu">Bạc Liêu</option>
+              <option value="Bắc Ninh">Bắc Ninh</option>
+              <option value="Bến Tre">Bến Tre</option>
+              <option value="Bình Định">Bình Định</option>
+              <option value="Bình Dương">Bình Dương</option>
+              <option value="Bình Phước">Bình Phước</option>
+              <option value="Bình Thuận">Bình Thuận</option>
+              <option value="Cà Mau">Cà Mau</option>
+              <option value="Cần Thơ">Cần Thơ</option>
+              <option value="Cao Bằng">Cao Bằng</option>
+              <option value="Đà Nẵng">Đà Nẵng</option>
+              <option value="Đắk Lắk">Đắk Lắk</option>
+              <option value="Đắk Nông">Đắk Nông</option>
+              <option value="Điện Biên">Điện Biên</option>
+              <option value="Đồng Nai">Đồng Nai</option>
+              <option value="Đồng Tháp">Đồng Tháp</option>
+              <option value="Gia Lai">Gia Lai</option>
+              <option value="Hà Giang">Hà Giang</option>
+              <option value="Hà Nam">Hà Nam</option>
+              <option value="Hà Nội">Hà Nội</option>
+              <option value="Hà Tĩnh">Hà Tĩnh</option>
+              <option value="Hải Dương">Hải Dương</option>
+              <option value="Hải Phòng">Hải Phòng</option>
+              <option value="Hậu Giang">Hậu Giang</option>
+              <option value="Hòa Bình">Hòa Bình</option>
+              <option value="Hưng Yên">Hưng Yên</option>
+              <option value="Khánh Hòa">Khánh Hòa</option>
+              <option value="Kiên Giang">Kiên Giang</option>
+              <option value="Kon Tum">Kon Tum</option>
+              <option value="Lai Châu">Lai Châu</option>
+              <option value="Lâm Đồng">Lâm Đồng</option>
+              <option value="Lạng Sơn">Lạng Sơn</option>
+              <option value="Lào Cai">Lào Cai</option>
+              <option value="Long An">Long An</option>
+              <option value="Nam Định">Nam Định</option>
+              <option value="Nghệ An">Nghệ An</option>
+              <option value="Ninh Bình">Ninh Bình</option>
+              <option value="Ninh Thuận">Ninh Thuận</option>
+              <option value="Phú Thọ">Phú Thọ</option>
+              <option value="Phú Yên">Phú Yên</option>
+              <option value="Quảng Bình">Quảng Bình</option>
+              <option value="Quảng Nam">Quảng Nam</option>
+              <option value="Quảng Ngãi">Quảng Ngãi</option>
+              <option value="Quảng Ninh">Quảng Ninh</option>
+              <option value="Quảng Trị">Quảng Trị</option>
+              <option value="Sóc Trăng">Sóc Trăng</option>
+              <option value="Sơn La">Sơn La</option>
+              <option value="Tây Ninh">Tây Ninh</option>
+              <option value="Thái Bình">Thái Bình</option>
+              <option value="Thái Nguyên">Thái Nguyên</option>
+              <option value="Thanh Hóa">Thanh Hóa</option>
+              <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+              <option value="Tiền Giang">Tiền Giang</option>
+              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+              <option value="Trà Vinh">Trà Vinh</option>
+              <option value="Tuyên Quang">Tuyên Quang</option>
+              <option value="Vĩnh Long">Vĩnh Long</option>
+              <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+              <option value="Yên Bái">Yên Bái</option>
+            </optgroup>
           </select>
         </div>
         <button class="blob-btn" id="regSubmitBtn" style="width:100%; margin-top:1rem;">
@@ -774,7 +853,7 @@
           </a>
         </div>
 
-        <div style="background:#fcf8f2; border:2px solid #1b1b1b; border-radius:var(--radius-md); padding:1rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+        <div style="background:#fcf8f2; border:2px solid #1b1b1b; border-radius:var(--radius-md); padding:1rem; margin-bottom:1.2rem; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <h3 style="font-size:1.15rem; font-weight:800;" id="profileName">Người dùng</h3>
             <p style="font-size:0.85rem; color:#666;">📞 SĐT: <span id="profilePhone">---</span></p>
@@ -784,6 +863,105 @@
             <div class="font-mouse-memoirs text-red" style="font-size:1.8rem;" id="profilePoints">50</div>
             <span style="font-size:0.75rem; font-weight:800;">MĂM XU</span>
           </div>
+        </div>
+
+        <!-- Thiết Lập Thông Tin Tài Khoản & Địa Chỉ Giao Hàng -->
+        <div style="background:#ffffff; border:2px solid #1b1b1b; border-radius:var(--radius-md); padding:1.2rem; margin-bottom:1.5rem;">
+          <h4 style="font-weight:800; font-size:1rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:6px;">
+            <span>📍</span> <span>Thiết Lập Địa Chỉ Nhận Hàng Mặc Định</span>
+          </h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:0.8rem;">
+            <div>
+              <label class="form-label" style="font-size:0.82rem;">Họ và tên</label>
+              <input type="text" id="profileEditName" class="form-input" style="padding:0.5rem 0.8rem;" placeholder="Họ và tên" />
+            </div>
+            <div>
+              <label class="form-label" style="font-size:0.82rem;">Số điện thoại</label>
+              <input type="tel" id="profileEditPhone" class="form-input" style="padding:0.5rem 0.8rem;" placeholder="09xxxxxxxx" />
+            </div>
+          </div>
+          <div style="margin-bottom:0.8rem;">
+            <label class="form-label" style="font-size:0.82rem;">Tỉnh / Thành phố</label>
+            <select id="profileEditCity" class="form-select" style="padding:0.5rem 0.8rem;">
+              <optgroup label="⭐ Tỉnh / Thành Phố Ưu Tiên (Giao Nhanh)">
+                <option value="Hà Nội">Hà Nội (Hỏa tốc 24h)</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh (Giao trong ngày / 24h)</option>
+                <option value="Lâm Đồng">Lâm Đồng - Đà Lạt (Gốc tiệm The Măm Măm)</option>
+              </optgroup>
+              <optgroup label="── 63 Tỉnh Thành Toàn Quốc (A - Z) ──">
+                <option value="An Giang">An Giang</option>
+                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                <option value="Bắc Giang">Bắc Giang</option>
+                <option value="Bắc Kạn">Bắc Kạn</option>
+                <option value="Bạc Liêu">Bạc Liêu</option>
+                <option value="Bắc Ninh">Bắc Ninh</option>
+                <option value="Bến Tre">Bến Tre</option>
+                <option value="Bình Định">Bình Định</option>
+                <option value="Bình Dương">Bình Dương</option>
+                <option value="Bình Phước">Bình Phước</option>
+                <option value="Bình Thuận">Bình Thuận</option>
+                <option value="Cà Mau">Cà Mau</option>
+                <option value="Cần Thơ">Cần Thơ</option>
+                <option value="Cao Bằng">Cao Bằng</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Đắk Lắk">Đắk Lắk</option>
+                <option value="Đắk Nông">Đắk Nông</option>
+                <option value="Điện Biên">Điện Biên</option>
+                <option value="Đồng Nai">Đồng Nai</option>
+                <option value="Đồng Tháp">Đồng Tháp</option>
+                <option value="Gia Lai">Gia Lai</option>
+                <option value="Hà Giang">Hà Giang</option>
+                <option value="Hà Nam">Hà Nam</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Hà Tĩnh">Hà Tĩnh</option>
+                <option value="Hải Dương">Hải Dương</option>
+                <option value="Hải Phòng">Hải Phòng</option>
+                <option value="Hậu Giang">Hậu Giang</option>
+                <option value="Hòa Bình">Hòa Bình</option>
+                <option value="Hưng Yên">Hưng Yên</option>
+                <option value="Khánh Hòa">Khánh Hòa</option>
+                <option value="Kiên Giang">Kiên Giang</option>
+                <option value="Kon Tum">Kon Tum</option>
+                <option value="Lai Châu">Lai Châu</option>
+                <option value="Lâm Đồng">Lâm Đồng</option>
+                <option value="Lạng Sơn">Lạng Sơn</option>
+                <option value="Lào Cai">Lào Cai</option>
+                <option value="Long An">Long An</option>
+                <option value="Nam Định">Nam Định</option>
+                <option value="Nghệ An">Nghệ An</option>
+                <option value="Ninh Bình">Ninh Bình</option>
+                <option value="Ninh Thuận">Ninh Thuận</option>
+                <option value="Phú Thọ">Phú Thọ</option>
+                <option value="Phú Yên">Phú Yên</option>
+                <option value="Quảng Bình">Quảng Bình</option>
+                <option value="Quảng Nam">Quảng Nam</option>
+                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                <option value="Quảng Ninh">Quảng Ninh</option>
+                <option value="Quảng Trị">Quảng Trị</option>
+                <option value="Sóc Trăng">Sóc Trăng</option>
+                <option value="Sơn La">Sơn La</option>
+                <option value="Tây Ninh">Tây Ninh</option>
+                <option value="Thái Bình">Thái Bình</option>
+                <option value="Thái Nguyên">Thái Nguyên</option>
+                <option value="Thanh Hóa">Thanh Hóa</option>
+                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                <option value="Tiền Giang">Tiền Giang</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                <option value="Trà Vinh">Trà Vinh</option>
+                <option value="Tuyên Quang">Tuyên Quang</option>
+                <option value="Vĩnh Long">Vĩnh Long</option>
+                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                <option value="Yên Bái">Yên Bái</option>
+              </optgroup>
+            </select>
+          </div>
+          <div style="margin-bottom:0.9rem;">
+            <label class="form-label" style="font-size:0.82rem;">Địa chỉ chi tiết (Số nhà, tên đường, phường/xã)</label>
+            <input type="text" id="profileEditAddress" class="form-input" style="padding:0.5rem 0.8rem;" placeholder="Ví dụ: 123 Đường Phan Đình Phùng..." />
+          </div>
+          <button type="button" id="profileSaveBtn" class="nav-pill nav-pill-red" style="width:100%; justify-content:center; padding:0.55rem 1rem; font-size:0.95rem;">
+            💾 Lưu Thiết Lập Địa Chỉ Giao Hàng
+          </button>
         </div>
 
         <h3 class="font-mouse-memoirs text-red" style="font-size:1.6rem; margin-bottom:0.6rem;">LỊCH SỬ ĐƠN HÀNG</h3>

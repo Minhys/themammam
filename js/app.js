@@ -880,8 +880,19 @@
 
     document.getElementById('profileName').textContent = user.name;
     document.getElementById('profilePhone').textContent = user.phone;
-    document.getElementById('profileAddress').textContent = user.address || 'Chưa cập nhật';
+    const fullAddr = user.address ? `${user.address}${user.city ? ', ' + user.city : ''}` : (user.city || 'Chưa cập nhật');
+    document.getElementById('profileAddress').textContent = fullAddr;
     document.getElementById('profilePoints').textContent = user.points || 0;
+
+    // Prefill address setup fields
+    const editName = document.getElementById('profileEditName');
+    const editPhone = document.getElementById('profileEditPhone');
+    const editCity = document.getElementById('profileEditCity');
+    const editAddr = document.getElementById('profileEditAddress');
+    if (editName) editName.value = user.name || '';
+    if (editPhone) editPhone.value = user.phone || '';
+    if (editCity) editCity.value = user.city || 'Hà Nội';
+    if (editAddr) editAddr.value = user.address || '';
 
     // Render personal order history
     const historyList = document.getElementById('profileOrdersList');
@@ -909,6 +920,59 @@
     }
 
     openModal('userProfileModal');
+  }
+
+  function handleSaveProfile() {
+    const user = state.currentUser;
+    if (!user) {
+      showToast('Vui lòng đăng nhập để lưu thiết lập địa chỉ!', 'error');
+      return;
+    }
+
+    const editName = document.getElementById('profileEditName');
+    const editPhone = document.getElementById('profileEditPhone');
+    const editCity = document.getElementById('profileEditCity');
+    const editAddr = document.getElementById('profileEditAddress');
+
+    const name = editName ? editName.value.trim() : '';
+    const phone = editPhone ? editPhone.value.trim() : '';
+    const city = editCity ? editCity.value : 'Hà Nội';
+    const address = editAddr ? editAddr.value.trim() : '';
+
+    if (!name || !phone) {
+      showToast('Vui lòng nhập đầy đủ Họ tên và Số điện thoại!', 'error');
+      return;
+    }
+
+    // Update currentUser object
+    user.name = name;
+    user.phone = phone;
+    user.city = city;
+    user.address = address;
+
+    // Save to users array in localStorage
+    const users = getUsers();
+    const idx = users.findIndex((u) => u.phone === user.phone || u.id === user.id);
+    if (idx !== -1) {
+      users[idx] = { ...users[idx], name, phone, city, address };
+      saveUsers(users);
+    }
+    localStorage.setItem('mammam_current_user', JSON.stringify(user));
+
+    // Also update guest info fallback so checkout gets prefilled automatically
+    state.guestInfo = { name, phone, city, address };
+    localStorage.setItem('mammam_guest_info', JSON.stringify(state.guestInfo));
+
+    // Update UI elements
+    updateUserUI();
+    const profileNameEl = document.getElementById('profileName');
+    const profilePhoneEl = document.getElementById('profilePhone');
+    const profileAddrEl = document.getElementById('profileAddress');
+    if (profileNameEl) profileNameEl.textContent = name;
+    if (profilePhoneEl) profilePhoneEl.textContent = phone;
+    if (profileAddrEl) profileAddrEl.textContent = address ? `${address}, ${city}` : city;
+
+    showToast('Đã lưu thiết lập thông tin & địa chỉ giao hàng thành công! 📍');
   }
 
   function getOrderStatusLabel(status) {
@@ -1530,6 +1594,9 @@
 
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+
+    const profileSaveBtn = document.getElementById('profileSaveBtn');
+    if (profileSaveBtn) profileSaveBtn.addEventListener('click', handleSaveProfile);
 
     // Auth tabs toggle
     const tabLogin = document.getElementById('tabLoginBtn');

@@ -85,6 +85,10 @@
       <a href="chinh-sach.html" class="nav-pill" style="border-color:rgba(76,174,79,0.35); color:#2e7d32;" title="Chính Sách & Tiêu Chuẩn Chất Lượng">
         <span>🛡️</span> <span>Chính Sách</span>
       </a>
+      <button type="button" class="nav-pill nav-pill-ai" id="navFaqBotBtn" title="Trợ Lý Ảo AI - 100 Câu Hỏi Đáp Nhanh">
+        <span>🤖</span> <span>Hỏi Đáp AI</span>
+        <span class="nav-hot-tag">100+</span>
+      </button>
       <button class="nav-pill" id="navUserBtn" title="Tài Khoản / Đăng Nhập">
         <span>👤</span> <span>Tài Khoản</span>
       </button>
@@ -115,6 +119,9 @@
       <a href="#menu" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Thực Đơn (106 Món)</a>
       <a href="#about" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Câu Chuyện</a>
       <a href="chinh-sach.html" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Chính Sách Chất Lượng</a>
+      <button type="button" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer'); window.mammamApp.openModal('faqBotModal');" style="display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-size:1.05rem;">
+        <span>🤖</span> <span>Hỏi Đáp Trợ Lý Ảo AI (100+ FAQ)</span>
+      </button>
       <div style="margin-top:auto; display:flex; flex-direction:column; gap:0.8rem;">
         <button class="nav-pill" onclick="window.mammamApp.closeModal('mobileDrawer'); document.getElementById('navUserBtn').click();" style="justify-content:center; background:#fff; color:var(--black); font-weight:700;">
           👤 Tài Khoản / Đăng Nhập
@@ -1049,6 +1056,82 @@
     </div>
   </div>
 
+  <!-- ═══════════════ MODAL: TRỢ LÝ ẢO AI & HỎI ĐÁP NHANH (100 CÂU HỎI PHỔ BIẾN) ═══════════════ -->
+  <div class="modal-overlay" id="faqBotModal" role="dialog" aria-modal="true" aria-labelledby="faqBotModalTitle">
+    <div class="modal-card faq-bot-card">
+      <button class="modal-close-btn" data-close-modal="faqBotModal" aria-label="Đóng Trợ Lý Ảo">✕</button>
+
+      <!-- Modal Header -->
+      <div class="faq-bot-header">
+        <div class="faq-header-profile">
+          <div class="faq-mascot-avatar">
+            <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="faq-mascot-img" />
+            <span class="faq-online-dot"></span>
+          </div>
+          <div class="faq-header-info">
+            <h2 id="faqBotModalTitle" class="faq-header-title">TRỢ LÝ ẢO THE MĂM MĂM</h2>
+            <div class="faq-header-sub">
+              <span>● Đang trực tuyến</span>
+              <span>· 100 câu hỏi sản phẩm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Switch Tabs -->
+        <div class="faq-view-switch-tabs">
+          <button type="button" class="faq-switch-btn active" id="faqToggleChatViewBtn">
+            <span>💬</span> <span>Trò Chuyện AI</span>
+          </button>
+          <button type="button" class="faq-switch-btn" id="faqToggleDirViewBtn">
+            <span>📚</span> <span>100 Câu Hỏi</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Category Strip -->
+      <div class="faq-category-strip" id="faqCategoryTabs">
+        <!-- Rendered dynamically by faq-bot.js -->
+      </div>
+
+      <!-- Live Search Strip -->
+      <div class="faq-search-strip">
+        <div class="faq-search-input-wrap">
+          <span class="faq-search-icon">🔍</span>
+          <input type="text" id="faqLiveSearchInput" class="faq-search-input" placeholder="Tìm nhanh trong 100 câu hỏi (VD: khoai tây, bảo quản, ship hà nội, freeship, voucher...)" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- Section 1: Chat View -->
+      <div class="faq-chat-view-section" id="faqChatViewSection">
+        <div class="faq-chat-messages" id="faqChatMessages">
+          <!-- Chat messages dynamically rendered -->
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="faq-chat-input-bar">
+          <form id="faqBotChatForm" class="faq-bot-chat-form">
+            <input type="text" id="faqBotMsgInput" class="faq-bot-msg-input" placeholder="Nhập câu hỏi của bạn tại đây hoặc bấm gợi ý bên trên..." autocomplete="off" />
+            <button type="submit" class="faq-bot-send-btn">
+              <span>Gửi</span>
+              <span>➔</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Section 2: Directory 100 Questions View -->
+      <div class="faq-directory-view-section" id="faqDirectoryViewSection" style="display:none;">
+        <div class="faq-dir-top-meta">
+          <span id="faqFilteredCount">100 câu hỏi thường gặp</span>
+          <span style="font-size:0.8rem; color:#888;">Nhấp để xem câu trả lời chi tiết</span>
+        </div>
+        <div class="faq-directory-list" id="faqDirectoryList">
+          <!-- Accordion list dynamically rendered -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════════ ARENA: MINI GAME GÕ KHOAI TÂY GIÒN RỤM (10s THỬ THÁCH) ═══════════════ -->
   <div id="potatoGameArena" class="potato-game-arena hidden" role="dialog" aria-modal="true" aria-label="Mini-game Gõ Khoai Tây Giòn Rụm">
     <!-- Game Top HUD -->
@@ -1196,6 +1279,16 @@
       <span class="fab-label">0974 449 708</span>
     </a>
 
+    <!-- Trợ Lý Ảo AI Button (Hỏi Đáp Nhanh 100 Câu Hỏi Phổ Biến) -->
+    <div class="floating-ai-wrap">
+      <button type="button" class="floating-fab fab-ai" id="fabFaqBotBtn" title="Hỏi Đáp Nhanh - Trợ Lý Ảo AI (100 Câu Hỏi Phổ Biến Về Sản Phẩm)">
+        <span class="fab-pulse-ring" style="border-color:#7b2cbf;"></span>
+        <span class="fab-icon">🤖</span>
+        <span class="fab-label">Hỏi Đáp Trợ Lý AI</span>
+        <span class="fab-badge-pill">100+ FAQ</span>
+      </button>
+    </div>
+
     <!-- Chat Cho Tiệm Button (Đơn giản, chuyển tiếp Telegram Bot) -->
     <div class="floating-telegram-wrap">
       <button type="button" class="floating-fab fab-telegram" id="fabChatShopBtn" title="Chat Cho Tiệm (Tư Vấn & Đặt Hàng)">
@@ -1254,6 +1347,8 @@
 
   <!-- Application Scripts -->
   <script src="js/data.js"></script>
+  <script src="js/faq-data.js"></script>
+  <script src="js/faq-bot.js"></script>
   <script src="js/voucher-security.js"></script>
   <script src="js/app.js"></script>
 </body>

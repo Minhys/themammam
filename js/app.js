@@ -1285,7 +1285,7 @@
     // Escape key closes open drawers & modals
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        ['cartDrawer', 'mobileDrawer', 'authModal', 'userProfileModal', 'productDetailModal', 'checkoutModal', 'orderSuccessModal', 'chatShopModal'].forEach(closeModal);
+        ['cartDrawer', 'mobileDrawer', 'authModal', 'userProfileModal', 'productDetailModal', 'checkoutModal', 'orderSuccessModal', 'chatShopModal', 'faqBotModal'].forEach(closeModal);
       }
     });
   }
@@ -2753,7 +2753,11 @@
     openLuckyWheelModal,
     spinLuckyWheel,
     applyLuckyVoucher,
-    retryPotatoFromWheel
+    retryPotatoFromWheel,
+    openFaqBot: () => openModal('faqBotModal'),
+    askFaqQuestion: (id) => window.mammamFaqBot && window.mammamFaqBot.ask(id),
+    handleFaqAction: (type) => window.mammamFaqBot && window.mammamFaqBot.handleAction(type),
+    switchFaqMode: (mode) => window.mammamFaqBot && window.mammamFaqBot.switchMode(mode)
   };
 })();
 

@@ -339,8 +339,8 @@
         <img src="${product.image}" alt="${product.name}" 
              style="width:100%; height:100%; object-fit:cover;"
              onerror="this.src='assets/khoai_tay_mammam.png'" />
-        <div style="position:absolute; top:1rem; right:1.5rem; width:52px; height:52px; border-radius:50%; background:#fff; border:2px solid var(--mustard); box-shadow:0 4px 12px rgba(0,0,0,0.3); overflow:hidden; z-index:5;">
-          <img src="assets/mammam-logo.png" alt="The Măm Măm" style="width:100%; height:100%; object-fit:cover;" />
+        <div style="position:absolute; top:1rem; right:1.5rem; width:54px; height:54px; z-index:5; filter:drop-shadow(0 3px 8px rgba(0,0,0,0.35)); pointer-events:none;">
+          <img src="assets/mammam-logo.png" alt="The Măm Măm" style="width:100%; height:100%; object-fit:contain;" />
         </div>
         <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.7) 10%, transparent 60%);"></div>
         <div style="position:absolute; bottom:1rem; left:1.5rem; right:1.5rem; color:#fff;">

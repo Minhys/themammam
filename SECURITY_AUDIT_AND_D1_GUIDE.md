@@ -54,32 +54,30 @@ Bạn có thể tạo bằng 1 trong 2 cách:
 
 #### Cách A: Dùng giao diện Web Cloudflare Dashboard
 1. Truy cập [dash.cloudflare.com](https://dash.cloudflare.com/) $\rightarrow$ Chọn **Storage & Databases** $\rightarrow$ **D1 SQL Database**.
-2. Bấm nút **Create database** $\rightarrow$ Đặt tên: `themammam_db`.
-3. Bấm **Create**. Sau khi tạo xong, copy chuỗi **Database ID** (dạng `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`).
-4. Mở file `wrangler.json` trong dự án, dán `database_id` của bạn vào:
+2. Database hiện tại đã được tạo thành công là: `themammam-db` (Database ID: `289611f6-0dd1-4910-a9c6-66e737c00ee2`).
+3. Cấu hình trong file `wrangler.json`:
    ```json
    "d1_databases": [
      {
        "binding": "DB",
-       "database_name": "themammam_db",
-       "database_id": "DÁN_DATABASE_ID_CỦA_BẠN_VÀO_ĐÂY"
+       "database_name": "themammam-db",
+       "database_id": "289611f6-0dd1-4910-a9c6-66e737c00ee2"
      }
    ]
    ```
 
-#### Cách B: Dùng lệnh Wrangler CLI qua Terminal
-Chạy lệnh trong thư mục dự án:
+#### Cách B: Quản lý hoặc thực thi lệnh qua Wrangler CLI
+Khi chạy các lệnh D1, bạn sử dụng tên database là `themammam-db`:
 ```bash
-npx wrangler d1 create themammam_db
+npx wrangler@3 d1 execute themammam-db --remote --command="SELECT name FROM sqlite_master WHERE type='table';"
 ```
-Lệnh sẽ trả về đoạn cấu hình binding, bạn chỉ cần copy vào `wrangler.json`.
 
 ---
 
 ### Bước 2: Nạp cấu trúc bảng (Schema SQL) vào Database D1
-Chạy lệnh sau trên terminal để tạo toàn bộ bảng dữ liệu vào Cloudflare D1 từ file `d1-schema.sql`:
+Toàn bộ 12 câu lệnh tạo bảng từ `d1-schema.sql` đã được nạp thành công vào Cloudflare D1 từ xa. Nếu bạn muốn thực thi thêm lệnh SQL mới:
 ```bash
-npx wrangler d1 execute themammam_db --remote --file=./d1-schema.sql
+npx wrangler@3 d1 execute themammam-db --remote --file=./d1-schema.sql
 ```
 *(Nếu muốn kiểm tra thử ở môi trường local trước, bạn dùng cờ `--local` thay cho `--remote`)*.
 

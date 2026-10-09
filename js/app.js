@@ -272,9 +272,6 @@
       return `
         <div class="product-card" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
           <div class="card-thumb-wrap">
-            <div class="card-brand-badge" title="The Măm Măm (Since 2026)">
-              <img src="assets/mammam-logo.png" alt="The Măm Măm" class="brand-seal-img" />
-            </div>
             <img class="card-thumb-img" 
                  src="${p.image}" 
                  alt="${p.name}" 
@@ -339,9 +336,6 @@
         <img src="${product.image}" alt="${product.name}" 
              style="width:100%; height:100%; object-fit:cover;"
              onerror="this.src='assets/khoai_tay_mammam.png'" />
-        <div style="position:absolute; top:1rem; right:1.5rem; width:54px; height:54px; z-index:5; filter:drop-shadow(0 3px 8px rgba(0,0,0,0.35)); pointer-events:none;">
-          <img src="assets/mammam-logo.png" alt="The Măm Măm" style="width:100%; height:100%; object-fit:contain;" />
-        </div>
         <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.7) 10%, transparent 60%);"></div>
         <div style="position:absolute; bottom:1rem; left:1.5rem; right:1.5rem; color:#fff;">
           <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-bottom:0.35rem;">

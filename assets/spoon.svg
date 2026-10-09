@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="spoonMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#e2e8f0"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="75%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <linearGradient id="spoonBowlGrad" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#f1f5f9"/>
+      <stop offset="65%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <radialGradient id="spoonHighlight" cx="35%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="spoonShadow" x="-25%" y="-25%" width="160%" height="160%">
+      <feDropShadow dx="3" dy="6" stdDeviation="3.5" flood-color="rgba(0,0,0,0.45)"/>
+    </filter>
+  </defs>
+  <g filter="url(#spoonShadow)">
+    <!-- Handle -->
+    <path d="M38 42 C46 51 68 76 76 84 C79 87 84 87 87 84 C90 81 90 76 87 73 C79 65 54 43 45 35 Z" fill="url(#spoonMetal)" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Handle Spine Highlight -->
+    <path d="M43 40 L81 80" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <!-- Spoon Neck -->
+    <path d="M34 31 C37 34 42 39 46 36 C44 32 39 27 34 31 Z" fill="url(#spoonMetal)"/>
+    <!-- Spoon Bowl Rim -->
+    <ellipse cx="26" cy="24" rx="22" ry="16" transform="rotate(-42 26 24)" fill="url(#spoonBowlGrad)" stroke="#334155" stroke-width="2.5"/>
+    <!-- Spoon Bowl Inner Cavity -->
+    <ellipse cx="25" cy="23" rx="17" ry="12" transform="rotate(-42 25 23)" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
+    <ellipse cx="23" cy="21" rx="13" ry="8" transform="rotate(-42 23 21)" fill="url(#spoonHighlight)"/>
+    <!-- Specular Star Reflection -->
+    <path d="M22 17 L23 19 L25 20 L23 21 L22 23 L21 21 L19 20 L21 19 Z" fill="#ffffff" opacity="0.95"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "telegram": {
+    "bot_token": "",
+    "chat_id": "",
+    "bot_username": "themammam_bot",
+    "description": "Nhập Bot Token (từ @BotFather) và Chat ID (từ @userinfobot hoặc ID group) vào đây để nhận tin nhắn khách chat"
+  },
+  "store": {
+    "name": "The Măm Măm",
+    "hotline": "0974449708",
+    "momo_phone": "0974449708",
+    "momo_name": "NGUYEN THI KIM OANH"
+  }
+}

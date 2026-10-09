@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Măm Măm | Chuyên Đặc Sản Đà Lạt & Bánh Ngon Handmade</title>
+  <meta name="description" content="Thương hiệu The Măm Măm — Chuyên đặc sản Đà Lạt thượng hạng: Khoai tây sấy giòn rong biển, dâu tây sấy thăng hoa, hoa quả sấy dẻo và bánh tươi nướng mỗi ngày. Đặt online giao hỏa tốc toàn quốc!" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/cheese-logo.webp" type="image/webp" />
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- SVG Filters Definition for 3D Peeling Stickers -->
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;">
+    <defs>
+      <filter id="pointLight">
+        <feGaussianBlur stdDeviation="1" result="blur" />
+        <feSpecularLighting result="spec" in="blur" specularExponent="100" specularConstant="0.1" lighting-color="white">
+          <fePointLight x="100" y="100" z="300" />
+        </feSpecularLighting>
+        <feComposite in="spec" in2="SourceGraphic" result="lit" />
+        <feComposite in="lit" in2="SourceAlpha" operator="in" />
+      </filter>
+      <filter id="pointLightFlipped">
+        <feGaussianBlur stdDeviation="10" result="blur" />
+        <feSpecularLighting result="spec" in="blur" specularExponent="100" specularConstant="0.7" lighting-color="white">
+          <fePointLight x="100" y="100" z="300" />
+        </feSpecularLighting>
+        <feComposite in="spec" in2="SourceGraphic" result="lit" />
+        <feComposite in="lit" in2="SourceAlpha" operator="in" />
+      </filter>
+      <filter id="dropShadow">
+        <feDropShadow dx="2" dy="4" stdDeviation="1.8" flood-color="black" flood-opacity="0.6" />
+      </filter>
+      <filter id="expandAndFill">
+        <feOffset dx="0" dy="0" in="SourceAlpha" result="shape" />
+        <feFlood flood-color="rgb(220,220,220)" result="flood" />
+        <feComposite operator="in" in="flood" in2="shape" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ═══════════════ PRELOADER CURTAINS ═══════════════ -->
+  <div id="preloader" role="dialog" aria-modal="true" aria-label="Đang tải trang">
+    <div class="loader-curtains">
+      <svg class="curtain-1" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path fill="#4C0016" d="M -1 -1 L 101 -1 L 101 101 Q 50 101 -1 101 Z"></path>
+      </svg>
+      <svg class="curtain-2" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path fill="#EF6F2E" d="M -1 -1 L 101 -1 L 101 101 Q 50 101 -1 101 Z"></path>
+      </svg>
+      <svg class="curtain-3" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path fill="#F91814" d="M -1 -1 L 101 -1 L 101 101 Q 50 101 -1 101 Z"></path>
+      </svg>
+    </div>
+
+    <div class="loader-content">
+      <div class="loader-mascot-box">
+        <div class="loader-brand-seal-wrap">
+          <img class="loader-brand-seal-img" src="assets/mammam-logo.png" alt="The Măm Măm Logo" />
+        </div>
+      </div>
+      <div class="loader-text font-mouse-memoirs">ĐANG CHUẨN BỊ ĐẶC SẢN THE MĂM MĂM...</div>
+      <div class="loader-progress-wrap">
+        <div class="loader-progress-bar" id="loaderBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <header class="navbar" id="navbar">
+    <a href="#" class="nav-brand">
+      <img src="assets/mammam-logo.png" alt="The Măm Măm Logo" class="nav-logo-img" />
+      <span class="nav-brand-text">THE MĂM MĂM</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#hero" class="nav-pill active">Trang Chủ</a>
+      <a href="#about" class="nav-pill">Câu Chuyện</a>
+      <a href="#menu" class="nav-pill">Thực Đơn (106)</a>
+      <a href="#delivery" class="nav-pill">Giao Hàng</a>
+      <a href="chinh-sach.html" class="nav-pill" style="border-color:rgba(76,174,79,0.35); color:#2e7d32;" title="Chính Sách & Tiêu Chuẩn Chất Lượng">
+        <span>🛡️</span> <span>Chính Sách</span>
+      </a>
+      <button class="nav-pill" id="navUserBtn" title="Tài Khoản / Đăng Nhập">
+        <span>👤</span> <span>Tài Khoản</span>
+      </button>
+      <button class="nav-pill nav-pill-red" id="navCartBtn" title="Xem giỏ hàng của bạn">
+        <span>🛒</span> <span>Giỏ Hàng</span>
+        <span class="cart-btn-badge cart-count">0</span>
+      </button>
+    </nav>
+
+    <div class="nav-mobile-actions">
+      <button class="nav-pill nav-pill-red mobile-cart-direct-btn" onclick="window.mammamApp.openModal('cartDrawer')" title="Giỏ Hàng">
+        <span>🛒</span> <span class="cart-count">0</span>
+      </button>
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Mở menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobileDrawer">
+    <div class="mobile-drawer-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <span class="font-modak text-mustard" style="font-size:2.3rem;">THE MĂM MĂM</span>
+        <button onclick="window.mammamApp.closeModal('mobileDrawer')" style="background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;" aria-label="Đóng menu">✕</button>
+      </div>
+      <a href="#hero" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Trang Chủ</a>
+      <a href="#about" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Câu Chuyện</a>
+      <a href="#delivery" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Giao Hỏa Tốc</a>
+      <a href="#menu" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Thực Đơn (106 Món)</a>
+      <a href="chinh-sach.html" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Chính Sách Chất Lượng</a>
+      <div style="margin-top:auto; display:flex; flex-direction:column; gap:0.8rem;">
+        <button class="nav-pill" onclick="window.mammamApp.closeModal('mobileDrawer'); document.getElementById('navUserBtn').click();" style="justify-content:center; background:#fff; color:var(--black); font-weight:700;">
+          👤 Tài Khoản / Đăng Nhập
+        </button>
+        <button class="nav-pill nav-pill-red" onclick="window.mammamApp.closeModal('mobileDrawer'); window.mammamApp.openModal('cartDrawer');" style="justify-content:center;">
+          🛒 Giỏ Hàng (<span class="cart-count">0</span>)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ HERO SECTION ═══════════════ -->
+  <section class="hero-section" id="hero">
+    <div class="hero-header-wrap">
+      <div class="hero-tag-badge badge-left">🥔 KHOAI TÂY SẤY GIÒN</div>
+      <div class="hero-tag-badge badge-right">🏔 100% ĐÀ LẠT CHÍNH GỐC</div>
+      <h1 class="hero-title text-stroke">THE MĂM MĂM</h1>
+    </div>
+
+    <!-- Centerpiece Center Image: Khoai Tây Sấy Giòn -->
+    <div class="hero-centerpiece-wrap">
+      <div class="hero-centerpiece-card">
+        <img class="hero-centerpiece-img" src="assets/khoai-tay-say-gion.png" alt="Khoai Tây Sấy Giòn Rong Biển Đà Lạt - The Măm Măm" />
+        <div class="hero-best-seller-badge font-modak">🔥 BEST SELLER SỐ 1</div>
+      </div>
+    </div>
+
+    <!-- Bottom Row Information -->
+    <div class="hero-bottom-grid">
+      <div class="hero-col">
+        <p class="text-black">
+          Khoai tây sấy giòn rong biển chuẩn vị Đà Lạt, giòn tan đậm đà mặn ngọt, ăn là ghiền, đóng hũ tiện lợi mang đi muôn nơi.
+        </p>
+      </div>
+
+      <div style="text-align:center;">
+        <a href="#menu" class="blob-btn">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Khám Phá Menu</span>
+        </a>
+      </div>
+
+      <div class="hero-col" style="text-align:right;">
+        <p class="text-black">
+          Chuyên đặc sản Đà Lạt: khoai sấy giòn, dâu tây, hoa quả sấy dẻo và các dòng bánh tươi thơm ngon làm mới mỗi ngày.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jelly Wave Divider 1 -->
+  <div class="jelly-divider">
+    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
+      <path d="M0,0 C380,140 760,20 1140,110 C1330,155 1450,110 1536,90 L1536,200 L0,200 Z" fill="#F91814"></path>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ SECTION: ABOUT / STORY ═══════════════ -->
+  <section class="about-section bg-red text-white" id="about">
+    <div style="position:relative; z-index:10; max-width:900px; margin:0 auto;">
+      <span class="section-label text-mustard rotate-5" style="display:inline-block;">TOP ĐẶC SẢN</span>
+      <h2 class="about-hero-title">
+        <span class="text-mustard">GIÒN RỤM</span> <span class="title-dot">·</span> <span class="text-white">ĐẬM VỊ</span>
+        <span class="title-break"></span>
+        <span class="text-white">ĐẶC SẢN ĐÀ LẠT</span> <span class="text-mustard">CHÍNH HIỆU</span>
+      </h2>
+      
+      <!-- Redesigned Story Card with Rich Typography -->
+      <div class="about-story-card">
+        <div class="story-card-header">
+          <span class="story-tag" style="background:#e8f5e9; color:#2e7d32; border:1.5px solid #a5d6a7;">🌱 THÀNH LẬP NĂM 2026</span>
+          <span class="story-tag">🌾 100% NÔNG SẢN ĐÀ LẠT</span>
+          <span class="story-pill-secondary">✨ Chuẩn Vị Phố Núi</span>
+        </div>
+        <p class="about-story-desc">
+          Chính thức thành lập từ năm <strong>2026</strong>, thương hiệu nông sản thế hệ mới <span class="highlight-brand">The Măm Măm</span> (Since 2026) tự hào tuyển chọn từng mẻ đặc sản sạch tinh túy từ vùng đất lành sương mù Lâm Viên: <strong>khoai tây sấy giòn rong biển</strong> bùi thơm đượm vị mặn ngọt đậm đà, <strong>dâu tây sấy thăng hoa</strong> nguyên trái giòn xốp thơm lừng, cùng hoa quả sấy dẻo và hơn <strong>50+ món bánh tươi handmade</strong> nướng thủ công mỗi sớm mai.
+        </p>
+        <div class="about-story-pills">
+          <span class="story-feature-item" style="background:#e8f5e9; font-weight:700;">🌱 Thương hiệu mới từ 2026</span>
+          <span class="story-feature-item">🥔 Khoai tây sấy rong biển</span>
+          <span class="story-feature-item">🍓 Dâu tây sấy thăng hoa</span>
+          <span class="story-feature-item">🥕 Rau củ thập cẩm giòn rụm</span>
+          <span class="story-feature-item">🥐 Bánh tươi nướng thủ công</span>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <a href="#menu" class="blob-btn blob-btn-mustard">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span style="color:#1b1b1b;">Đặt Mua Ngay</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Tilted Media Cards with Peeling Stickers - 100% Authentic Dalat Specialties & Măm Măm Branding -->
+    <div class="cards-tilted-grid">
+      <div class="tilted-media-card">
+        <img src="assets/khoai_tay_mammam.png" alt="Khoai tây sấy giòn rong biển The Măm Măm" />
+        <div class="tilted-card-tag">🥔 Khoai Tây Rong Biển</div>
+      </div>
+      <div class="tilted-media-card">
+        <img src="assets/dalat_mixed_chips_mammam.jpg" alt="Thập cẩm rau củ quả sấy giòn The Măm Măm" />
+        <div class="tilted-card-tag">🥕 Thập Cẩm Rau Củ Sấy Giòn</div>
+      </div>
+      <div class="tilted-media-card">
+        <img src="assets/dalat_dried_strawberries_mammam.jpg" alt="Dâu tây sấy thăng hoa The Măm Măm" />
+        <div class="tilted-card-tag">🍓 Dâu Tây Sấy Thăng Hoa</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jelly Wave Divider 2 -->
+  <div class="jelly-divider">
+    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
+      <path d="M0,0 C450,150 900,30 1350,130 L1536,110 L1536,200 L0,200 Z" fill="#FFD750"></path>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ SECTION: MASCOT FACE WITH EYE TRACKING ═══════════════ -->
+  <section class="face-section bg-mustard text-black" id="mascotSection">
+    <p class="section-label text-red -rotate-7">ĐẶC SẢN PHỐ NÚI</p>
+    <h2 class="mascot-section-title">
+      MIẾNG NÀO CŨNG GIÒN RỤM
+    </h2>
+
+    <!-- Potato Mini-Game Hero Launch Card -->
+    <div class="potato-game-hero-banner">
+      <div class="game-hero-badge">
+        <span class="badge-dot-live"></span>
+        <span>🎮 MINI GAME: GÕ KHOAI TÂY GIÒN RỤM</span>
+      </div>
+      <h3 class="game-hero-title">DÙNG THÌA GÕ KHOAI — SĂN VOUCHER ĐẾN 15%!</h3>
+      <p class="game-hero-desc">
+        Củ khoai tây Đà Lạt siêu tinh nghịch, chạy quanh màn hình và <strong>biết né thìa cực gắt</strong>! Bạn có <strong>10 giây</strong> để gõ trúng làm <em>vỡ vụn giòn rụm</em> và rinh ngay <strong>1 lượt Vòng Quay May Mắn</strong>!
+      </p>
+      
+      <div class="game-hero-actions">
+        <button type="button" id="startPotatoGameBtn" class="btn-start-game-cta">
+          <img src="assets/spoon.svg" alt="Chiếc Thìa" class="cta-spoon-icon" />
+          <span>BẮT ĐẦU THỬ THÁCH (10s GÕ KHOAI)</span>
+        </button>
+      </div>
+
+      <!-- Prize distribution transparency -->
+      <div class="game-prize-rates">
+        <span class="rate-tag rate-jackpot">👑 Evoucher 15% (15%)</span>
+        <span class="rate-tag rate-gold">🎁 Evoucher 10% (15%)</span>
+        <span class="rate-tag rate-warm">🎟️ Evoucher 5% (50%)</span>
+        <span class="rate-tag rate-luck">🥔 May Mắn Lần Sau (20%)</span>
+      </div>
+    </div>
+
+    <div class="face-mascot-box" id="faceMascotInteractiveBox" title="Click vào củ khoai tây để bắt đầu thử thách!">
+      <!-- Click Hint Tooltip -->
+      <div class="mascot-click-challenge-hint">
+        <span>🥄 Click vào mình để đập thử xem! Né cực đỉnh đấy 😜</span>
+      </div>
+
+      <!-- Interactive Pupils Following Mouse -->
+      <div class="interactive-eyes">
+        <div class="eye-socket">
+          <div class="eye-pupil"></div>
+        </div>
+        <div class="eye-socket">
+          <div class="eye-pupil"></div>
+        </div>
+      </div>
+
+      <img src="assets/potato-chip-mascot.png" alt="The Măm Măm Potato Chip Mascot" style="width:100%; height:auto;" />
+    </div>
+
+    <div class="face-badges-row">
+      <span>🥔 KHOAI TÂY VÀNG GIÒN</span>
+      <span>•</span>
+      <span>🍓 DÂU TÂY SẤY THĂNG HOA</span>
+      <span>•</span>
+      <span>🫙 100% TỰ NHIÊN ĐÀ LẠT</span>
+    </div>
+  </section>
+
+  <!-- Jelly Wave Divider 3 -->
+  <div class="jelly-divider">
+    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
+      <path d="M0,0 C380,120 780,20 1200,100 L1536,80 L1536,200 L0,200 Z" fill="#F5E3CD"></path>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ SECTION: FLOATING INGREDIENT LAYERS ═══════════════ -->
+  <section class="ingredients-section" id="ingredients">
+    <p class="section-label text-red rotate-7">NGUYÊN LIỆU PHỐ NÚI</p>
+    <div style="margin-top:1rem;">
+      <h2 class="heading180 text-stroke-180 text-red">TỪNG LỚP NGUYÊN LIỆU</h2>
+      <h2 class="heading180 text-stroke-180 text-red">ĐẬM ĐÀ NGUYÊN BẢN</h2>
+      <h2 class="heading180 text-stroke-180 text-red">ĐẶC SẢN ĐÀ LẠT</h2>
+    </div>
+
+    <!-- Floating Ingredients -->
+    <img class="floating-layer-item layer-tomato" src="assets/tomato.webp" alt="Dâu tây tươi Đà Lạt" />
+    <img class="floating-layer-item layer-cheese" src="assets/cheese.webp" alt="Phô mai kéo sợi" />
+    <img class="floating-layer-item layer-lettuce" src="assets/lettuce.webp" alt="Rong biển thượng hạng" />
+    <img class="floating-layer-item layer-patty" src="assets/khoai-tay-say-gion.png" alt="Khoai tây sấy giòn" style="border-radius:24px; border:3px solid #1b1b1b; box-shadow:var(--shadow-pop);" />
+
+    <p class="text40" style="max-width:680px; margin:2.5rem auto 0; color:#444;">
+      Từng củ khoai tây thu hoạch từ nông trại hữu cơ Đà Lạt, lát mỏng đều tay, sấy giòn lắc cùng rong biển thượng hạng và gia vị đậm đà mặn ngọt — tạo nên hương vị đặc sản nức tiếng The Măm Măm.
+    </p>
+  </section>
+
+  <!-- Jelly Wave Divider 4 -->
+  <div class="jelly-divider">
+    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
+      <path d="M0,0 C350,130 800,40 1250,120 L1536,90 L1536,200 L0,200 Z" fill="#FFD750"></path>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ SECTION: DELIVERY MAP & PACKAGING ═══════════════ -->
+  <section class="delivery-section" id="delivery">
+    <p class="section-label text-red -rotate-5">GIAO HÀNG HỎA TỐC</p>
+    <h2 class="heading300 text-stroke-180-mustard text-white">
+      ĐẶC SẢN ĐÀ LẠT ĐẾN TẬN TAY BẠN
+    </h2>
+    <p class="text40" style="max-width:700px; margin:1rem auto 0; text-align:center;">
+      Đóng gói hũ nắp nhôm & túi zip chống ẩm tiêu chuẩn cao, bảo quản giòn rụm thơm lừng. Giao nhanh toàn quốc!
+    </p>
+
+    <!-- Cities Grid -->
+    <div class="cities-route-grid">
+      <div class="city-card">
+        <img class="city-card-img" src="assets/city_dalat.webp" alt="Biểu tượng Đà Lạt - Quảng trường Lâm Viên" />
+        <div class="city-name">ĐÀ LẠT</div>
+        <div class="city-time">15–30 Phút</div>
+      </div>
+      <div class="city-card">
+        <img class="city-card-img" src="assets/city_saigon.webp" alt="Biểu tượng Sài Gòn - Chợ Bến Thành" />
+        <div class="city-name">SÀI GÒN</div>
+        <div class="city-time">Trong Ngày / 24h</div>
+      </div>
+      <div class="city-card">
+        <img class="city-card-img" src="assets/city_hanoi.webp" alt="Biểu tượng Hà Nội - Khuê Văn Các" />
+        <div class="city-name">HÀ NỘI</div>
+        <div class="city-time">Hỏa Tốc 24h</div>
+      </div>
+      <div class="city-card">
+        <img class="city-card-img" src="assets/city_danang.webp" alt="Biểu tượng Đà Nẵng - Cầu Rồng" />
+        <div class="city-name">ĐÀ NẴNG</div>
+        <div class="city-time">24–36 Giờ</div>
+      </div>
+      <div class="city-card">
+        <img class="city-card-img" src="assets/city_cantho.webp" alt="Biểu tượng Cần Thơ - Chợ Nổi Cái Răng" />
+        <div class="city-name">CẦN THƠ</div>
+        <div class="city-time">24–36 Giờ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jelly Wave Divider 5 -->
+  <div class="jelly-divider">
+    <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
+      <path d="M0,0 C400,120 850,20 1300,110 L1536,95 L1536,200 L0,200 Z" fill="#FBF2E6"></path>
+    </svg>
+  </div>
+
+  <!-- ═══════════════ SECTION: FULL MENU & ORDERING ═══════════════ -->
+  <section class="menu-section" id="menu">
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <span class="section-label text-red rotate-5">ĐẶC SẢN ĐÀ LẠT CHÍNH GỐC</span>
+      <h2 class="heading300 text-stroke-180 text-red" style="margin-top:0.3rem;">
+        CHỌN MÓN THE MĂM MĂM
+      </h2>
+      <p class="text40" style="color:#555;">Đầy đủ 106 món bánh mì tươi, bánh mềm, bánh su, cookie & đặc sản Đà Lạt chính thức</p>
+    </div>
+
+    <!-- Controls Header Bar -->
+    <div class="menu-header-bar">
+      <!-- Category Tabs -->
+      <div class="category-tabs-wrap" id="categoryTabs"></div>
+
+      <!-- Search & Sort Controls -->
+      <div class="search-and-sort-bar">
+        <div class="search-box-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="menuSearch" class="search-input" placeholder="Tìm kiếm món (bánh su, bánh mì tươi, bông lan bơ chuối, cookie, MM001...)" />
+        </div>
+
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <span class="menu-stats-text" id="menuStats">HIỂN THỊ 106 MÓN</span>
+          <select id="menuSort" class="form-select" style="padding:0.6rem 1.2rem; border-radius:999px; border:2px solid #1b1b1b; font-weight:700;">
+            <option value="default">Sắp xếp: Mặc định</option>
+            <option value="price-asc">Giá: Thấp đến Cao</option>
+            <option value="price-desc">Giá: Cao đến Thấp</option>
+            <option value="name">Tên món: A - Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Cards Grid -->
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- ═══════════════ CTA BANNER SECTION ═══════════════ -->
+  <section style="background:var(--beige); padding:clamp(3rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem); position:relative; overflow:hidden;">
+    <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+      <div>
+        <span class="section-label text-red -rotate-5">FEEL THE CRUNCH</span>
+        <h2 class="heading300 text-stroke-180 text-red" style="margin:0.5rem 0 1rem; line-height:0.88;">
+          THÈM LÀ PHẢI THE MĂM MĂM
+        </h2>
+        <p class="text40" style="color:#444; line-height:1.4; margin-bottom:2rem;">
+          Thưởng thức vị giòn rụm khó cưỡng của khoai tây sấy rong biển và những món đặc sản Đà Lạt thơm lừng. Đặt hàng ngay hôm nay để nhận ưu đãi miễn phí giao hàng cho đơn từ 200k!
+        </p>
+        <a href="#menu" class="blob-btn">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Đặt Món Liền Tay</span>
+        </a>
+      </div>
+
+      <div style="position:relative; text-align:center;">
+        <img src="assets/khoai-tay-say-gion.png" alt="Khoai Tây Sấy Giòn Đà Lạt" style="width:100%; max-width:440px; margin:0 auto; border-radius:var(--radius-xl); border:5px solid #1b1b1b; box-shadow:var(--shadow-pop);" />
+        <div style="position:absolute; bottom:-10px; right:10px; width:130px;">
+          <img src="assets/burger-boy.png" alt="Mascot Boy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer-section">
+    <div class="footer-nav-row">
+      <a href="#hero" class="footer-link">Trang Chủ</a>
+      <a href="#menu" class="footer-link">Thực Đơn Đặc Sản (106 Món)</a>
+      <a href="#about" class="footer-link">Câu Chuyện</a>
+      <a href="#delivery" class="footer-link">Giao Hàng</a>
+      <a href="chinh-sach.html" class="footer-link" style="color:var(--red);">🛡️ Chính Sách & Tiêu Chuẩn Bộ Y Tế</a>
+    </div>
+
+    <div style="width:100%; height:2px; background:rgba(27,27,27,0.12); margin:1.8rem auto 1.5rem; max-width:1100px;"></div>
+
+    <div class="footer-info-card">
+      <div class="footer-brand-header">
+        <img src="assets/mammam-logo.png" alt="The Măm Măm Logo" class="footer-logo-img" />
+        <div>
+          <h3 class="footer-brand-name">Tiệm Bánh & Ăn Vặt The Măm Măm</h3>
+          <p class="footer-brand-slogan">🌾 Thương hiệu thành lập năm 2026 · Tiệm bánh tươi & món ngon ăn vặt · Giòn tan từng miếng</p>
+        </div>
+      </div>
+      <div class="footer-details-grid single-contact-grid">
+        <div>📞 <strong>Hotline liên hệ / Zalo:</strong> <a href="tel:0974449708" style="color:var(--red); font-weight:800; font-size:1.05rem;">0974 449 708</a> (Hỗ trợ 24/7)</div>
+        <div>🌱 <strong>Khởi nguyên:</strong> Thương hiệu mới thành lập & ra mắt đầu năm 2026</div>
+        <div>🛡️ <strong>Chứng nhận ATTP:</strong> Đạt chuẩn QCVN 8-1, 8-2, 8-3/BYT & Luật ATTP 55/2010/QH12</div>
+      </div>
+    </div>
+
+    <p class="font-mouse-memoirs" style="font-size:1.15rem; color:#888; text-transform:uppercase; margin-top:2rem;">
+      © 2026 THE MĂM MĂM — TIỆM BÁNH & ĂN VẶT — ALL RIGHTS RESERVED · GIÒN TAN TỪNG MIẾNG
+    </p>
+  </footer>
+
+  <!-- ═══════════════ MODAL: PRODUCT DETAIL ═══════════════ -->
+  <div class="modal-overlay" id="productDetailModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" data-close-modal="productDetailModal">✕</button>
+      <div id="productDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ DRAWER: SHOPPING CART ═══════════════ -->
+  <div id="cartDrawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng của bạn">
+    <div class="cart-sheet">
+      <div class="cart-header">
+        <div class="cart-title">GIỎ HÀNG CỦA BẠN</div>
+        <button class="modal-close-btn cart-close-btn" data-close-modal="cartDrawer" onclick="window.mammamApp.closeModal('cartDrawer')" aria-label="Đóng giỏ hàng">✕</button>
+      </div>
+
+      <div class="cart-body">
+        <div id="cartEmptyNotice" style="text-align:center; padding:3rem 1rem;">
+          <div style="font-size:4rem; margin-bottom:1rem;">🛍️</div>
+          <h3 class="font-modak text-red" style="font-size:1.8rem;">Giỏ hàng đang trống!</h3>
+          <p style="color:#666; margin-top:0.5rem;">Hãy thêm món khoai tây sấy giòn hoặc bánh thơm từ thực đơn nhé.</p>
+        </div>
+        <div id="cartItemsList"></div>
+      </div>
+
+      <div class="cart-footer" id="cartSummaryBox">
+        <!-- Voucher Input -->
+        <div style="display:flex; gap:0.5rem;">
+          <input type="text" id="voucherInput" class="form-input" placeholder="Mã giảm giá (MAMMAM20, FREESHIP, MAM10)" style="text-transform:uppercase;" />
+          <button class="nav-pill nav-pill-red" id="applyVoucherBtn" style="padding:0.5rem 1rem; font-size:1.1rem;">Áp dụng</button>
+        </div>
+
+        <div>
+          <div class="cart-summary-line">
+            <span>Tạm tính:</span>
+            <strong id="cartSubtotal">0đ</strong>
+          </div>
+          <div class="cart-summary-line" style="margin-top:0.3rem;">
+            <span>Phí giao hàng:</span>
+            <span id="cartShipping">25.000đ</span>
+          </div>
+          <div class="cart-summary-line text-red" id="cartDiscountRow" style="display:none; margin-top:0.3rem;">
+            <span>Giảm giá:</span>
+            <span id="cartDiscount">-0đ</span>
+          </div>
+          <div style="width:100%; height:1px; background:#ddd; margin:0.6rem 0;"></div>
+          <div class="cart-summary-line">
+            <span style="font-size:1.1rem; font-weight:800;">TỔNG CỘNG:</span>
+            <span class="cart-summary-total" id="cartGrandTotal">0đ</span>
+          </div>
+        </div>
+
+        <button class="blob-btn" id="proceedCheckoutBtn" style="width:100%;">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Tiến Hành Đặt Hàng</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: CHECKOUT & PAYMENT ═══════════════ -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card" style="max-width:580px;">
+      <button class="modal-close-btn" data-close-modal="checkoutModal">✕</button>
+      <div style="padding:1.5rem 1.8rem; border-bottom:2px solid var(--black); background:var(--beige);">
+        <h2 class="font-modak text-red" style="font-size:2.2rem; line-height:1;">ĐẶT HÀNG THE MĂM MĂM</h2>
+        <p style="font-size:0.85rem; color:#555;">Điền nhanh thông tin giao hàng & chọn phương thức thanh toán</p>
+      </div>
+
+      <div style="padding:1.5rem 1.8rem;">
+        <div class="form-group">
+          <label class="form-label">Họ và tên người nhận *</label>
+          <input type="text" id="checkoutName" class="form-input" placeholder="Ví dụ: Nguyễn Văn An" />
+        </div>
+
+        <div class="form-group" style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;">
+          <div>
+            <label class="form-label">Số điện thoại *</label>
+            <input type="tel" id="checkoutPhone" class="form-input" placeholder="09xxxxxxxx" />
+          </div>
+          <div>
+            <label class="form-label">Tỉnh / Thành phố</label>
+            <select id="checkoutCity" class="form-select">
+              <option value="Đà Lạt">Đà Lạt (Giao nhanh)</option>
+              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+              <option value="Hà Nội">Hà Nội</option>
+              <option value="Đà Nẵng">Đà Nẵng</option>
+              <option value="Cần Thơ">Cần Thơ</option>
+              <option value="Khác">Tỉnh thành khác</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Địa chỉ nhận hàng chi tiết *</label>
+          <input type="text" id="checkoutAddress" class="form-input" placeholder="Số nhà, tên đường, phường/xã" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ghi chú đơn hàng (nếu có)</label>
+          <textarea id="checkoutNote" class="form-textarea" rows="2" placeholder="Ví dụ: Giao giờ hành chính, bọc kỹ đồ giòn..."></textarea>
+        </div>
+
+        <!-- Payment Method Selection -->
+        <div class="form-group" style="margin-top:1.2rem;">
+          <label class="form-label">Phương thức thanh toán</label>
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <label style="display:flex; align-items:center; gap:0.8rem; padding:0.8rem 1rem; border:2px solid #d82d8b; border-radius:var(--radius-md); background:#fff0f5; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="momo" checked style="accent-color:#d82d8b; transform:scale(1.2);" />
+              <div>
+                <strong style="color:#d82d8b;">📱 Quét Mã QR MoMo (Đơn giản & Nhanh chóng - Khuyên dùng)</strong>
+                <p style="font-size:0.8rem; color:#666;">Admin xác nhận tức thì qua mã đơn hàng tự động tạo</p>
+              </div>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.8rem; padding:0.8rem 1rem; border:2px solid #1b1b1b; border-radius:var(--radius-md); background:#fcfcfc; cursor:pointer;">
+              <input type="radio" name="paymentMethod" value="cod" style="transform:scale(1.2);" />
+              <div>
+                <strong>💵 Tiền mặt khi nhận hàng (COD)</strong>
+                <p style="font-size:0.8rem; color:#666;">Thanh toán trực tiếp cho nhân viên giao hàng</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div style="margin:1rem 0; display:flex; align-items:center; gap:0.5rem;">
+          <input type="checkbox" id="checkoutSaveInfo" checked style="transform:scale(1.2);" />
+          <label for="checkoutSaveInfo" style="font-size:0.85rem; color:#555; cursor:pointer;">
+            Lưu thông tin giao hàng cho lần đặt sau trên thiết bị này
+          </label>
+        </div>
+
+        <div style="background:#fdf5ea; border:2px solid #f4a804; border-radius:var(--radius-md); padding:0.8rem 1rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+          <span>Tổng số tiền cần thanh toán:</span>
+          <strong class="font-mouse-memoirs text-red" id="checkoutTotalPreview" style="font-size:1.8rem;">0đ</strong>
+        </div>
+
+        <button class="blob-btn" id="confirmOrderBtn" style="width:100%;">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Xác Nhận Đặt Hàng & Nhận Mã</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: ORDER SUCCESS & MOMO QR ═══════════════ -->
+  <div class="modal-overlay" id="orderSuccessModal">
+    <div class="modal-card" style="max-width:540px; text-align:center;">
+      <button class="modal-close-btn" data-close-modal="orderSuccessModal">✕</button>
+
+      <div style="padding:2rem 1.8rem;">
+        <div style="font-size:3.5rem; line-height:1; margin-bottom:0.5rem;">🎉🥔</div>
+        <h2 class="font-modak text-red" style="font-size:2.2rem; line-height:1;">ĐẶT HÀNG THÀNH CÔNG!</h2>
+        <p style="color:#555; font-size:0.9rem; margin-top:0.3rem;">
+          Cảm ơn bạn đã ủng hộ <strong>Đặc Sản The Măm Măm</strong>! Mã đơn hàng của bạn là:
+        </p>
+
+        <!-- Auto-generated Order Code -->
+        <div style="margin:1rem 0;">
+          <div class="order-code-badge" id="successOrderCode">MM-8921-A7K</div>
+          <div>
+            <button class="nav-pill" data-copy-target="successOrderCode" data-copy-label="mã đơn hàng" style="padding:0.3rem 1rem; font-size:1.1rem; margin-top:0.2rem;">
+              📋 Sao Chép Mã Đơn
+            </button>
+          </div>
+        </div>
+
+        <!-- MoMo Payment Box -->
+        <div class="momo-box">
+          <div style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+            <span style="font-size:1.8rem;">📱</span>
+            <strong class="font-modak" style="font-size:1.5rem; color:#d82d8b;">THANH TOÁN MOMO QR</strong>
+          </div>
+          <p style="font-size:0.85rem; color:#444; margin-top:0.3rem;">
+            Quét mã QR dưới đây bằng ứng dụng <strong>MoMo</strong> hoặc app Ngân hàng:
+          </p>
+
+          <img class="momo-qr-img" id="momoQrImage" src="" alt="Mã QR Thanh Toán MoMo" />
+
+          <div style="background:#fff; border-radius:var(--radius-md); padding:0.8rem; border:1px dashed #d82d8b; text-align:left; font-size:0.88rem; line-height:1.6;">
+            <div>👤 Người nhận: <strong id="momoRecipientName">NGUYEN THI KIM OANH</strong></div>
+            <div>📞 Số MoMo: <strong id="momoRecipientPhone">0974 449 708</strong> 
+              <button class="nav-pill" data-copy-target="momoRecipientPhone" data-copy-label="số MoMo" style="padding:0.15rem 0.6rem; font-size:0.8rem; margin-left:6px;">Sao chép</button>
+            </div>
+            <div>💰 Số tiền: <strong class="text-red" id="successTotalAmount">0đ</strong></div>
+            <div>📝 Lời nhắn: <strong class="text-red" id="momoMsgOrderCode">MM-8921-A7K</strong>
+              <button class="nav-pill" data-copy-target="momoMsgOrderCode" data-copy-label="lời nhắn" style="padding:0.15rem 0.6rem; font-size:0.8rem; margin-left:6px;">Sao chép</button>
+            </div>
+          </div>
+
+          <div style="background:#fff3cd; border:1px solid #ffeeba; border-radius:8px; padding:0.6rem; margin-top:0.8rem; font-size:0.8rem; color:#856404; text-align:left;">
+            ⚠️ <strong>Lưu ý quan trọng:</strong> Quý khách nhớ ghi đúng <strong>Mã đơn hàng</strong> vào lời nhắn MoMo để Admin xác nhận và lên lò làm bánh ngay nhé!
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem; display:flex; gap:0.8rem; justify-content:center;">
+          <button class="blob-btn" data-close-modal="orderSuccessModal" style="flex:1;">
+            <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+              <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+            </svg>
+            <span>Đã Hiểu & Đóng</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: AUTHENTICATION (LOGIN / REGISTER) ═══════════════ -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card" style="max-width:480px;">
+      <button class="modal-close-btn" data-close-modal="authModal">✕</button>
+
+      <div class="checkout-tabs">
+        <button class="checkout-tab-btn active" id="tabLoginBtn">ĐĂNG NHẬP</button>
+        <button class="checkout-tab-btn" id="tabRegBtn">TẠO TÀI KHOẢN</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginFormWrap" style="padding:1.8rem;">
+        <div class="form-group">
+          <label class="form-label">Tài khoản (SĐT, Email hoặc Admin)</label>
+          <input type="text" id="loginIdentifier" class="form-input" placeholder="09xxxxxxxx hoặc admin" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mật khẩu</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button class="blob-btn" id="loginSubmitBtn" style="width:100%; margin-top:1rem;">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Đăng Nhập Ngay</span>
+        </button>
+        <p style="font-size:0.83rem; color:#666; margin-top:1.1rem; text-align:center; line-height:1.4;">
+          🔐 Quản trị viên tiệm có thể đăng nhập trực tiếp tại đây với tài khoản <strong>admin</strong>.
+        </p>
+      </div>
+
+      <!-- Register Form -->
+      <div id="regFormWrap" style="padding:1.8rem; display:none;">
+        <div class="form-group">
+          <label class="form-label">Họ và tên *</label>
+          <input type="text" id="regName" class="form-input" placeholder="Nguyễn Văn A" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Số điện thoại *</label>
+          <input type="tel" id="regPhone" class="form-input" placeholder="09xxxxxxxx" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email (Tùy chọn)</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="email@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mật khẩu *</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="••••••••" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Địa chỉ mặc định</label>
+          <input type="text" id="regAddress" class="form-input" placeholder="Địa chỉ giao hàng nhận bánh" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Khu vực</label>
+          <select id="regCity" class="form-select">
+            <option value="Đà Lạt">Đà Lạt</option>
+            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Đà Nẵng">Đà Nẵng</option>
+            <option value="Cần Thơ">Cần Thơ</option>
+          </select>
+        </div>
+        <button class="blob-btn" id="regSubmitBtn" style="width:100%; margin-top:1rem;">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>Tạo Tài Khoản (+50 Điểm)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: USER PROFILE & HISTORY ═══════════════ -->
+  <div class="modal-overlay" id="userProfileModal">
+    <div class="modal-card" style="max-width:560px;">
+      <button class="modal-close-btn" data-close-modal="userProfileModal">✕</button>
+      <div style="padding:1.5rem 1.8rem; background:var(--beige); border-bottom:2px solid var(--black);">
+        <h2 class="font-modak text-red" style="font-size:2rem; line-height:1;">TÀI KHOẢN THE MĂM MĂM</h2>
+        <p style="font-size:0.85rem; color:#555;">Thông tin cá nhân & Lịch sử đơn hàng của bạn</p>
+      </div>
+
+      <div style="padding:1.5rem 1.8rem;">
+        <div id="profileAdminBanner" style="display:none; background:#fff8e1; border:2px dashed #f57c00; border-radius:var(--radius-md); padding:0.9rem 1.1rem; margin-bottom:1.2rem; align-items:center; justify-content:space-between; gap:10px;">
+          <div>
+            <strong style="color:#d84315; font-size:0.95rem; display:block;">🔐 Quyền Quản Trị Viên Admin</strong>
+            <span style="font-size:0.82rem; color:#666;">Bạn đang đăng nhập phiên quản trị tiệm bánh</span>
+          </div>
+          <a href="admin.html" class="nav-pill nav-pill-red" style="font-size:0.85rem; padding:0.45rem 0.9rem; text-decoration:none; flex-shrink:0;">
+            Vào Trang Admin ➔
+          </a>
+        </div>
+
+        <div style="background:#fcf8f2; border:2px solid #1b1b1b; border-radius:var(--radius-md); padding:1rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h3 style="font-size:1.15rem; font-weight:800;" id="profileName">Người dùng</h3>
+            <p style="font-size:0.85rem; color:#666;">📞 SĐT: <span id="profilePhone">---</span></p>
+            <p style="font-size:0.85rem; color:#666;">📍 Địa chỉ: <span id="profileAddress">---</span></p>
+          </div>
+          <div style="text-align:center; background:var(--mustard); border:2px solid #1b1b1b; padding:0.5rem 1rem; border-radius:var(--radius-md);">
+            <div class="font-mouse-memoirs text-red" style="font-size:1.8rem;" id="profilePoints">50</div>
+            <span style="font-size:0.75rem; font-weight:800;">MĂM XU</span>
+          </div>
+        </div>
+
+        <h3 class="font-mouse-memoirs text-red" style="font-size:1.6rem; margin-bottom:0.6rem;">LỊCH SỬ ĐƠN HÀNG</h3>
+        <div id="profileOrdersList" style="max-height:260px; overflow-y:auto;"></div>
+
+        <div style="margin-top:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem;">
+          <a href="admin.html" id="profileAdminDirectLink" style="display:none; font-size:0.88rem; color:#d84315; font-weight:700; text-decoration:underline;">
+            ⚙️ Trang Quản Trị Admin
+          </a>
+          <button class="nav-pill" id="logoutBtn" style="border-color:#c33; color:#c33; margin-left:auto;">
+            Đăng Xuất Tài Khoản
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: CHAT CHO TIỆM (TELEGRAM BOT ROUTING) ═══════════════ -->
+  <div class="modal-overlay" id="chatShopModal" role="dialog" aria-modal="true" aria-labelledby="chatShopModalTitle">
+    <div class="modal-card" style="max-width:520px;">
+      <button class="modal-close-btn" data-close-modal="chatShopModal">✕</button>
+      
+      <div style="padding:1.4rem 1.6rem; background:#0088cc; color:#ffffff; border-bottom:3px solid #1b1b1b; display:flex; align-items:center; gap:12px;">
+        <div style="width:48px; height:48px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.2); flex-shrink:0;">
+          <img src="assets/mammam-logo.png" alt="The Măm Măm Logo" style="width:40px; height:40px; object-fit:contain;" />
+        </div>
+        <div>
+          <h2 id="chatShopModalTitle" class="font-modak" style="font-size:1.8rem; line-height:1; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2);">
+            CHAT CHO TIỆM
+          </h2>
+          <p style="font-size:0.85rem; color:#e1f5fe; margin-top:3px;">
+            Đội ngũ The Măm Măm nhận tin nhắn qua Telegram & gọi điện/chat tư vấn ngay!
+          </p>
+        </div>
+      </div>
+
+      <div style="padding:1.6rem;">
+        <form id="chatShopForm" onsubmit="event.preventDefault(); window.mammamApp.submitChatShop();">
+          <div style="margin-bottom:1.1rem;">
+            <label for="chatCustomerName" style="display:block; font-size:0.88rem; font-weight:800; color:#1b1b1b; margin-bottom:0.35rem;">
+              👤 Họ Và Tên Của Bạn <span style="color:#e53935;">*</span>
+            </label>
+            <input type="text" id="chatCustomerName" class="form-input" placeholder="Ví dụ: Nguyễn Văn An" required style="width:100%; font-size:0.95rem; padding:0.65rem 0.9rem;" />
+          </div>
+
+          <div style="margin-bottom:1.1rem;">
+            <label for="chatCustomerPhone" style="display:block; font-size:0.88rem; font-weight:800; color:#1b1b1b; margin-bottom:0.35rem;">
+              📞 Số Điện Thoại Liên Hệ <span style="color:#e53935;">*</span>
+            </label>
+            <input type="tel" id="chatCustomerPhone" class="form-input" placeholder="Ví dụ: 0974 449 708" required pattern="[0-9\s\.\-]{9,15}" style="width:100%; font-size:0.95rem; padding:0.65rem 0.9rem;" />
+            <span style="font-size:0.75rem; color:#666; margin-top:3px; display:block;">Team hỗ trợ sẽ gọi điện lại hoặc nhắn tin tư vấn trực tiếp qua số này.</span>
+          </div>
+
+          <div style="margin-bottom:1.2rem;">
+            <label for="chatCustomerMsg" style="display:block; font-size:0.88rem; font-weight:800; color:#1b1b1b; margin-bottom:0.35rem;">
+              💬 Lời Nhắn / Món Bạn Cần Tư Vấn <span style="color:#e53935;">*</span>
+            </label>
+            <textarea id="chatCustomerMsg" class="form-input" rows="3" placeholder="Ví dụ: Tiệm ơi mình muốn đặt 3 hũ khoai tây sấy rong biển và bánh ship về Sài Gòn..." required style="width:100%; font-size:0.92rem; padding:0.65rem 0.9rem; resize:vertical;"></textarea>
+          </div>
+
+          <div id="chatSubmitStatus" style="display:none; margin-bottom:1rem; padding:0.75rem 1rem; border-radius:10px; font-size:0.88rem; line-height:1.5;"></div>
+
+          <div style="display:flex; gap:0.8rem; align-items:center;">
+            <button type="submit" id="chatSubmitBtn" class="nav-pill nav-pill-red" style="flex:1; justify-content:center; padding:0.75rem; font-size:1.05rem; box-shadow:0 4px 12px rgba(239,35,60,0.35);">
+              <span>🚀 Gửi Tin Nhắn Cho Tiệm</span>
+            </button>
+          </div>
+        </form>
+
+        <div style="margin-top:1.2rem; padding-top:1.2rem; border-top:1px dashed #ddd; text-align:center;">
+          <p style="font-size:0.82rem; color:#666; margin-bottom:0.5rem;">
+            Hoặc liên hệ nhanh qua:
+          </p>
+          <div style="display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;">
+            <a href="tel:0974449708" class="quick-pill" style="color:#d32f2f; font-weight:700; text-decoration:none;">
+              📞 Hotline: 0974 449 708
+            </a>
+            <a id="chatDirectTelegramLink" href="https://t.me/themammam_bot" target="_blank" rel="noopener noreferrer" class="quick-pill" style="color:#0088cc; font-weight:700; text-decoration:none;">
+              ✈️ Mở Trực Tiếp Telegram Bot
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ARENA: MINI GAME GÕ KHOAI TÂY GIÒN RỤM (10s THỬ THÁCH) ═══════════════ -->
+  <div id="potatoGameArena" class="potato-game-arena hidden" role="dialog" aria-modal="true" aria-label="Mini-game Gõ Khoai Tây Giòn Rụm">
+    <!-- Game Top HUD -->
+    <div class="game-hud-bar">
+      <div class="hud-item hud-timer-box">
+        <span class="hud-label">⏱️ THỜI GIAN CÒN LẠI</span>
+        <span class="hud-value" id="gameTimerVal">10.0s</span>
+      </div>
+      <div class="hud-item hud-status-box">
+        <span class="hud-mascot-taunt" id="hudTauntMsg">🥄 Di chuyển thìa và nhấp để gõ trúng khoai tây!</span>
+      </div>
+      <div class="hud-item hud-actions-box">
+        <button type="button" class="hud-btn-quit" id="quitGameBtn" title="Thoát trò chơi">✕ Dừng Chơi</button>
+      </div>
+    </div>
+
+    <!-- Dodging Potato Mascot (Chạy xung quanh màn hình và biết né) -->
+    <div id="dodgingPotato" class="dodging-potato">
+      <div class="potato-speech-bubble" id="potatoBubble">Lêu lêu đố gõ trúng! 😜</div>
+      <div class="potato-sweat-drop" id="potatoSweat">💦</div>
+      <div class="potato-avatar-wrap" id="potatoAvatarWrap">
+        <img src="assets/potato-chip-mascot.png" alt="Khoai Tây Biết Né" class="dodging-potato-img" />
+      </div>
+    </div>
+
+    <!-- Shatter Explosion Canvas / Shards Container -->
+    <div id="shatterContainer" class="shatter-container"></div>
+
+    <!-- Impact Flash Ring & Text -->
+    <div id="impactBurst" class="impact-burst hidden">
+      <div class="impact-shockwave"></div>
+      <div class="burst-text">💥 RẮC! GIÒN RỤM!</div>
+    </div>
+
+    <!-- Custom Spoon Cursor -->
+    <div id="spoonCursor" class="spoon-cursor">
+      <img src="assets/spoon.svg" alt="Chiếc Thìa" class="spoon-img" />
+      <div class="spoon-hit-flash"></div>
+    </div>
+
+    <!-- Timeout Popup (Khi hết 10 giây) -->
+    <div id="gameOverPopup" class="game-arena-popup hidden">
+      <div class="arena-popup-card">
+        <div class="popup-badge-icon">💨🥔</div>
+        <h3 class="popup-title">HẾT GIỜ RỒI NHA!</h3>
+        <p class="popup-desc">
+          Củ khoai tây đã né thoát thành công trong 10 giây! Tốc độ đỉnh chóp thế này bạn có muốn thử lại để phục thù không? 😜
+        </p>
+        <div class="popup-btn-row">
+          <button type="button" id="retryGameBtn" class="popup-btn btn-primary-pulse">
+            🔄 Thử Lại Ngay (10s)
+          </button>
+          <button type="button" id="closeGamePopupBtn" class="popup-btn btn-secondary">
+            ✕ Để Lúc Khác
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Victory Popup (Khi gõ trúng khoai tây vỡ vụn) -->
+    <div id="gameVictoryPopup" class="game-arena-popup hidden">
+      <div class="arena-popup-card victory-card">
+        <div class="popup-badge-icon">💥✨🎉</div>
+        <h3 class="popup-title">XUẤT SẮC! GÕ TRÚNG RỒI!</h3>
+        <p class="popup-desc">
+          Miếng khoai tây đã <strong>vỡ vụn giòn rụm</strong>! Bạn đã mở khóa thành công <strong>1 lượt Vòng Quay May Mắn</strong>!
+        </p>
+        <div class="popup-btn-row">
+          <button type="button" id="openLuckyWheelBtn" class="popup-btn btn-gold-pulse">
+            🎡 MỞ VÒNG QUAY MAY MẮN NGAY!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL: VÒNG QUAY MAY MẮN (LUCKY WHEEL) ═══════════════ -->
+  <div class="modal-overlay" id="luckyWheelModal" role="dialog" aria-modal="true" aria-labelledby="luckyWheelTitle">
+    <div class="modal-card wheel-modal-card">
+      <button class="modal-close-btn" data-close-modal="luckyWheelModal">✕</button>
+      
+      <div class="wheel-modal-header">
+        <div class="wheel-header-tag">🎁 PHẦN THƯỞNG CHIẾN THẮNG</div>
+        <h2 id="luckyWheelTitle" class="wheel-main-title font-modak">VÒNG QUAY MAY MẮN</h2>
+        <p class="wheel-subtitle">
+          Quay để nhận ngay mã E-Voucher giảm giá trực tiếp vào đơn hàng của bạn!
+        </p>
+      </div>
+
+      <!-- The Wheel Stage -->
+      <div class="wheel-stage-container">
+        <!-- Pointer Arrow at top (12 o'clock) -->
+        <div class="wheel-top-pointer">
+          <div class="pointer-triangle"></div>
+          <div class="pointer-jewel"></div>
+        </div>
+
+        <!-- Wheel Rim & Canvas -->
+        <div class="wheel-rim-wrapper">
+          <canvas id="luckyWheelCanvas" width="400" height="400"></canvas>
+          <!-- Center Spin Hub Button -->
+          <button type="button" id="spinWheelBtn" class="wheel-center-hub" title="Nhấp để quay thưởng!">
+            <div class="hub-inner-core">
+              <span class="hub-spin-text">QUAY</span>
+              <span class="hub-spin-sub">NGAY</span>
+            </div>
+            <div class="hub-glow-ring"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Prize Odds Legend (Tỉ lệ chuẩn 20% - 50% - 15% - 15%) -->
+      <div class="wheel-legend-box">
+        <div class="legend-chip legend-chip-jackpot">
+          <span class="legend-color-dot" style="background:#EAB308;"></span>
+          <span class="legend-label">Evoucher 15% <strong>(15%)</strong></span>
+        </div>
+        <div class="legend-chip legend-chip-red">
+          <span class="legend-color-dot" style="background:#DC2626;"></span>
+          <span class="legend-label">Evoucher 10% <strong>(15%)</strong></span>
+        </div>
+        <div class="legend-chip legend-chip-amber">
+          <span class="legend-color-dot" style="background:#F59E0B;"></span>
+          <span class="legend-label">Evoucher 5% <strong>(50%)</strong></span>
+        </div>
+        <div class="legend-chip legend-chip-luck">
+          <span class="legend-color-dot" style="background:#64748B;"></span>
+          <span class="legend-label">May mắn lần sau <strong>(20%)</strong></span>
+        </div>
+      </div>
+
+      <!-- Result Reveal Card (Ẩn ban đầu, hiện sau khi quay xong) -->
+      <div id="wheelResultCard" class="wheel-result-card hidden">
+        <div id="wheelResultBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ FLOATING ACTION BUTTONS (CALL & CHAT CHO TIỆM) ═══════════════ -->
+  <div class="floating-contact-group" id="floatingContactGroup">
+    <!-- Quick Call Button -->
+    <a href="tel:0974449708" class="floating-fab fab-call" title="Gọi Ngay Hotline 0974 449 708">
+      <span class="fab-pulse-ring"></span>
+      <span class="fab-icon">📞</span>
+      <span class="fab-label">0974 449 708</span>
+    </a>
+
+    <!-- Chat Cho Tiệm Button (Đơn giản, chuyển tiếp Telegram Bot) -->
+    <div class="floating-telegram-wrap">
+      <button type="button" class="floating-fab fab-telegram" id="fabChatShopBtn" title="Chat Cho Tiệm (Tư Vấn & Đặt Hàng)">
+        <span class="fab-pulse-ring" style="border-color:#0088cc;"></span>
+        <span class="fab-icon">💬</span>
+        <span class="fab-label">Chat Cho Tiệm</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MOBILE STICKY BOTTOM ORDER BAR (Requirement 5) ═══════════════ -->
+  <div class="mobile-sticky-order-bar" id="mobileStickyOrderBar">
+    <div class="sticky-bar-content" onclick="window.mammamApp.openModal('cartDrawer')">
+      <div class="sticky-bar-left">
+        <div class="sticky-cart-icon-wrap">
+          <span style="font-size:1.3rem;">🛒</span>
+          <span class="sticky-cart-badge cart-count">0</span>
+        </div>
+        <div class="sticky-bar-text">
+          <div class="sticky-bar-total" id="stickyBarTotal">0đ</div>
+          <div class="sticky-bar-sub" id="stickyBarSub">Miễn phí ship đơn từ 200k</div>
+        </div>
+      </div>
+      <button class="sticky-bar-cta-btn" onclick="event.stopPropagation(); window.mammamApp.openModal('cartDrawer');">
+        <span>ĐẶT MÓN NGAY</span>
+        <span style="font-size:1.1rem;">➔</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MOBILE APP BOTTOM NAVIGATION BAR (Requirement 5) ═══════════════ -->
+  <nav class="mobile-app-bottom-nav" id="mobileAppBottomNav">
+    <a href="#hero" class="mobile-nav-tab active">
+      <span class="tab-icon">🏠</span>
+      <span class="tab-label">Trang Chủ</span>
+    </a>
+    <a href="#menu" class="mobile-nav-tab">
+      <span class="tab-icon">📋</span>
+      <span class="tab-label">Thực Đơn</span>
+    </a>
+    <button type="button" class="mobile-nav-tab tab-cart-btn" onclick="window.mammamApp.openModal('cartDrawer')">
+      <div class="tab-icon-wrap">
+        <span class="tab-icon">🛒</span>
+        <span class="tab-badge cart-count">0</span>
+      </div>
+      <span class="tab-label">Giỏ Hàng</span>
+    </button>
+    <a href="tel:0974449708" class="mobile-nav-tab">
+      <span class="tab-icon">📞</span>
+      <span class="tab-label">Hotline</span>
+    </a>
+  </nav>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/voucher-security.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

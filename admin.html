@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản Trị Đơn Hàng | The Măm Măm Admin</title>
+  <link rel="icon" type="image/png" href="assets/mammam-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Saira+Condensed:wght@700;800;900&family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Dedicated Admin Styles */
+    body.admin-body {
+      background-color: #f7efe4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at center, #fbf2e6 0%, #ecd6bf 100%);
+    }
+
+    .admin-login-box {
+      background: #ffffff;
+      border: 3px solid #1b1b1b;
+      border-radius: 28px;
+      box-shadow: 6px 8px 0px #1b1b1b;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      position: relative;
+    }
+
+    .admin-login-logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      border: 3px solid #1b1b1b;
+      box-shadow: 3px 3px 0px #1b1b1b;
+      background: #fff;
+      padding: 6px;
+      object-fit: contain;
+    }
+
+    .admin-header-bar {
+      background: #ffffff;
+      border-bottom: 3px solid #1b1b1b;
+      box-shadow: 0 4px 15px rgba(27,27,27,0.06);
+      padding: 0.8rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .admin-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .admin-brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #1b1b1b;
+      background: #fff;
+    }
+
+    .admin-main-wrap {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.2rem;
+    }
+
+    .admin-stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .admin-stat-card {
+      background: #ffffff;
+      border: 2.5px solid #1b1b1b;
+      border-radius: 18px;
+      box-shadow: 4px 4px 0px #1b1b1b;
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .admin-stat-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .admin-stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 2px solid #1b1b1b;
+      flex-shrink: 0;
+    }
+
+    .stat-icon-orders { background: #ffeaa7; }
+    .stat-icon-revenue { background: #dff9fb; }
+    .stat-icon-momo { background: #fce4ec; color: #d82d8b; }
+    .stat-icon-done { background: #e8f5e9; color: #2e7d32; }
+
+    .admin-stat-num {
+      font-family: var(--font-saira);
+      font-weight: 900;
+      font-size: 1.8rem;
+      line-height: 1.1;
+      color: #1b1b1b;
+    }
+
+    .admin-stat-label {
+      font-size: 0.82rem;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .admin-panel-card {
+      background: #ffffff;
+      border: 3px solid #1b1b1b;
+      border-radius: 24px;
+      box-shadow: 5px 6px 0px #1b1b1b;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .admin-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px dashed rgba(27,27,27,0.15);
+    }
+
+    .admin-table-container {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 2px solid #1b1b1b;
+    }
+
+    .admin-orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+      font-size: 0.92rem;
+    }
+
+    .admin-orders-table th {
+      background: #fff2cc;
+      color: #1b1b1b;
+      font-family: var(--font-saira);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      border-bottom: 2px solid #1b1b1b;
+      letter-spacing: 0.03em;
+    }
+
+    .admin-orders-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+      background: #ffffff;
+    }
+
+    .admin-orders-table tr:hover td {
+      background: #fffcf8;
+    }
+
+    .btn-action-sm {
+      border: 1.5px solid #1b1b1b;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .btn-action-sm:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-momo-confirm {
+      background: #d82d8b;
+      color: #fff;
+      border: 1.5px solid #1b1b1b;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #1b1b1b;
+    }
+
+    .btn-momo-confirm:hover {
+      background: #b81c70;
+      transform: translateY(-1px);
+    }
+
+    .admin-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .setting-box {
+      background: #fdfaf6;
+      border: 2px solid #1b1b1b;
+      border-radius: 16px;
+      padding: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .admin-main-wrap {
+        padding: 0 0.8rem;
+      }
+      .admin-login-box {
+        padding: 2rem 1.2rem;
+      }
+      .admin-filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- ═══════════════ VIEW 1: ADMIN LOGIN FORM (CHƯA ĐĂNG NHẬP) ═══════════════ -->
+  <div id="adminLoginView" class="admin-login-screen">
+    <div class="admin-login-box">
+      <img src="assets/mammam-logo.png" alt="The Măm Măm Logo" class="admin-login-logo" />
+      <h1 class="font-modak text-red" style="font-size: 2.2rem; line-height: 1.1; margin-bottom: 0.3rem;">ĐĂNG NHẬP ADMIN</h1>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.6rem; font-weight: 500;">
+        Hệ thống quản lý đơn hàng & xác nhận thanh toán The Măm Măm
+      </p>
+
+      <form id="adminLoginForm" onsubmit="handleAdminLoginSubmit(event)" style="display:flex; flex-direction:column; gap:1.1rem; text-align:left;">
+        <div>
+          <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.4rem; color:#333;">
+            👤 Tên đăng nhập Admin:
+          </label>
+          <input type="text" id="adminLoginUsername" class="form-input" placeholder="Nhập tài khoản (vd: admin)" required autocomplete="username" />
+        </div>
+
+        <div>
+          <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.4rem; color:#333;">
+            🔒 Mật khẩu quản trị:
+          </label>
+          <div style="position:relative;">
+            <input type="password" id="adminLoginPassword" class="form-input" placeholder="Nhập mật khẩu" required autocomplete="current-password" style="padding-right: 42px;" />
+            <button type="button" onclick="togglePasswordVisibility()" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:1.1rem; color:#666;" title="Hiện/ẩn mật khẩu">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div style="background:#fff3cd; border:1.5px dashed #f4a804; border-radius:12px; padding:0.6rem 0.8rem; font-size:0.82rem; color:#856404; line-height:1.4;">
+          🔑 <strong>Tài khoản mặc định:</strong><br/>
+          Tên đăng nhập: <code>admin</code> · Mật khẩu: <code>themammam2026</code>
+        </div>
+
+        <button type="submit" class="blob-btn" style="width:100%; margin-top:0.4rem; justify-content:center;">
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+            <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+          </svg>
+          <span>ĐĂNG NHẬP HỆ THỐNG ➔</span>
+        </button>
+
+        <div style="text-align:center; margin-top:0.8rem;">
+          <a href="index.html" style="font-size:0.88rem; color:#0066cc; font-weight:700; text-decoration:underline;">
+            ← Quay lại trang bán hàng
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════ VIEW 2: ADMIN PORTAL (ĐÃ ĐĂNG NHẬP) ═══════════════ -->
+  <div id="adminPortalView" style="display:none; flex-direction:column; min-height:100vh;">
+    <!-- Top Header -->
+    <header class="admin-header-bar">
+      <div class="admin-header-content">
+        <div class="admin-brand-wrap">
+          <img src="assets/mammam-logo.png" alt="The Măm Măm Logo" class="admin-brand-logo" />
+          <div>
+            <h2 class="font-modak text-red" style="font-size:1.6rem; line-height:1;">THE MĂM MĂM</h2>
+            <span style="font-size:0.75rem; font-weight:800; color:#555; letter-spacing:0.04em;">TRANG QUẢN TRỊ ĐƠN HÀNG RIÊNG</span>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
+          <div style="background:#e8f5e9; border:1.5px solid #2e7d32; border-radius:30px; padding:4px 12px; font-size:0.82rem; font-weight:700; color:#2e7d32;">
+            👤 Quản trị viên: <span id="adminSessionUsername">admin</span>
+          </div>
+          <a href="index.html" class="nav-pill" style="padding:0.4rem 1rem; font-size:0.88rem;">
+            🛒 Xem Cửa Hàng
+          </a>
+          <button onclick="handleAdminLogout()" class="nav-pill nav-pill-red" style="padding:0.4rem 1rem; font-size:0.88rem;">
+            🚪 Đăng Xuất
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="admin-main-wrap">
+
+      <!-- Stat Cards -->
+      <div class="admin-stats-container">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon stat-icon-orders">📦</div>
+          <div>
+            <div class="admin-stat-num" id="statTotalOrders">0</div>
+            <div class="admin-stat-label">Tổng Đơn Hàng</div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon stat-icon-revenue">💰</div>
+          <div>
+            <div class="admin-stat-num text-red" id="statTotalRevenue">0đ</div>
+            <div class="admin-stat-label">Doanh Thu Đã Nhận</div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon stat-icon-momo">⏳</div>
+          <div>
+            <div class="admin-stat-num" style="color:#d82d8b;" id="statPendingMomo">0</div>
+            <div class="admin-stat-label">Chờ Khớp MoMo</div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon stat-icon-done">✅</div>
+          <div>
+            <div class="admin-stat-num" style="color:#2e7d32;" id="statCompletedOrders">0</div>
+            <div class="admin-stat-label">Đơn Hoàn Thành</div>
+          </div>
+        </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon" style="background:#fef3c7; border-color:#d97706;">🎟️</div>
+          <div>
+            <div class="admin-stat-num" style="color:#d97706;" id="statActiveVouchers">0</div>
+            <div class="admin-stat-label">Voucher 5 Ký Tự Khả Dụng</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders Management Panel -->
+      <div class="admin-panel-card">
+        <div class="admin-filter-bar">
+          <div>
+            <h3 class="font-modak" style="font-size:1.6rem; color:#1b1b1b;">DANH SÁCH ĐƠN HÀNG</h3>
+            <p style="font-size:0.82rem; color:#666;">Cập nhật đơn hàng thời gian thực từ khách hàng đặt món</p>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+            <select id="adminStatusFilterSelect" class="form-select" onchange="renderOrdersTable()" style="padding:0.45rem 0.9rem; font-size:0.88rem; font-weight:600;">
+              <option value="all">🔍 Tất cả trạng thái</option>
+              <option value="pending_momo">⏳ Chờ xác nhận MoMo</option>
+              <option value="paid_momo">💰 Đã thanh toán MoMo</option>
+              <option value="pending">🟡 Mới nhận</option>
+              <option value="preparing">🟠 Đang làm bánh</option>
+              <option value="shipping">🚚 Đang giao hàng</option>
+              <option value="completed">✅ Đã hoàn thành</option>
+              <option value="cancelled">❌ Đã hủy</option>
+            </select>
+
+            <input type="text" id="adminSearchOrderInput" class="form-input" oninput="renderOrdersTable()" placeholder="🔍 Tìm mã đơn, SĐT, tên khách..." style="padding:0.45rem 0.9rem; font-size:0.88rem; width:260px;" />
+
+            <button onclick="createSampleOrder()" class="btn-action-sm" style="background:#fff2cc;" title="Tạo thử 1 đơn hàng mới">
+              + Đơn Mẫu
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-orders-table">
+            <thead>
+              <tr>
+                <th style="width:160px;">MÃ ĐƠN & GIỜ</th>
+                <th style="width:230px;">KHÁCH HÀNG</th>
+                <th>MÓN ĐÃ ĐẶT & GHI CHÚ</th>
+                <th style="width:130px;">TỔNG TIỀN</th>
+                <th style="width:170px;">THANH TOÁN MOMO</th>
+                <th style="width:180px;">TRẠNG THÁI & LỆNH</th>
+              </tr>
+            </thead>
+            <tbody id="adminOrdersTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Admin System Configuration Box -->
+      <div class="admin-panel-card">
+        <h3 class="font-modak" style="font-size:1.5rem; color:#1b1b1b; margin-bottom:0.4rem;">
+          ⚙️ CẤU HÌNH HỆ THỐNG & TÀI KHOẢN ADMIN
+        </h3>
+        <p style="font-size:0.85rem; color:#666; margin-bottom:1.2rem;">
+          Tùy chỉnh thông tin nhận tiền MoMo tự động và thay đổi mật khẩu tài khoản quản trị
+        </p>
+
+        <div class="admin-settings-grid">
+          <!-- Telegram Bot Configuration -->
+          <div class="setting-box" style="border-color:#0088cc; box-shadow:4px 4px 0px #0088cc;">
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.8rem; color:#0088cc; display:flex; align-items:center; gap:6px;">
+              ✈️ Cấu Hình Telegram Bot (Khách Chat Cho Tiệm)
+            </h4>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">
+                  Bot Token (Từ @BotFather):
+                </label>
+                <input type="text" id="settingTgBotToken" class="form-input" placeholder="Ví dụ: 7123456789:AAH..." />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">
+                  Chat ID / Group ID (Nhận thông báo):
+                </label>
+                <input type="text" id="settingTgChatId" class="form-input" placeholder="Ví dụ: 123456789 hoặc -100123456789" />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">
+                  Bot Username (Tên hiển thị):
+                </label>
+                <input type="text" id="settingTgBotUser" class="form-input" placeholder="Ví dụ: themammam_bot" />
+              </div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.2rem;">
+                <button type="button" onclick="testTelegramConnection()" class="nav-pill" style="flex:1; justify-content:center; padding:0.5rem; font-size:0.88rem; background:#e0f2fe; color:#0369a1; border-color:#0284c7;">
+                  🧪 Gửi Thử Tin Nhắn Test
+                </button>
+                <button type="button" onclick="saveTelegramSettings()" class="nav-pill nav-pill-red" style="flex:1; justify-content:center; padding:0.5rem; font-size:0.88rem; background:#0088cc; border-color:#1b1b1b;">
+                  💾 Lưu Cấu Hình Telegram
+                </button>
+              </div>
+
+              <!-- Collapsible Guide -->
+              <details style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:0.6rem 0.8rem; font-size:0.78rem; line-height:1.5; color:#475569; margin-top:0.3rem;">
+                <summary style="font-weight:700; cursor:pointer; color:#0284c7;">📖 Xem Hướng Dẫn Lấy Bot Token & Chat ID</summary>
+                <ol style="margin:0.5rem 0 0 1.2rem; padding:0;">
+                  <li>Mở Telegram, gõ tìm <strong>@BotFather</strong>, bấm Start.</li>
+                  <li>Gõ lệnh <code>/newbot</code>, đặt tên và username bot (kết thúc bằng <code>_bot</code>).</li>
+                  <li>Copy đoạn mã <code>API Token</code> dán vào ô <strong>Bot Token</strong> ở trên.</li>
+                  <li><strong>Lấy Chat ID:</strong> Chat với bot <strong>@userinfobot</strong> để lấy ID của bạn (ví dụ <code>123456789</code>). Hoặc thêm bot vào Group của tiệm để lấy ID nhóm (thường có dấu <code>-100...</code>).</li>
+                  <li>Nhập vào các ô trên và bấm <strong>"Gửi Thử Tin Nhắn Test"</strong> để xác nhận!</li>
+                </ol>
+              </details>
+            </div>
+          </div>
+
+          <!-- MoMo Settings -->
+          <div class="setting-box">
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.8rem; color:#d82d8b; display:flex; align-items:center; gap:6px;">
+              📱 Thông Tin Ví MoMo Nhận Tiền
+            </h4>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Số Điện Thoại MoMo:</label>
+                <input type="text" id="settingMomoPhone" class="form-input" placeholder="0974449708" />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Tên Chủ Ví MoMo:</label>
+                <input type="text" id="settingMomoName" class="form-input" placeholder="NGUYEN THI KIM OANH" />
+              </div>
+              <button onclick="saveMomoSettings()" class="nav-pill nav-pill-red" style="margin-top:0.4rem; padding:0.5rem; justify-content:center;">
+                💾 Lưu Thông Tin MoMo
+              </button>
+            </div>
+          </div>
+
+          <!-- Change Admin Password -->
+          <div class="setting-box">
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.8rem; color:#1b1b1b; display:flex; align-items:center; gap:6px;">
+              🔐 Đổi Mật Khẩu Tài Khoản Admin
+            </h4>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Mật Khẩu Hiện Tại:</label>
+                <input type="password" id="changePassCurrent" class="form-input" placeholder="Mật khẩu cũ" />
+              </div>
+              <div>
+                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Mật Khẩu Mới:</label>
+                <input type="password" id="changePassNew" class="form-input" placeholder="Mật khẩu mới (tối thiểu 6 ký tự)" />
+              </div>
+              <button onclick="handleChangeAdminPassword()" class="nav-pill" style="margin-top:0.4rem; padding:0.5rem; justify-content:center; background:#ffeaa7;">
+                🔑 Cập Nhật Mật Khẩu
+              </button>
+            </div>
+          </div>
+
+          <!-- Store Contact & Hotline Info -->
+          <div class="setting-box">
+            <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.8rem; color:#2e7d32; display:flex; align-items:center; gap:6px;">
+              📞 Hotline Liên Hệ Duy Nhất
+            </h4>
+            <div style="background:#fff; border:1px solid #ddd; border-radius:10px; padding:0.8rem; font-size:0.85rem; line-height:1.6;">
+              <div>📞 <strong>Hotline / Zalo:</strong> <span style="font-size:1.1rem; color:var(--red); font-weight:800;">0974 449 708</span></div>
+              <div style="margin-top:6px; color:#555;">💬 <strong>Telegram Bot:</strong> <code>@themammam_bot</code></div>
+              <div style="margin-top:6px; color:#666; font-size:0.8rem;">Địa chỉ quán đã được ẩn theo yêu cầu; khách hàng liên hệ trực tiếp qua số Hotline và Telegram.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ SECURITY VOUCHER VAULT PANEL ═══════════════ -->
+      <div class="admin-panel-card" style="margin-top:1.8rem; border-color:#0284c7; box-shadow:6px 8px 0px #0284c7;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; border-bottom:2px dashed #bae6fd; padding-bottom:0.8rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:1.8rem;">🛡️</span>
+              <h3 class="font-modak" style="font-size:1.6rem; color:#0369a1; margin:0;">
+                CÔNG CỤ BẢO MẬT & QUẢN LÝ MÃ VOUCHER 5 KÝ TỰ
+              </h3>
+            </div>
+            <p style="font-size:0.85rem; color:#555; margin:4px 0 0;">
+              Thuật toán ngẫu nhiên CSPRNG (33,5 triệu tổ hợp) · Xác thực chữ ký số SHA-256 HMAC chống giả mạo · Kiểm soát dùng 1 lần & chống brute-force
+            </p>
+          </div>
+
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button type="button" class="btn-action-sm" onclick="switchVoucherTab('generate')" id="tabBtnVoucherGen" style="background:#e0f2fe; color:#0369a1; border-color:#0284c7;">
+              ⚡ Tạo Mã Mới
+            </button>
+            <button type="button" class="btn-action-sm" onclick="switchVoucherTab('scan')" id="tabBtnVoucherScan">
+              🔍 Quét Chống Hack
+            </button>
+            <button type="button" class="btn-action-sm" onclick="switchVoucherTab('list')" id="tabBtnVoucherList">
+              📋 Danh Sách (<span id="voucherTotalCountBadge">0</span>)
+            </button>
+            <button type="button" class="btn-action-sm" onclick="switchVoucherTab('policy')" id="tabBtnVoucherPolicy">
+              ⚙️ Chính Sách Bảo Mật
+            </button>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 1: TẠO MÃ BẢO MẬT -->
+        <div id="voucherTabGenerate" class="voucher-subtab-pane">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.2rem;">
+            <!-- Form Parameters -->
+            <div style="background:#f0f9ff; border:2px solid #bae6fd; border-radius:14px; padding:1.2rem;">
+              <h4 style="font-size:1rem; font-weight:800; color:#0369a1; margin-bottom:0.8rem;">
+                ⚙️ THIẾT LẬP THÔNG SỐ VOUCHER
+              </h4>
+              <form id="voucherGenForm" onsubmit="handleAdminGenerateVoucher(event)" style="display:flex; flex-direction:column; gap:0.8rem;">
+                <div>
+                  <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Mức Chiết Khấu / Ưu Đãi:</label>
+                  <select id="vgenTypeAndValue" class="form-select" style="font-weight:700;">
+                    <option value="percent_5">🎟️ Giảm 5% tổng đơn (Tỷ lệ 50% Vòng Quay)</option>
+                    <option value="percent_10">🎁 Giảm 10% tổng đơn (Tỷ lệ 15% Vòng Quay)</option>
+                    <option value="percent_15" selected>👑 Giảm 15% tổng đơn (Jackpot 15% Vòng Quay)</option>
+                    <option value="percent_20">🔥 Giảm 20% tổng đơn</option>
+                    <option value="percent_30">⚡ Giảm 30% tổng đơn</option>
+                    <option value="fixed_20000">💵 Giảm 20.000đ trực tiếp</option>
+                    <option value="fixed_50000">💵 Giảm 50.000đ trực tiếp</option>
+                    <option value="freeship_0">🚚 Miễn phí vận chuyển (FreeShip)</option>
+                  </select>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.8rem;">
+                  <div>
+                    <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Số Lượng Mã:</label>
+                    <select id="vgenQuantity" class="form-select">
+                      <option value="1">1 mã đơn lẻ</option>
+                      <option value="5" selected>5 mã hàng loạt</option>
+                      <option value="10">10 mã hàng loạt</option>
+                      <option value="20">20 mã chiến dịch</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Thời Hạn Sử Dụng:</label>
+                    <select id="vgenDuration" class="form-select">
+                      <option value="24" selected>24 giờ (1 ngày)</option>
+                      <option value="72">3 ngày</option>
+                      <option value="168">7 ngày (1 tuần)</option>
+                      <option value="720">30 ngày (1 tháng)</option>
+                      <option value="0">Không hết hạn</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.3rem;">Ghi Chú Mục Đích Cấp Mã:</label>
+                  <input type="text" id="vgenNote" class="form-input" placeholder="Ví dụ: Tặng khách VIP / Khuyến mãi riêng tiệm" />
+                </div>
+
+                <button type="submit" class="nav-pill" style="background:#0284c7; color:#fff; border-color:#0369a1; font-weight:800; padding:0.6rem; justify-content:center; margin-top:0.4rem; box-shadow:3px 3px 0px #0369a1;">
+                  ⚡ TẠO MÃ 5 KÝ TỰ BẢO MẬT (CSPRNG + SHA-256)
+                </button>
+              </form>
+            </div>
+
+            <!-- Generated Output Box -->
+            <div style="background:#fff; border:2px solid #1b1b1b; border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+                <h4 style="font-size:0.95rem; font-weight:800; color:#1b1b1b; margin:0;">
+                  ✨ KẾT QUẢ MÃ VỪA TẠO
+                </h4>
+                <button type="button" class="btn-action-sm" onclick="copyAllNewVouchers()" id="btnCopyAllGen" style="display:none; background:#dcfce7; color:#166534;">
+                  📋 Sao Chép Tất Cả
+                </button>
+              </div>
+
+              <div id="vgenResultEmpty" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#94a3b8; padding:2rem; text-align:center;">
+                <span style="font-size:2.5rem; margin-bottom:0.4rem;">🎟️</span>
+                <p style="font-size:0.88rem; margin:0;">Chưa tạo mã nào trong phiên này.<br/>Bấm nút "Tạo Mã" bên trái để sinh mã voucher 5 ký tự ngẫu nhiên.</p>
+              </div>
+
+              <div id="vgenResultList" style="display:none; flex-direction:column; gap:0.5rem; max-height:260px; overflow-y:auto; padding-right:4px;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 2: QUÉT CHỐNG HACK -->
+        <div id="voucherTabScan" class="voucher-subtab-pane" style="display:none;">
+          <div style="background:#fafafa; border:2px solid #1b1b1b; border-radius:14px; padding:1.2rem;">
+            <h4 style="font-size:1rem; font-weight:800; color:#1b1b1b; margin-bottom:0.4rem;">
+              🔍 CÔNG CỤ QUÉT CHỮ KÝ SỐ & PHÁT HIỆN GIAN LẬN
+            </h4>
+            <p style="font-size:0.85rem; color:#666; margin-bottom:1rem;">
+              Nhập mã voucher 5 ký tự từ khách hàng hoặc nghi vấn để hệ thống đối chiếu chữ ký HMAC-SHA256, kiểm tra tính nguyên vẹn, nguồn cấp và trạng thái đơn hàng.
+            </p>
+
+            <div style="display:flex; gap:0.6rem; max-width:540px; margin-bottom:1.2rem;">
+              <input type="text" id="vscanInput" class="form-input" placeholder="Nhập mã 5 ký tự (vd: 7K9X2, B4T9Z...)" maxlength="12" style="text-transform:uppercase; font-family:monospace; font-size:1.15rem; font-weight:800; letter-spacing:2px;" />
+              <button type="button" onclick="handleScanVoucher()" class="nav-pill" style="background:#0284c7; color:#fff; border-color:#0369a1; font-weight:800; white-space:nowrap; padding:0.5rem 1.2rem;">
+                🔍 Kiểm Tra Ngay
+              </button>
+            </div>
+
+            <div id="vscanResultContainer" style="display:none;">
+              <!-- Scan Report Rendered Here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 3: DANH SÁCH & AUDIT LOG -->
+        <div id="voucherTabList" class="voucher-subtab-pane" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem;">
+            <div style="display:flex; gap:0.6rem; align-items:center;">
+              <select id="vlistFilterStatus" class="form-select" onchange="renderVoucherTable()" style="font-size:0.85rem; font-weight:600; padding:0.4rem 0.8rem;">
+                <option value="all">🔍 Tất cả trạng thái</option>
+                <option value="ACTIVE">🟢 Còn hiệu lực (Chưa dùng)</option>
+                <option value="USED">🟡 Đã sử dụng</option>
+                <option value="EXPIRED">⏳ Đã hết hạn</option>
+                <option value="REVOKED">🔴 Đã bị khóa</option>
+              </select>
+
+              <input type="text" id="vlistSearchInput" class="form-input" oninput="renderVoucherTable()" placeholder="🔍 Tìm mã 5 ký tự..." style="font-size:0.85rem; width:180px; padding:0.4rem 0.8rem;" />
+            </div>
+
+            <div style="display:flex; gap:0.4rem;">
+              <button type="button" onclick="cleanExpiredVouchers()" class="btn-action-sm" style="background:#fee2e2; color:#991b1b;" title="Dọn dẹp các voucher đã hết hạn">
+                🧹 Dọn Hết Hạn
+              </button>
+              <button type="button" onclick="renderVoucherTable()" class="btn-action-sm" title="Tải lại danh sách">
+                🔄 Tải Lại
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-orders-table">
+              <thead>
+                <tr>
+                  <th style="width:130px;">MÃ VOUCHER</th>
+                  <th style="width:110px;">ƯU ĐÃI</th>
+                  <th style="width:140px;">NGUỒN CẤP</th>
+                  <th style="width:160px;">NGÀY TẠO & HẠN DÙNG</th>
+                  <th style="width:130px;">TRẠNG THÁI</th>
+                  <th>ĐƠN HÀNG ĐÃ DÙNG</th>
+                  <th style="width:160px;">THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody id="adminVoucherTableBody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SUB-TAB 4: CHÍNH SÁCH BẢO MẬT -->
+        <div id="voucherTabPolicy" class="voucher-subtab-pane" style="display:none;">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+            <div style="background:#f8fafc; border:2px solid #cbd5e1; border-radius:12px; padding:1rem;">
+              <h4 style="font-size:0.95rem; font-weight:800; color:#0f172a; margin-bottom:0.4rem;">🛡️ Chính Sách Dùng 1 Lần</h4>
+              <p style="font-size:0.82rem; color:#64748b; line-height:1.5;">
+                Khi khách hàng đặt đơn thành công, mã voucher sẽ được chuyển sang <code>USED</code> và gắn chặt với Mã Đơn Hàng. Không ai có thể dùng lại mã này lần thứ hai.
+              </p>
+              <div style="display:inline-flex; align-items:center; gap:6px; background:#dcfce7; color:#166534; font-weight:700; font-size:0.8rem; padding:3px 10px; border-radius:20px; margin-top:0.4rem;">
+                ✓ Đang Bật (Mặc định bắt buộc)
+              </div>
+            </div>
+
+            <div style="background:#f8fafc; border:2px solid #cbd5e1; border-radius:12px; padding:1rem;">
+              <h4 style="font-size:0.95rem; font-weight:800; color:#0f172a; margin-bottom:0.4rem;">🚫 Chống Dò Mã (Anti-Bruteforce)</h4>
+              <p style="font-size:0.82rem; color:#64748b; line-height:1.5;">
+                Tự động phát hiện và tạm khóa quyền nhập mã 5 phút nếu một phiên nhập sai quá 5 lần liên tiếp. Chống lại các công cụ tool tự động vét mã.
+              </p>
+              <div style="display:inline-flex; align-items:center; gap:6px; background:#dcfce7; color:#166534; font-weight:700; font-size:0.8rem; padding:3px 10px; border-radius:20px; margin-top:0.4rem;">
+                ✓ Đang Bật (5 lần / 5 phút)
+              </div>
+            </div>
+
+            <div style="background:#f8fafc; border:2px solid #cbd5e1; border-radius:12px; padding:1rem;">
+              <h4 style="font-size:0.95rem; font-weight:800; color:#0f172a; margin-bottom:0.4rem;">🔑 Khóa Bí Mật Chữ Ký (Secret Salt)</h4>
+              <p style="font-size:0.82rem; color:#64748b; line-height:1.5; margin-bottom:0.6rem;">
+                Dùng để băm chữ ký SHA-256 HMAC chống giả mạo thuộc tính mã.
+              </p>
+              <input type="text" id="adminSecretSaltInput" class="form-input" style="font-family:monospace; font-size:0.85rem;" />
+              <button type="button" onclick="saveAdminSecretSalt()" class="btn-action-sm" style="margin-top:0.4rem; background:#e2e8f0;">
+                💾 Lưu Khóa Bảo Mật
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Chat Leads Panel -->
+      <div class="admin-panel-card" style="margin-top:1.8rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <h3 class="font-modak" style="font-size:1.5rem; color:#1b1b1b; margin-bottom:0.2rem;">
+              💬 NHẬT KÝ KHÁCH CHAT CHO TIỆM (LEADS)
+            </h3>
+            <p style="font-size:0.85rem; color:#666;">
+              Danh sách khách hàng đã để lại Họ Tên, Số Điện Thoại & Lời Nhắn qua tính năng "Chat Cho Tiệm"
+            </p>
+          </div>
+          <button onclick="clearChatLeads()" class="nav-pill" style="font-size:0.82rem; padding:0.4rem 0.8rem; border-color:#e11d48; color:#e11d48;">
+            🗑️ Xóa Lịch Sử Chat
+          </button>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-orders-table">
+            <thead>
+              <tr>
+                <th>Mã Yêu Cầu</th>
+                <th>Thời Gian</th>
+                <th>Khách Hàng</th>
+                <th>Số Điện Thoại</th>
+                <th>Lời Nhắn Tư Vấn</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+              </tr>
+            </thead>
+            <tbody id="adminChatLeadsBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="adminToastContainer"></div>
+
+  <!-- SCRIPT LOGIC -->
+  <script src="js/data.js"></script>
+  <script src="js/voucher-security.js"></script>
+  <script>
+    // ════════════════ ADMIN CORE STATE ════════════════
+    const DEFAULT_ADMIN = {
+      username: 'admin',
+      password: 'themammam2026'
+    };
+
+    function getAdminCredentials() {
+      const stored = localStorage.getItem('mammam_admin_account');
+      if (stored) {
+        try { return JSON.parse(stored); } catch (e) {}
+      }
+      return DEFAULT_ADMIN;
+    }
+
+    function checkAdminSession() {
+      const isLogged = sessionStorage.getItem('mammam_admin_logged') === 'true' ||
+                       localStorage.getItem('mammam_admin_logged') === 'true';
+      const loginView = document.getElementById('adminLoginView');
+      const portalView = document.getElementById('adminPortalView');
+
+      if (isLogged) {
+        loginView.style.display = 'none';
+        portalView.style.display = 'flex';
+        const creds = getAdminCredentials();
+        document.getElementById('adminSessionUsername').textContent = creds.username;
+        loadAdminData();
+      } else {
+        loginView.style.display = 'flex';
+        portalView.style.display = 'none';
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const pass = document.getElementById('adminLoginPassword');
+      pass.type = pass.type === 'password' ? 'text' : 'password';
+    }
+
+    function handleAdminLoginSubmit(e) {
+      e.preventDefault();
+      const user = document.getElementById('adminLoginUsername').value.trim();
+      const pass = document.getElementById('adminLoginPassword').value;
+      const creds = getAdminCredentials();
+
+      if (user === creds.username && pass === creds.password) {
+        sessionStorage.setItem('mammam_admin_logged', 'true');
+        showAdminToast('Đăng nhập Quản Trị Viên thành công! 🔐', 'success');
+        checkAdminSession();
+      } else {
+        showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
+      }
+    }
+
+    function handleAdminLogout() {
+      if (confirm('Bạn có chắc muốn đăng xuất khỏi trang Quản Trị Admin?')) {
+        sessionStorage.removeItem('mammam_admin_logged');
+        localStorage.removeItem('mammam_admin_logged');
+        showAdminToast('Đã đăng xuất an toàn.');
+        checkAdminSession();
+      }
+    }
+
+    // ════════════════ TOAST NOTIFICATION ════════════════
+    function showAdminToast(msg, type = 'info') {
+      const c = document.getElementById('adminToastContainer');
+      const t = document.createElement('div');
+      t.className = 'toast-msg' + (type === 'error' ? ' error' : '');
+      t.innerHTML = `<span>${type === 'error' ? '⚠️' : '✓'}</span> <span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateY(10px)';
+        setTimeout(() => t.remove(), 300);
+      }, 3500);
+    }
+
+    // ════════════════ ORDERS & SETTINGS LOGIC ════════════════
+    let currentOrders = [];
+
+    function getStoredOrders() {
+      try {
+        const stored = localStorage.getItem('mammam_orders_db');
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      return [];
+    }
+
+    function saveStoredOrders(orders) {
+      localStorage.setItem('mammam_orders_db', JSON.stringify(orders));
+    }
+
+    function loadAdminData() {
+      currentOrders = getStoredOrders();
+
+      // Prepopulate default sample order if none exists
+      if (!currentOrders.length) {
+        currentOrders = [
+          {
+            code: 'MM-2026-A1K',
+            createdAt: new Date(Date.now() - 3600000).toISOString(),
+            customerName: 'Nguyễn Văn Minh',
+            phone: '0974449708',
+            address: 'Toà Landmark 81, P.22',
+            city: 'Hồ Chí Minh',
+            note: 'Giao giờ hành chính, gọi trước 10 phút',
+            items: [
+              { id: 'khoai-tay-say-gion', name: 'Khoai Tây Sấy Giòn Rong Biển Đà Lạt', price: 65000, quantity: 2 },
+              { id: 'bq-01', name: 'Bánh Chuối Nướng Nếp Cẩm', price: 95000, quantity: 1 }
+            ],
+            subtotal: 225000,
+            shippingFee: 0,
+            discount: 0,
+            total: 225000,
+            paymentMethod: 'momo',
+            paymentStatus: 'paid',
+            orderStatus: 'preparing'
+          }
+        ];
+        saveStoredOrders(currentOrders);
+      }
+
+      // Load MoMo settings
+      const momoSettings = JSON.parse(localStorage.getItem('mammam_admin_settings') || '{}');
+      document.getElementById('settingMomoPhone').value = momoSettings.momoPhone || '0974449708';
+      document.getElementById('settingMomoName').value = momoSettings.momoName || 'NGUYEN THI KIM OANH';
+
+      // Load Telegram Bot settings
+      const tgConfig = JSON.parse(localStorage.getItem('mammam_telegram_config') || '{}');
+      const defaultTg = (typeof MAMMAM_DATA !== 'undefined' && MAMMAM_DATA.telegram) ? MAMMAM_DATA.telegram : {};
+      document.getElementById('settingTgBotToken').value = tgConfig.botToken || defaultTg.botToken || '';
+      document.getElementById('settingTgChatId').value = tgConfig.chatId || defaultTg.chatId || '';
+      document.getElementById('settingTgBotUser').value = tgConfig.botUsername || defaultTg.botUsername || 'themammam_bot';
+
+      renderAdminStats();
+      renderOrdersTable();
+      renderChatLeadsTable();
+      renderVoucherTable();
+
+      // Load Security Salt into input
+      if (window.VoucherSecurity) {
+        const secCfg = window.VoucherSecurity.getSecurityConfig();
+        const saltInp = document.getElementById('adminSecretSaltInput');
+        if (saltInp) saltInp.value = secCfg.salt || '';
+      }
+    }
+
+    function formatVND(n) {
+      return (n || 0).toLocaleString('vi-VN') + 'đ';
+    }
+
+    function renderAdminStats() {
+      const orders = currentOrders;
+      const totalRev = orders
+        .filter(o => o.paymentStatus === 'paid')
+        .reduce((sum, o) => sum + (o.total || 0), 0);
+
+      const pendingMomo = orders.filter(o => o.paymentStatus === 'pending').length;
+      const completed = orders.filter(o => o.orderStatus === 'completed').length;
+
+      document.getElementById('statTotalOrders').textContent = orders.length;
+      document.getElementById('statTotalRevenue').textContent = formatVND(totalRev);
+      document.getElementById('statPendingMomo').textContent = pendingMomo;
+      document.getElementById('statCompletedOrders').textContent = completed;
+
+      // Active Vouchers metric
+      if (window.VoucherSecurity) {
+        const vault = window.VoucherSecurity.getVault();
+        const activeCount = vault.filter(v => v.status === 'ACTIVE' && (!v.expiresAt || new Date(v.expiresAt).getTime() > Date.now())).length;
+        const vEl = document.getElementById('statActiveVouchers');
+        if (vEl) vEl.textContent = activeCount;
+        const badge = document.getElementById('voucherTotalCountBadge');
+        if (badge) badge.textContent = vault.length;
+      }
+    }
+
+    function renderOrdersTable() {
+      const tbody = document.getElementById('adminOrdersTableBody');
+      if (!tbody) return;
+
+      const filter = document.getElementById('adminStatusFilterSelect').value;
+      const search = document.getElementById('adminSearchOrderInput').value.toLowerCase().trim();
+
+      let list = currentOrders;
+
+      if (filter !== 'all') {
+        if (filter === 'pending_momo') list = list.filter(o => o.paymentStatus === 'pending');
+        else if (filter === 'paid_momo') list = list.filter(o => o.paymentStatus === 'paid');
+        else list = list.filter(o => o.orderStatus === filter);
+      }
+
+      if (search) {
+        list = list.filter(o =>
+          (o.code && o.code.toLowerCase().includes(search)) ||
+          (o.customerName && o.customerName.toLowerCase().includes(search)) ||
+          (o.phone && o.phone.includes(search))
+        );
+      }
+
+      if (!list.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center; padding:3rem 1rem; color:#888;">
+              <div style="font-size:2.5rem; margin-bottom:0.5rem;">📋</div>
+              <strong>Không tìm thấy đơn hàng nào!</strong>
+              <p style="font-size:0.85rem; margin-top:0.3rem;">Đơn hàng mới từ khách sẽ tự động hiển thị ở đây.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map(o => {
+        const isPaid = o.paymentStatus === 'paid';
+        const d = new Date(o.createdAt);
+        const timeStr = isNaN(d) ? 'Hôm nay' : `${d.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'})} · ${d.toLocaleDateString('vi-VN')}`;
+        const itemsList = (o.items || []).map(i => `<strong>${i.quantity}x</strong> ${i.name}`).join('<br/>');
+
+        return `
+          <tr>
+            <td>
+              <div class="font-mouse-memoirs text-red" style="font-size:1.35rem; line-height:1;">${o.code}</div>
+              <div style="font-size:0.75rem; color:#777; margin-top:3px;">${timeStr}</div>
+              <span class="quick-pill" style="margin-top:6px; display:inline-block; font-size:0.72rem; background:${o.paymentMethod === 'momo' ? '#fce4ec' : '#eee'}; color:${o.paymentMethod === 'momo' ? '#d82d8b' : '#333'};">
+                ${o.paymentMethod === 'momo' ? '📱 MoMo QR' : '💵 Tiền Mặt COD'}
+              </span>
+            </td>
+            <td>
+              <strong style="color:#1b1b1b; font-size:1rem;">${o.customerName || 'Khách vãng lai'}</strong><br/>
+              <a href="tel:${o.phone}" style="color:#0066cc; font-weight:700; font-size:0.88rem; display:inline-flex; align-items:center; gap:4px; margin:2px 0;">
+                📞 ${o.phone}
+              </a>
+              <div style="font-size:0.8rem; color:#555; line-height:1.3;">
+                ${o.address ? o.address + ', ' : ''}${o.city || ''}
+              </div>
+            </td>
+            <td>
+              <div style="font-size:0.85rem; line-height:1.5;">${itemsList}</div>
+              ${o.note ? `<div style="margin-top:6px; background:#fff2cc; border-left:3px solid #f4a804; padding:3px 6px; font-size:0.78rem; color:#856404; font-style:italic;">Ghi chú: ${o.note}</div>` : ''}
+            </td>
+            <td>
+              <div class="font-mouse-memoirs text-red" style="font-size:1.4rem;">${formatVND(o.total)}</div>
+              <div style="font-size:0.72rem; color:#777;">(Đã gồm ship)</div>
+            </td>
+            <td>
+              <div style="margin-bottom:0.4rem;">
+                <span class="status-badge status-${isPaid ? 'confirmed' : 'pending'}" style="font-size:0.75rem;">
+                  ${isPaid ? '✓ ĐÃ NHẬN MOMO' : '⏳ CHỜ QUÉT MÃ'}
+                </span>
+              </div>
+              ${!isPaid ? `
+                <button class="btn-momo-confirm" onclick="adminConfirmMomo('${o.code}')">
+                  ✓ Khớp Tiền MoMo
+                </button>
+              ` : `
+                <span style="font-size:0.78rem; color:#2e7d32; font-weight:700;">✓ Đã kiểm tra MoMo</span>
+              `}
+            </td>
+            <td>
+              <select class="form-select" style="padding:0.35rem 0.6rem; font-size:0.82rem; font-weight:600; width:100%; margin-bottom:0.4rem;" onchange="updateOrderStatus('${o.code}', this.value)">
+                <option value="pending" ${o.orderStatus === 'pending' ? 'selected' : ''}>🟡 Mới nhận</option>
+                <option value="preparing" ${o.orderStatus === 'preparing' ? 'selected' : ''}>🟠 Đang làm bánh</option>
+                <option value="shipping" ${o.orderStatus === 'shipping' ? 'selected' : ''}>🚚 Đang giao hàng</option>
+                <option value="completed" ${o.orderStatus === 'completed' ? 'selected' : ''}>✅ Đã hoàn thành</option>
+                <option value="cancelled" ${o.orderStatus === 'cancelled' ? 'selected' : ''}>❌ Hủy đơn</option>
+              </select>
+              <div style="display:flex; gap:0.4rem;">
+                <button onclick="printOrderInvoice('${o.code}')" class="btn-action-sm" style="background:#f0f0f0;">
+                  🖨 In Bill
+                </button>
+                <button onclick="deleteOrder('${o.code}')" class="btn-action-sm" style="background:#fee; color:#c33;">
+                  ✕ Xóa
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function adminConfirmMomo(code) {
+      const o = currentOrders.find(x => x.code === code);
+      if (!o) return;
+      o.paymentStatus = 'paid';
+      if (o.orderStatus === 'pending') o.orderStatus = 'preparing';
+      saveStoredOrders(currentOrders);
+      renderAdminStats();
+      renderOrdersTable();
+      showAdminToast(`Đã xác nhận thanh toán MoMo cho đơn ${code}! 🎉`, 'success');
+    }
+
+    function updateOrderStatus(code, status) {
+      const o = currentOrders.find(x => x.code === code);
+      if (!o) return;
+      o.orderStatus = status;
+      saveStoredOrders(currentOrders);
+      renderAdminStats();
+      showAdminToast(`Đã cập nhật trạng thái đơn ${code}!`);
+    }
+
+    function deleteOrder(code) {
+      if (confirm(`Bạn có chắc muốn xóa đơn hàng ${code}?`)) {
+        currentOrders = currentOrders.filter(x => x.code !== code);
+        saveStoredOrders(currentOrders);
+        renderAdminStats();
+        renderOrdersTable();
+        showAdminToast(`Đã xóa đơn ${code}.`);
+      }
+    }
+
+    function createSampleOrder() {
+      const code = 'MM-' + Math.floor(1000 + Math.random() * 9000) + '-DEMO';
+      const sample = {
+        code: code,
+        createdAt: new Date().toISOString(),
+        customerName: 'Khách Test Admin',
+        phone: '0974449708',
+        address: '88 Đường Hoa Đà Lạt',
+        city: 'Đà Lạt',
+        note: 'Giao ngay bánh nóng hổi',
+        items: [
+          { id: 'khoai-tay-say-gion', name: 'Khoai Tây Sấy Giòn Rong Biển Đà Lạt', price: 65000, quantity: 2 },
+          { id: 'bm-01', name: 'Bánh Mì Phô Mai Tan Chảy', price: 75000, quantity: 1 }
+        ],
+        subtotal: 205000,
+        shippingFee: 0,
+        discount: 0,
+        total: 205000,
+        paymentMethod: 'momo',
+        paymentStatus: 'pending',
+        orderStatus: 'pending'
+      };
+      currentOrders.unshift(sample);
+      saveStoredOrders(currentOrders);
+      renderAdminStats();
+      renderOrdersTable();
+      showAdminToast(`Đã tạo đơn mẫu ${code}!`);
+    }
+
+    function saveMomoSettings() {
+      const phone = document.getElementById('settingMomoPhone').value.trim();
+      const name = document.getElementById('settingMomoName').value.trim();
+      if (!phone || !name) {
+        showAdminToast('Vui lòng nhập đủ SĐT và Tên MoMo!', 'error');
+        return;
+      }
+      const settings = { momoPhone: phone, momoName: name };
+      localStorage.setItem('mammam_admin_settings', JSON.stringify(settings));
+      showAdminToast('Đã lưu thông tin cấu hình MoMo thành công! 📱', 'success');
+    }
+
+    // ════════════════ TELEGRAM BOT CONFIGURATION ════════════════
+    function saveTelegramSettings() {
+      const token = document.getElementById('settingTgBotToken').value.trim();
+      const chatId = document.getElementById('settingTgChatId').value.trim();
+      const user = document.getElementById('settingTgBotUser').value.trim();
+
+      const cfg = { botToken: token, chatId: chatId, botUsername: user };
+      localStorage.setItem('mammam_telegram_config', JSON.stringify(cfg));
+      showAdminToast('Đã lưu cấu hình Telegram Bot thành công! ✈️', 'success');
+    }
+
+    async function testTelegramConnection() {
+      const token = document.getElementById('settingTgBotToken').value.trim();
+      const chatId = document.getElementById('settingTgChatId').value.trim();
+
+      if (!token || !chatId) {
+        showAdminToast('Vui lòng nhập đầy đủ Bot Token và Chat ID trước khi test!', 'error');
+        return;
+      }
+
+      showAdminToast('Đang gửi tin nhắn test tới Telegram...', 'info');
+
+      const msg = `🧪 <b>TEST KẾT NỐI TELEGRAM BOT - THE MĂM MĂM</b>\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `✅ Kết nối thành công giữa Website The Măm Măm và Telegram Bot!\n` +
+        `⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}\n` +
+        `🎉 Sẵn sàng tiếp nhận thông tin khi khách bấm "Chat Cho Tiệm"!`;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: msg,
+            parse_mode: 'HTML'
+          })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          saveTelegramSettings();
+          showAdminToast('Gửi tin nhắn test Telegram thành công! Hãy kiểm tra app Telegram. 🎉', 'success');
+        } else {
+          showAdminToast('Lỗi Telegram: ' + (data.description || 'Không gửi được'), 'error');
+        }
+      } catch (e) {
+        showAdminToast('Không thể kết nối Telegram API: ' + e.message, 'error');
+      }
+    }
+
+    // ════════════════ CUSTOMER CHAT LEADS ════════════════
+    function getChatLeads() {
+      try {
+        return JSON.parse(localStorage.getItem('mammam_chat_leads') || '[]');
+      } catch (e) { return []; }
+    }
+
+    function renderChatLeadsTable() {
+      const tbody = document.getElementById('adminChatLeadsBody');
+      if (!tbody) return;
+
+      const leads = getChatLeads();
+      if (!leads.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:2rem; color:#888;">
+              Chưa có khách nào gửi tin nhắn qua mục "Chat Cho Tiệm".
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = leads.map(l => {
+        const isDone = l.status === 'called';
+        const dateStr = new Date(l.createdAt).toLocaleString('vi-VN', { hour12: false });
+        return `
+          <tr>
+            <td><code>${l.id}</code></td>
+            <td style="font-size:0.8rem; color:#666;">${dateStr}</td>
+            <td><strong>${l.name}</strong></td>
+            <td>
+              <a href="tel:${l.phone}" style="color:#0088cc; font-weight:800; text-decoration:none;">
+                📞 ${l.phone}
+              </a>
+            </td>
+            <td style="max-width:280px; font-size:0.85rem; color:#333;">${l.message}</td>
+            <td>
+              <span class="status-badge ${isDone ? 'badge-completed' : 'badge-pending'}" style="cursor:pointer;" onclick="toggleLeadStatus('${l.id}')" title="Bấm để đổi trạng thái">
+                ${isDone ? '✅ Đã gọi tư vấn' : '⏳ Chờ liên hệ'}
+              </span>
+            </td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <a href="tel:${l.phone}" class="nav-pill" style="padding:4px 8px; font-size:0.75rem; text-decoration:none; background:#ecfdf5; color:#047857; border-color:#10b981;">
+                  Gọi ngay
+                </a>
+                <button onclick="deleteChatLead('${l.id}')" class="nav-pill" style="padding:4px 8px; font-size:0.75rem; background:#fff1f2; color:#be123c; border-color:#f43f5e;">
+                  Xóa
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function toggleLeadStatus(id) {
+      const leads = getChatLeads();
+      const lead = leads.find(x => x.id === id);
+      if (lead) {
+        lead.status = (lead.status === 'called') ? 'pending' : 'called';
+        localStorage.setItem('mammam_chat_leads', JSON.stringify(leads));
+        renderChatLeadsTable();
+        showAdminToast('Đã cập nhật trạng thái yêu cầu chat!');
+      }
+    }
+
+    function deleteChatLead(id) {
+      if (confirm('Xóa yêu cầu tư vấn này?')) {
+        let leads = getChatLeads();
+        leads = leads.filter(x => x.id !== id);
+        localStorage.setItem('mammam_chat_leads', JSON.stringify(leads));
+        renderChatLeadsTable();
+        showAdminToast('Đã xóa yêu cầu tư vấn.');
+      }
+    }
+
+    function clearChatLeads() {
+      if (confirm('Bạn có chắc muốn xóa toàn bộ lịch sử khách chat?')) {
+        localStorage.removeItem('mammam_chat_leads');
+        renderChatLeadsTable();
+        showAdminToast('Đã dọn sạch nhật ký chat!');
+      }
+    }
+
+    function handleChangeAdminPassword() {
+      const curr = document.getElementById('changePassCurrent').value;
+      const newP = document.getElementById('changePassNew').value;
+      const creds = getAdminCredentials();
+
+      if (curr !== creds.password) {
+        showAdminToast('Mật khẩu hiện tại không đúng!', 'error');
+        return;
+      }
+      if (!newP || newP.length < 6) {
+        showAdminToast('Mật khẩu mới phải từ 6 ký tự trở lên!', 'error');
+        return;
+      }
+
+      creds.password = newP;
+      localStorage.setItem('mammam_admin_account', JSON.stringify(creds));
+      document.getElementById('changePassCurrent').value = '';
+      document.getElementById('changePassNew').value = '';
+      showAdminToast('Đổi mật khẩu Admin thành công! Hãy ghi nhớ mật khẩu mới.', 'success');
+    }
+
+    function printOrderInvoice(code) {
+      const order = currentOrders.find(x => x.code === code);
+      if (!order) return;
+
+      const printWin = window.open('', '_blank', 'width=600,height=750');
+      if (!printWin) {
+        alert('Trình duyệt đã chặn popup in, vui lòng cho phép!');
+        return;
+      }
+
+      const rows = (order.items || []).map(i => `
+        <tr>
+          <td>${i.name}</td>
+          <td>${i.quantity}</td>
+          <td style="text-align:right;">${formatVND(i.price * i.quantity)}</td>
+        </tr>
+      `).join('');
+
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <title>Phiếu Giao Hàng - ${order.code}</title>
+          <style>
+            body { font-family: -apple-system, sans-serif; padding: 25px; line-height: 1.5; color: #1b1b1b; }
+            .center { text-align: center; }
+            .line { border-top: 1.5px dashed #333; margin: 12px 0; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+            th, td { text-align: left; padding: 6px 0; border-bottom: 1px solid #eee; }
+            .total { font-size: 18px; font-weight: bold; color: #f91814; }
+          </style>
+        </head>
+        <body>
+          <div class="center">
+            <h2 style="margin:0;">THE MĂM MĂM</h2>
+            <p style="margin:4px 0;">Hotline đặt hàng: 0974 449 708</p>
+            <div class="line"></div>
+            <h3 style="margin:6px 0;">PHIẾU GIAO HÀNG & HÓA ĐƠN</h3>
+            <p>Mã Đơn: <strong>${order.code}</strong> | ${new Date(order.createdAt).toLocaleString('vi-VN')}</p>
+          </div>
+          <div class="line"></div>
+          <p>
+            <strong>Khách hàng:</strong> ${order.customerName}<br/>
+            <strong>Số điện thoại:</strong> ${order.phone}<br/>
+            <strong>Địa chỉ giao:</strong> ${order.address || ''}, ${order.city || ''}<br/>
+            <strong>Phương thức:</strong> ${order.paymentMethod === 'momo' ? 'Chuyển khoản MoMo' : 'Tiền mặt khi giao COD'}<br/>
+            <strong>Trạng thái thanh toán:</strong> ${order.paymentStatus === 'paid' ? 'ĐÃ THANH TOÁN' : 'CHƯA THANH TOÁN'}<br/>
+            ${order.note ? `<strong>Ghi chú:</strong> ${order.note}` : ''}
+          </p>
+          <div class="line"></div>
+          <table>
+            <thead>
+              <tr><th>Sản Phẩm</th><th>SL</th><th style="text-align:right;">Thành Tiền</th></tr>
+            </thead>
+            <tbody>
+              ${rows}
+            </tbody>
+          </table>
+          <div class="line"></div>
+          <div style="display:flex; justify-content:space-between; margin-top:10px;">
+            <span>Phí Giao Hàng:</span>
+            <span>${order.shippingFee === 0 ? 'MIỄN PHÍ' : formatVND(order.shippingFee)}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:6px;" class="total">
+            <span>TỔNG CỘNG:</span>
+            <span>${formatVND(order.total)}</span>
+          </div>
+          <div class="line"></div>
+          <div class="center" style="font-size:12px; color:#666; margin-top:20px;">
+            Cảm ơn quý khách đã ủng hộ The Măm Măm!<br/>
+            Chúc quý khách thưởng thức ngon miệng! 🌾
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    }
+
+    // ════════════════ VOUCHER SECURITY VAULT CONTROLLERS ════════════════
+    let latestGeneratedCodes = [];
+
+    function switchVoucherTab(tabName) {
+      const tabs = ['generate', 'scan', 'list', 'policy'];
+      tabs.forEach(t => {
+        const pane = document.getElementById('voucherTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('tabBtnVoucher' + (t === 'generate' ? 'Gen' : (t === 'scan' ? 'Scan' : (t === 'list' ? 'List' : 'Policy'))));
+        if (pane) pane.style.display = (t === tabName) ? 'block' : 'none';
+        if (btn) {
+          if (t === tabName) {
+            btn.style.background = '#e0f2fe';
+            btn.style.color = '#0369a1';
+            btn.style.borderColor = '#0284c7';
+          } else {
+            btn.style.background = '#fff';
+            btn.style.color = '#1b1b1b';
+            btn.style.borderColor = '#1b1b1b';
+          }
+        }
+      });
+      if (tabName === 'list') renderVoucherTable();
+    }
+
+    function handleAdminGenerateVoucher(e) {
+      e.preventDefault();
+      if (!window.VoucherSecurity) {
+        showAdminToast('Chưa nạp được module VoucherSecurity!', 'error');
+        return;
+      }
+
+      const typeVal = document.getElementById('vgenTypeAndValue').value;
+      const count = Number(document.getElementById('vgenQuantity').value) || 1;
+      const durationHours = Number(document.getElementById('vgenDuration').value);
+      const note = document.getElementById('vgenNote').value.trim() || 'Cấp từ Quản Trị Viên';
+
+      let discountType = 'percent';
+      let percent = 5;
+      let fixedAmount = 0;
+
+      if (typeVal.startsWith('percent_')) {
+        discountType = 'percent';
+        percent = Number(typeVal.replace('percent_', ''));
+      } else if (typeVal.startsWith('fixed_')) {
+        discountType = 'fixed';
+        fixedAmount = Number(typeVal.replace('fixed_', ''));
+        percent = 0;
+      } else if (typeVal === 'freeship_0') {
+        discountType = 'freeship';
+        percent = 0;
+      }
+
+      const newVouchers = window.VoucherSecurity.batchGenerateVouchers({
+        count,
+        percent,
+        discountType,
+        fixedAmount,
+        durationHours,
+        note
+      });
+
+      latestGeneratedCodes = newVouchers.map(v => v.code);
+
+      // Render output box
+      const emptyBox = document.getElementById('vgenResultEmpty');
+      const listBox = document.getElementById('vgenResultList');
+      const copyAllBtn = document.getElementById('btnCopyAllGen');
+
+      if (emptyBox) emptyBox.style.display = 'none';
+      if (copyAllBtn) copyAllBtn.style.display = 'inline-flex';
+      if (listBox) {
+        listBox.style.display = 'flex';
+        listBox.innerHTML = newVouchers.map(v => {
+          let badgeText = v.discountType === 'percent' ? `-${v.percent}%` : (v.discountType === 'fixed' ? `-${formatVND(v.fixedAmount)}` : 'FreeShip');
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:0.5rem 0.8rem;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:monospace; font-weight:800; font-size:1.15rem; letter-spacing:2px; color:#0f172a;">${v.code}</span>
+                <span style="background:#e0f2fe; color:#0369a1; font-weight:700; font-size:0.75rem; padding:2px 8px; border-radius:12px;">${badgeText}</span>
+                <span style="background:#dcfce7; color:#166534; font-size:0.7rem; font-weight:700; padding:2px 6px; border-radius:6px;">HMAC-SHA256 ✓</span>
+              </div>
+              <button type="button" class="btn-action-sm" onclick="copyVoucherCode('${v.code}')" style="background:#fff;">
+                📋 Chép
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderAdminStats();
+      renderVoucherTable();
+      showAdminToast(`Đã tạo thành công ${count} mã voucher 5 ký tự bảo mật! ⚡`, 'success');
+    }
+
+    function copyVoucherCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showAdminToast(`Đã sao chép mã ${code} vào bộ nhớ tạm! 📋`);
+      }).catch(() => {
+        showAdminToast(`Mã voucher: ${code}`);
+      });
+    }
+
+    function copyAllNewVouchers() {
+      if (!latestGeneratedCodes.length) return;
+      const text = latestGeneratedCodes.join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        showAdminToast(`Đã sao chép toàn bộ ${latestGeneratedCodes.length} mã voucher! 📋`, 'success');
+      });
+    }
+
+    function handleScanVoucher() {
+      if (!window.VoucherSecurity) return;
+      const code = document.getElementById('vscanInput').value.trim();
+      const container = document.getElementById('vscanResultContainer');
+      if (!code) {
+        showAdminToast('Vui lòng nhập mã voucher 5 ký tự cần quét!', 'error');
+        return;
+      }
+
+      const res = window.VoucherSecurity.inspectVoucher(code);
+      container.style.display = 'block';
+
+      if (!res.found) {
+        container.innerHTML = `
+          <div style="background:#fef2f2; border:2px solid #ef4444; border-radius:12px; padding:1.2rem; color:#991b1b;">
+            <div style="display:flex; align-items:center; gap:8px; font-weight:800; font-size:1.1rem; margin-bottom:0.4rem;">
+              <span>🚨</span> <span>KHÔNG TỒN TẠI HOẶC MÃ GIẢ MẠO</span>
+            </div>
+            <p style="font-size:0.88rem; margin:0;">Mã <strong>${code.toUpperCase()}</strong> không có trong Cơ sở Dữ liệu Bảo Mật. Khách hàng có thể tự nhập bừa hoặc chỉnh sửa code trái phép.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const isSigOk = res.isSignatureValid;
+      const v = res.voucher;
+      let statusBadge = '';
+      if (res.status === 'ACTIVE') statusBadge = '<span style="background:#dcfce7; color:#166534; font-weight:700; padding:3px 10px; border-radius:12px;">🟢 ĐANG HOẠT ĐỘNG (CHƯA DÙNG)</span>';
+      else if (res.status === 'USED') statusBadge = `<span style="background:#fef3c7; color:#92400e; font-weight:700; padding:3px 10px; border-radius:12px;">🟡 ĐÃ SỬ DỤNG (ĐƠN #${res.usedInOrder || 'N/A'})</span>`;
+      else if (res.status === 'EXPIRED') statusBadge = '<span style="background:#f1f5f9; color:#475569; font-weight:700; padding:3px 10px; border-radius:12px;">⏳ HẾT HẠN</span>';
+      else if (res.status === 'REVOKED') statusBadge = '<span style="background:#fee2e2; color:#991b1b; font-weight:700; padding:3px 10px; border-radius:12px;">🔴 ĐÃ BỊ KHÓA</span>';
+
+      let discountText = v.discountType === 'percent' ? `Giảm ${v.percent}%` : (v.discountType === 'fixed' ? `Giảm ${formatVND(v.fixedAmount)}` : 'Miễn phí Ship');
+
+      container.innerHTML = `
+        <div style="background:#fff; border:2px solid ${isSigOk ? '#0284c7' : '#ef4444'}; border-radius:12px; padding:1.2rem; box-shadow:4px 4px 0px ${isSigOk ? '#0284c7' : '#ef4444'};">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.6rem;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-family:monospace; font-size:1.6rem; font-weight:900; letter-spacing:2px; color:#0f172a;">${res.code}</span>
+              ${statusBadge}
+            </div>
+            <div>
+              ${isSigOk 
+                ? '<span style="background:#dcfce7; color:#166534; font-size:0.82rem; font-weight:800; padding:4px 10px; border-radius:8px; border:1px solid #166534;">🛡️ CHỮ KÝ SHA-256: HỢP LỆ (VERIFIED)</span>'
+                : '<span style="background:#fee2e2; color:#991b1b; font-size:0.82rem; font-weight:800; padding:4px 10px; border-radius:8px; border:1px solid #991b1b;">🚨 CẢNH BÁO: CHỮ KÝ BỊ GIẢ MẠO</span>'}
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; font-size:0.88rem;">
+            <div>
+              <div style="color:#64748b; font-size:0.8rem;">Mức Chiết Khấu:</div>
+              <strong style="font-size:1.1rem; color:#dc2626;">${discountText}</strong>
+            </div>
+            <div>
+              <div style="color:#64748b; font-size:0.8rem;">Nguồn Gốc Cấp:</div>
+              <strong>${v.source === 'LUCKY_WHEEL' ? '🎡 Vòng Quay May Mắn' : '👤 Quản Trị Viên Tạo'}</strong>
+            </div>
+            <div>
+              <div style="color:#64748b; font-size:0.8rem;">Ngày Tạo:</div>
+              <span>${new Date(v.createdAt).toLocaleString('vi-VN')}</span>
+            </div>
+            <div>
+              <div style="color:#64748b; font-size:0.8rem;">Hạn Sử Dụng:</div>
+              <span>${v.expiresAt ? new Date(v.expiresAt).toLocaleString('vi-VN') : 'Vô thời hạn'}</span>
+            </div>
+          </div>
+
+          <div style="background:#f8fafc; border-radius:8px; padding:0.6rem 0.8rem; margin-top:1rem; font-size:0.8rem; color:#475569; word-break:break-all;">
+            <strong>Chữ ký SHA-256 (32-hex):</strong> <code>${v.signature || 'N/A'}</code><br/>
+            <strong>Ghi chú:</strong> <em>${v.note || 'Không có'}</em>
+          </div>
+
+          ${res.usedInOrder ? `
+            <div style="background:#fef3c7; border:1px solid #f59e0b; border-radius:8px; padding:0.6rem 0.8rem; margin-top:0.6rem; font-size:0.84rem; color:#92400e;">
+              🔒 <strong>Đơn hàng đã sử dụng:</strong> #${res.usedInOrder} (lúc ${v.usedAt ? new Date(v.usedAt).toLocaleString('vi-VN') : 'N/A'})
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderVoucherTable() {
+      const tbody = document.getElementById('adminVoucherTableBody');
+      if (!tbody || !window.VoucherSecurity) return;
+
+      const vault = window.VoucherSecurity.getVault();
+      const filter = document.getElementById('vlistFilterStatus').value;
+      const search = (document.getElementById('vlistSearchInput').value || '').trim().toUpperCase();
+
+      let list = vault;
+      const now = Date.now();
+
+      if (filter !== 'all') {
+        if (filter === 'ACTIVE') {
+          list = list.filter(v => v.status === 'ACTIVE' && (!v.expiresAt || new Date(v.expiresAt).getTime() > now));
+        } else if (filter === 'EXPIRED') {
+          list = list.filter(v => v.status === 'EXPIRED' || (v.expiresAt && new Date(v.expiresAt).getTime() <= now && v.status !== 'USED'));
+        } else {
+          list = list.filter(v => v.status === filter);
+        }
+      }
+
+      if (search) {
+        list = list.filter(v => (v.code || '').toUpperCase().includes(search) || (v.usedInOrder || '').toUpperCase().includes(search));
+      }
+
+      if (!list.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:2rem; color:#888;">
+              Không tìm thấy mã voucher nào phù hợp.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map(v => {
+        const isExp = v.expiresAt && new Date(v.expiresAt).getTime() <= now;
+        let effectiveStatus = v.status;
+        if (effectiveStatus === 'ACTIVE' && isExp) effectiveStatus = 'EXPIRED';
+
+        let badge = '';
+        if (effectiveStatus === 'ACTIVE') badge = '<span style="background:#dcfce7; color:#166534; font-weight:700; font-size:0.75rem; padding:2px 8px; border-radius:10px;">🟢 Khả dụng</span>';
+        else if (effectiveStatus === 'USED') badge = '<span style="background:#fef3c7; color:#92400e; font-weight:700; font-size:0.75rem; padding:2px 8px; border-radius:10px;">🟡 Đã dùng</span>';
+        else if (effectiveStatus === 'EXPIRED') badge = '<span style="background:#f1f5f9; color:#475569; font-weight:700; font-size:0.75rem; padding:2px 8px; border-radius:10px;">⏳ Hết hạn</span>';
+        else if (effectiveStatus === 'REVOKED') badge = '<span style="background:#fee2e2; color:#991b1b; font-weight:700; font-size:0.75rem; padding:2px 8px; border-radius:10px;">🔴 Đã khóa</span>';
+
+        let discountTag = v.discountType === 'percent' ? `-${v.percent}%` : (v.discountType === 'fixed' ? `-${formatVND(v.fixedAmount)}` : 'FreeShip');
+        const createdStr = new Date(v.createdAt).toLocaleDateString('vi-VN');
+        const expStr = v.expiresAt ? new Date(v.expiresAt).toLocaleDateString('vi-VN') : 'Vô hạn';
+
+        return `
+          <tr>
+            <td>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-family:monospace; font-weight:800; font-size:1.1rem; letter-spacing:1px; color:#0f172a;">${v.code}</span>
+                <button type="button" onclick="copyVoucherCode('${v.code}')" class="btn-action-sm" style="padding:2px 6px; font-size:0.72rem;" title="Sao chép">📋</button>
+              </div>
+            </td>
+            <td>
+              <strong style="color:#dc2626;">${discountTag}</strong>
+            </td>
+            <td>
+              <span style="font-size:0.8rem; font-weight:600;">${v.source === 'LUCKY_WHEEL' ? '🎡 Vòng Quay' : '👤 Admin'}</span>
+            </td>
+            <td style="font-size:0.8rem; color:#555;">
+              Tạo: ${createdStr}<br/>
+              Hạn: ${expStr}
+            </td>
+            <td>${badge}</td>
+            <td style="font-size:0.82rem;">
+              ${v.usedInOrder ? `<span style="font-weight:700; color:#0369a1;">#${v.usedInOrder}</span>` : '<span style="color:#aaa;">—</span>'}
+            </td>
+            <td>
+              <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                ${v.status === 'ACTIVE' ? `
+                  <button type="button" onclick="adminRevokeVoucher('${v.code}')" class="btn-action-sm" style="background:#fee2e2; color:#991b1b;" title="Khóa mã chống gian lận">
+                    🚫 Khóa
+                  </button>
+                ` : `
+                  <button type="button" onclick="adminReactivateVoucher('${v.code}')" class="btn-action-sm" style="background:#dcfce7; color:#166534;" title="Mở khóa lại">
+                    🔄 Mở
+                  </button>
+                `}
+                <button type="button" onclick="adminDeleteVoucher('${v.code}')" class="btn-action-sm" style="background:#fff; color:#666;" title="Xóa khỏi kho">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function adminRevokeVoucher(code) {
+      if (confirm(`Bạn có chắc muốn KHÓA mã voucher ${code}? Khách hàng sẽ không thể áp dụng mã này.`)) {
+        window.VoucherSecurity.revokeVoucher(code);
+        showAdminToast(`Đã khóa mã voucher ${code}! 🚫`);
+        renderAdminStats();
+        renderVoucherTable();
+      }
+    }
+
+    function adminReactivateVoucher(code) {
+      window.VoucherSecurity.reactivateVoucher(code);
+      showAdminToast(`Đã kích hoạt lại mã voucher ${code}! 🟢`);
+      renderAdminStats();
+      renderVoucherTable();
+    }
+
+    function adminDeleteVoucher(code) {
+      if (confirm(`Xóa vĩnh viễn mã voucher ${code} khỏi cơ sở dữ liệu?`)) {
+        window.VoucherSecurity.deleteVoucher(code);
+        showAdminToast(`Đã xóa mã voucher ${code}! 🗑️`);
+        renderAdminStats();
+        renderVoucherTable();
+      }
+    }
+
+    function cleanExpiredVouchers() {
+      if (!window.VoucherSecurity) return;
+      const vault = window.VoucherSecurity.getVault();
+      const now = Date.now();
+      const validVault = vault.filter(v => {
+        if (v.status === 'USED') return true; // Keep used for audit
+        if (v.expiresAt && new Date(v.expiresAt).getTime() <= now) return false;
+        return true;
+      });
+      const removed = vault.length - validVault.length;
+      window.VoucherSecurity.saveVault(validVault);
+      showAdminToast(`Đã dọn dẹp ${removed} voucher hết hạn! 🧹`, 'info');
+      renderAdminStats();
+      renderVoucherTable();
+    }
+
+    function saveAdminSecretSalt() {
+      if (!window.VoucherSecurity) return;
+      const newSalt = document.getElementById('adminSecretSaltInput').value.trim();
+      if (!newSalt) {
+        showAdminToast('Khóa bảo mật Secret Salt không được để trống!', 'error');
+        return;
+      }
+      const cfg = window.VoucherSecurity.getSecurityConfig();
+      cfg.salt = newSalt;
+      window.VoucherSecurity.saveSecurityConfig(cfg);
+      showAdminToast('Đã lưu Secret Salt mới thành công! 🔐', 'success');
+    }
+
+    // Auto-init on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAdminSession();
+    });
+  </script>
+</body>
+</html>

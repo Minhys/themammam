@@ -1,0 +1,9 @@
+{
+  "name": "themammam",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Măm Măm - Tiệm Bánh & Ăn Vặt Đà Lạt",
+  "scripts": {
+    "build": "echo 'Static assets ready'"
+  }
+}

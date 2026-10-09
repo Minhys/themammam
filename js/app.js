@@ -2460,10 +2460,10 @@
   // ═════════════════════════════════════════════════════════════════════════
   // LUCKY WHEEL ENGINE (VÒNG QUAY MAY MẮN)
   // Tỉ lệ chuẩn xác:
-  // 1. Chúc bạn may mắn lần sau: 20%
+  // 1. Chúc bạn may mắn lần sau: 45%
   // 2. Evoucher giảm 5%: 50%
-  // 3. Evoucher giảm 10%: 15%
-  // 4. Evoucher giảm 15%: 15%
+  // 3. Evoucher giảm 10%: 3%
+  // 4. Evoucher giảm 15%: 2%
   // ═════════════════════════════════════════════════════════════════════════
   const WHEEL_PRIZES = [
     {
@@ -2474,7 +2474,7 @@
       icon: '🥔',
       color: '#64748B',
       textColor: '#FFFFFF',
-      rate: 20
+      rate: 45
     },
     {
       id: 1,
@@ -2498,7 +2498,7 @@
       textColor: '#FFFFFF',
       code: 'MAMMAM10',
       percent: 10,
-      rate: 15
+      rate: 3
     },
     {
       id: 3,
@@ -2510,7 +2510,7 @@
       textColor: '#1B1B1B',
       code: 'MAMMAM15',
       percent: 15,
-      rate: 15
+      rate: 2
     }
   ];
 
@@ -2640,17 +2640,20 @@
     if (spinBtn) spinBtn.disabled = true;
 
     // ── EXACT PROBABILITY ALLOCATION ──
-    // 1: 20%, 2: 50%, 3: 15%, 4: 15%
+    // 1. Chúc bạn may mắn lần sau: 45%
+    // 2. E-voucher 5%: 50% [45 -> 95)
+    // 3. E-voucher 10%: 3% [95 -> 98)
+    // 4. E-voucher 15%: 2% [98 -> 100)
     const rand = Math.random() * 100;
     let wonIndex;
-    if (rand < 20) {
-      wonIndex = 0; // Chúc bạn may mắn lần sau (20%)
-    } else if (rand < 70) {
+    if (rand < 45) {
+      wonIndex = 0; // Chúc bạn may mắn lần sau (45%)
+    } else if (rand < 95) {
       wonIndex = 1; // Evoucher giảm 5% (50%)
-    } else if (rand < 85) {
-      wonIndex = 2; // Evoucher giảm 10% (15%)
+    } else if (rand < 98) {
+      wonIndex = 2; // Evoucher giảm 10% (3%)
     } else {
-      wonIndex = 3; // Evoucher giảm 15% (15%)
+      wonIndex = 3; // Evoucher giảm 15% (2%)
     }
 
     const wonPrize = WHEEL_PRIZES[wonIndex];

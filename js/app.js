@@ -763,31 +763,53 @@
       return;
     }
 
-    // 1. Kiểm tra tài khoản Quản trị viên Admin
-    let adminCreds = { username: 'admin', password: 'themammam2026' };
-    const storedAdmin = localStorage.getItem('mammam_admin_account');
-    if (storedAdmin) {
-      try {
-        const parsed = JSON.parse(storedAdmin);
-        if (parsed && parsed.username && parsed.password) adminCreds = parsed;
-      } catch (e) {}
-    }
+    // 1. Thử xác thực Quản trị viên qua Cloudflare Serverless D1 API
+    fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: phoneOrEmail, password: pass })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data && data.success && data.token) {
+        sessionStorage.setItem('mammam_admin_logged', 'true');
+        sessionStorage.setItem('mammam_admin_token', data.token);
+        localStorage.setItem('mammam_admin_logged', 'true');
+        showToast('Đăng nhập Quản Trị Viên thành công! Đang chuyển đến trang Quản Trị... 🔐', 'success');
+        closeModal('authModal');
+        updateUserUI();
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 500);
+        return;
+      }
+      // Không phải tài khoản admin trên D1 -> Kiểm tra tài khoản khách hàng
+      processCustomerLogin(phoneOrEmail, pass);
+    })
+    .catch(() => {
+      // Fallback khi chạy offline
+      let adminCreds = { username: 'admin', password: 'themammam2026' };
+      const storedAdmin = localStorage.getItem('mammam_admin_account');
+      if (storedAdmin) {
+        try {
+          const parsed = JSON.parse(storedAdmin);
+          if (parsed && parsed.username && parsed.password) adminCreds = parsed;
+        } catch (e) {}
+      }
+      if (phoneOrEmail.toLowerCase() === adminCreds.username.toLowerCase() && pass === adminCreds.password) {
+        sessionStorage.setItem('mammam_admin_logged', 'true');
+        localStorage.setItem('mammam_admin_logged', 'true');
+        showToast('Đăng nhập Quản Trị Viên thành công! Đang chuyển đến trang Quản Trị... 🔐', 'success');
+        closeModal('authModal');
+        updateUserUI();
+        setTimeout(() => { window.location.href = 'admin.html'; }, 500);
+        return;
+      }
+      processCustomerLogin(phoneOrEmail, pass);
+    });
+  }
 
-    const isMatchAdminUser = (phoneOrEmail.toLowerCase() === adminCreds.username.toLowerCase()) || 
-                             (phoneOrEmail.toLowerCase() === 'admin');
-    if (isMatchAdminUser && pass === adminCreds.password) {
-      sessionStorage.setItem('mammam_admin_logged', 'true');
-      localStorage.setItem('mammam_admin_logged', 'true');
-      showToast('Đăng nhập Quản Trị Viên thành công! Đang chuyển đến trang Admin... 🔐', 'success');
-      closeModal('authModal');
-      updateUserUI();
-      setTimeout(() => {
-        window.location.href = 'admin.html';
-      }, 500);
-      return;
-    }
-
-    // 2. Kiểm tra tài khoản Khách hàng
+  function processCustomerLogin(phoneOrEmail, pass) {
     const users = getUsers();
     const user = users.find((u) => (u.phone === phoneOrEmail || u.email === phoneOrEmail) && u.password === pass);
 

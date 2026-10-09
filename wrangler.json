@@ -9,8 +9,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "themammam_db",
-      "database_id": "themammam_db"
+      "database_name": "themammam-db",
+      "database_id": "289611f6-0dd1-4910-a9c6-66e737c00ee2"
     }
   ]
 }

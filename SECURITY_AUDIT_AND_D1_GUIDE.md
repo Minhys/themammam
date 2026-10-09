@@ -54,14 +54,14 @@ Bạn có thể tạo bằng 1 trong 2 cách:
 
 #### Cách A: Dùng giao diện Web Cloudflare Dashboard
 1. Truy cập [dash.cloudflare.com](https://dash.cloudflare.com/) $\rightarrow$ Chọn **Storage & Databases** $\rightarrow$ **D1 SQL Database**.
-2. Database hiện tại đã được tạo thành công là: `themammam-db` (Database ID: `289611f6-0dd1-4910-a9c6-66e737c00ee2`).
+2. Database hiện tại đã được tạo thành công là: `themammam-db` (Database ID: `befc8f63-62a2-4bdd-9f60-994d22b84542`).
 3. Cấu hình trong file `wrangler.json`:
    ```json
    "d1_databases": [
      {
        "binding": "DB",
        "database_name": "themammam-db",
-       "database_id": "289611f6-0dd1-4910-a9c6-66e737c00ee2"
+       "database_id": "befc8f63-62a2-4bdd-9f60-994d22b84542"
      }
    ]
    ```

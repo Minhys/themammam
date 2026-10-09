@@ -1,0 +1,10 @@
+_worker.js
+d1-schema.sql
+TELEGRAM_SETUP_GUIDE.md
+SECURITY_AUDIT_AND_D1_GUIDE.md
+wrangler.json
+package.json
+package-lock.json
+.git
+.github
+.wrangler

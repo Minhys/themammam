@@ -186,6 +186,24 @@ export default {
                 voucherCode || '',
                 paymentMethod || 'COD'
               ).run();
+
+              // Đồng bộ thông tin khách hàng vào bảng users
+              await env.DB.prepare(`
+                INSERT INTO users (id, phone, name, city, address, points, updated_at)
+                VALUES (?, ?, ?, ?, ?, 10, CURRENT_TIMESTAMP)
+                ON CONFLICT(phone) DO UPDATE SET
+                  name = excluded.name,
+                  city = excluded.city,
+                  address = excluded.address,
+                  points = points + 10,
+                  updated_at = CURRENT_TIMESTAMP
+              `).bind(
+                'user_' + phone.trim(),
+                phone.trim(),
+                customerName.trim(),
+                city || '',
+                address.trim()
+              ).run();
             } catch (d1Err) {
               console.error('D1 Insert order error:', d1Err);
             }

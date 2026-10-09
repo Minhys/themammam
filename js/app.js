@@ -272,10 +272,7 @@
       return `
         <div class="product-card" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
           <div class="card-thumb-wrap">
-            <span class="card-badge-id">${p.id}</span>
-            <span class="card-badge-cat">${p.categoryLabel}</span>
-            <span class="card-shipping-badge ${p.shippingScope}">${p.shippingBadge}</span>
-            <div class="card-brand-badge" title="The Măm Măm Đặc Sản Đà Lạt">
+            <div class="card-brand-badge" title="The Măm Măm (Since 2026)">
               <img src="assets/mammam-logo.png" alt="The Măm Măm" class="brand-seal-img" />
             </div>
             <img class="card-thumb-img" 
@@ -1721,6 +1718,9 @@
   let lastWobbleTime = 0;
   let lastBubbleTime = 0;
   let lastBeepSec = -1;
+  let dodgeCount = 0;
+  let isDizzy = false;
+  let dizzyUntil = 0;
 
   const roamingTaunts = [
     'Hehe đố gõ trúng! 😜',
@@ -1831,14 +1831,69 @@
 
         // Check collision with potato
         const dist = Math.hypot(potatoX - cursorX, potatoY - cursorY);
-        const HIT_RADIUS = 78; // generous hit radius for fair and responsive tapping
+        const hudTaunt = document.getElementById('hudTauntMsg');
+        const potato = document.getElementById('dodgingPotato');
 
-        if (dist <= HIT_RADIUS) {
-          // HIT CONFIRMED!
-          handlePotatoHit(potatoX, potatoY);
+        if (isDizzy) {
+          // In dizzy state, potato is vulnerable to spoon bonk!
+          const HIT_RADIUS = 78;
+          if (dist <= HIT_RADIUS) {
+            // HIT CONFIRMED!
+            handlePotatoHit(potatoX, potatoY);
+          } else {
+            showPotatoBubble('Chệch rồi! Đập mau kẻo tỉnh! 😱');
+          }
         } else {
-          // Missed
-          showPotatoBubble('Hụt rồi nha! 😜');
+          // ACTIVE REACTION DODGE: The potato immediately detects the strike and leaps away!
+          dodgeCount++;
+
+          // Leap vector away from tap location
+          const angle = Math.atan2(potatoY - cursorY, potatoX - cursorX) + (Math.random() - 0.5) * 0.7;
+          const leapDist = 135 + Math.random() * 85;
+          potatoX += Math.cos(angle) * leapDist;
+          potatoY += Math.sin(angle) * leapDist;
+
+          // Clamp within screen boundaries
+          const margin = 80;
+          const topMargin = 130;
+          potatoX = Math.max(margin, Math.min(window.innerWidth - margin, potatoX));
+          potatoY = Math.max(topMargin, Math.min(window.innerHeight - margin, potatoY));
+
+          // Give a high sprint speed in leap direction
+          const LEAP_SPEED = 960;
+          potatoVx = Math.cos(angle) * LEAP_SPEED;
+          potatoVy = Math.sin(angle) * LEAP_SPEED;
+
+          if (potato) {
+            potato.style.left = potatoX + 'px';
+            potato.style.top = potatoY + 'px';
+          }
+
+          if (dodgeCount >= 3) {
+            // Potato is exhausted & dizzy for 1.15s!
+            isDizzy = true;
+            dizzyUntil = performance.now() + 1150;
+            if (potato) {
+              potato.classList.add('dizzy');
+              const avatarWrap = potato.querySelector('.potato-avatar-wrap');
+              if (avatarWrap) avatarWrap.style.transform = '';
+            }
+            potatoVx *= 0.1;
+            potatoVy *= 0.1;
+            showPotatoBubble('Thở không ra hơi rồi... 😵 ĐẬP MAU!');
+            if (hudTaunt) hudTaunt.textContent = '⚡ KHOAI TÂY ĐANG CHOÁNG VÁNG! ĐẬP NGAY BÂY GIỜ! 💥🔨';
+            playSound('beep');
+          } else {
+            const dodgeMsg = [
+              `Né phát ${dodgeCount}/3! 🏃💨`,
+              `Hụt rồi nha! 😜 (${dodgeCount}/3)`,
+              'Thìa chậm quá! ⚡',
+              'Gió thoảng qua thôi! 💨'
+            ];
+            const msg = dodgeMsg[(dodgeCount - 1) % dodgeMsg.length];
+            showPotatoBubble(msg);
+            if (hudTaunt) hudTaunt.textContent = `🥔 Khoai tây vừa né (${dodgeCount}/3 lần)! Gõ nhanh để làm nó choáng!`;
+          }
         }
       });
     }
@@ -1869,6 +1924,10 @@
 
     potato.style.display = 'block';
     potato.classList.remove('evading');
+    potato.classList.remove('dizzy');
+    dodgeCount = 0;
+    isDizzy = false;
+    dizzyUntil = 0;
 
     // Initial position: center of viewport
     potatoX = window.innerWidth / 2;
@@ -1975,61 +2034,81 @@
       return;
     }
 
-    // ── AI DODGING & REACTION ENGINE (MỨC ĐỘ KHÓ) ──
-    const dx = potatoX - cursorX;
-    const dy = potatoY - cursorY;
-    const dist = Math.hypot(dx, dy);
-    const DANGER_RADIUS = 185; // Proximity evasion radar
-
-    if (dist < DANGER_RADIUS) {
-      // PANIC EVASION: The potato actively spots the spoon and dashes away!
-      isEvading = true;
-      if (potato) potato.classList.add('evading');
-
-      // Unit vector directly away from spoon
-      const ux = dx / (dist || 1);
-      const uy = dy / (dist || 1);
-
-      // Perpendicular evasive sidestep (feint)
-      const perpX = -uy * dodgeSign;
-      const perpY = ux * dodgeSign;
-
-      // Burst velocity: 850px/sec sprint!
-      const BURST_SPEED = 850;
-      const targetVx = (ux * 0.72 + perpX * 0.65) * BURST_SPEED;
-      const targetVy = (uy * 0.72 + perpY * 0.65) * BURST_SPEED;
-
-      // Quick acceleration
-      potatoVx += (targetVx - potatoVx) * 0.38;
-      potatoVy += (targetVy - potatoVy) * 0.38;
-
-      if (timestamp - lastBubbleTime > 1200) {
-        lastBubbleTime = timestamp;
-        const randTaunt = panicTaunts[Math.floor(Math.random() * panicTaunts.length)];
-        showPotatoBubble(randTaunt);
-        if (hudTaunt) hudTaunt.textContent = randTaunt;
+    // ── DIZZY STATE HANDLING & RECOVERY ──
+    if (isDizzy) {
+      if (timestamp > dizzyUntil) {
+        // Recover from dizziness!
+        isDizzy = false;
+        dodgeCount = 0;
+        if (potato) potato.classList.remove('dizzy');
+        const recoverSpeed = 460;
+        const randAng = Math.random() * Math.PI * 2;
+        potatoVx = Math.cos(randAng) * recoverSpeed;
+        potatoVy = Math.sin(randAng) * recoverSpeed;
+        showPotatoBubble('Hồi sức rồi, đố bắt được! 🏃💨');
+        if (hudTaunt) hudTaunt.textContent = '🥄 Khoai tây đã tỉnh! Nhấp gõ nhanh 3 lần để làm nó choáng!';
+      } else {
+        // Drifting weakly while dizzy
+        potatoVx *= 0.93;
+        potatoVy *= 0.93;
       }
     } else {
-      // NORMAL AGILE DRIFT
-      isEvading = false;
-      if (potato) potato.classList.remove('evading');
+      // ── AI DODGING & REACTION ENGINE (MỨC ĐỘ KHÓ) ──
+      const dx = potatoX - cursorX;
+      const dy = potatoY - cursorY;
+      const dist = Math.hypot(dx, dy);
+      const DANGER_RADIUS = 185; // Proximity evasion radar
 
-      // Periodic random course wobble to be unpredictable
-      if (timestamp - lastWobbleTime > 380) {
-        lastWobbleTime = timestamp;
-        dodgeSign = Math.random() > 0.5 ? 1 : -1;
-        const currentSpeed = Math.hypot(potatoVx, potatoVy) || 400;
-        const currentAngle = Math.atan2(potatoVy, potatoVx);
-        const newAngle = currentAngle + (Math.random() - 0.5) * 1.2;
-        const targetSpeed = 380 + Math.random() * 80;
-        potatoVx = Math.cos(newAngle) * targetSpeed;
-        potatoVy = Math.sin(newAngle) * targetSpeed;
-      }
+      if (dist < DANGER_RADIUS) {
+        // PANIC EVASION: The potato actively spots the spoon and dashes away!
+        isEvading = true;
+        if (potato) potato.classList.add('evading');
 
-      if (timestamp - lastBubbleTime > 2200) {
-        lastBubbleTime = timestamp;
-        const randTaunt = roamingTaunts[Math.floor(Math.random() * roamingTaunts.length)];
-        showPotatoBubble(randTaunt);
+        // Unit vector directly away from spoon
+        const ux = dx / (dist || 1);
+        const uy = dy / (dist || 1);
+
+        // Perpendicular evasive sidestep (feint)
+        const perpX = -uy * dodgeSign;
+        const perpY = ux * dodgeSign;
+
+        // Burst velocity: 850px/sec sprint!
+        const BURST_SPEED = 850;
+        const targetVx = (ux * 0.72 + perpX * 0.65) * BURST_SPEED;
+        const targetVy = (uy * 0.72 + perpY * 0.65) * BURST_SPEED;
+
+        // Quick acceleration
+        potatoVx += (targetVx - potatoVx) * 0.38;
+        potatoVy += (targetVy - potatoVy) * 0.38;
+
+        if (timestamp - lastBubbleTime > 1200) {
+          lastBubbleTime = timestamp;
+          const randTaunt = panicTaunts[Math.floor(Math.random() * panicTaunts.length)];
+          showPotatoBubble(randTaunt);
+          if (hudTaunt) hudTaunt.textContent = randTaunt;
+        }
+      } else {
+        // NORMAL AGILE DRIFT
+        isEvading = false;
+        if (potato) potato.classList.remove('evading');
+
+        // Periodic random course wobble to be unpredictable
+        if (timestamp - lastWobbleTime > 380) {
+          lastWobbleTime = timestamp;
+          dodgeSign = Math.random() > 0.5 ? 1 : -1;
+          const currentSpeed = Math.hypot(potatoVx, potatoVy) || 400;
+          const currentAngle = Math.atan2(potatoVy, potatoVx);
+          const newAngle = currentAngle + (Math.random() - 0.5) * 1.2;
+          const targetSpeed = 380 + Math.random() * 80;
+          potatoVx = Math.cos(newAngle) * targetSpeed;
+          potatoVy = Math.sin(newAngle) * targetSpeed;
+        }
+
+        if (timestamp - lastBubbleTime > 2200) {
+          lastBubbleTime = timestamp;
+          const randTaunt = roamingTaunts[Math.floor(Math.random() * roamingTaunts.length)];
+          showPotatoBubble(randTaunt);
+        }
       }
     }
 
@@ -2069,8 +2148,12 @@
 
       const avatarWrap = potato.querySelector('.potato-avatar-wrap');
       if (avatarWrap) {
-        const tilt = Math.max(-25, Math.min(25, potatoVx * 0.035));
-        avatarWrap.style.transform = `rotate(${tilt}deg) scale(${isEvading ? '1.12, 0.88' : '1, 1'})`;
+        if (isDizzy) {
+          avatarWrap.style.transform = '';
+        } else {
+          const tilt = Math.max(-25, Math.min(25, potatoVx * 0.035));
+          avatarWrap.style.transform = `rotate(${tilt}deg) scale(${isEvading ? '1.12, 0.88' : '1, 1'})`;
+        }
       }
     }
 

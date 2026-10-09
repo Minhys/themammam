@@ -2191,25 +2191,26 @@ a {
 
 .card-brand-badge {
   position: absolute;
-  bottom: 0.6rem;
+  top: 0.6rem;
   right: 0.6rem;
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 6;
-  border: 1.5px solid var(--mustard);
+  z-index: 5;
+  border: 2px solid #ffffff;
   pointer-events: none;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
 }
 
 .product-card:hover .card-brand-badge {
-  transform: scale(1.18) rotate(10deg);
+  transform: scale(1.15) rotate(8deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .brand-seal-img {
@@ -2860,8 +2861,12 @@ a {
   }
 
   .card-brand-badge {
-    width: 28px !important;
-    height: 28px !important;
+    top: 0.4rem !important;
+    right: 0.4rem !important;
+    bottom: auto !important;
+    width: 26px !important;
+    height: 26px !important;
+    border-width: 1.5px !important;
   }
 
   .card-info {
@@ -3340,6 +3345,38 @@ a {
 @keyframes panicWobble {
   0% { transform: scale(1.1, 0.9) rotate(-8deg); }
   100% { transform: scale(0.9, 1.1) rotate(8deg); }
+}
+
+/* Dizzy / Exhausted State after Frantic Dodges */
+.dodging-potato.dizzy .potato-avatar-wrap {
+  animation: dizzySpin 0.5s infinite linear;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 80, 0.95)) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
+}
+
+@keyframes dizzySpin {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(0.92, 1.05) rotate(12deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  75% { transform: scale(1.05, 0.92) rotate(-12deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.dodging-potato.dizzy::before {
+  content: '💫 😵 💫';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  animation: dizzyStarsFloat 0.7s infinite alternate ease-in-out;
+  pointer-events: none;
+  z-index: 100015;
+}
+
+@keyframes dizzyStarsFloat {
+  0% { transform: translateX(-50%) translateY(0) scale(0.9); }
+  100% { transform: translateX(-50%) translateY(-8px) scale(1.15); }
 }
 
 /* Speech Bubble */

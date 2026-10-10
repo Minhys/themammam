@@ -597,7 +597,7 @@ const MAMMAM_FAQ_DATA = {
       category: "shipping",
       question: "Làm thế nào để tra cứu hành trình bưu kiện của tôi?",
       keywords: ["tra cuu don hang", "ma van don", "kiem tra hanh trinh"],
-      answer: "Sau khi shop gửi hàng, mã vận đơn sẽ được gửi tin nhắn SMS / Telegram xác nhận cho bạn. Bạn cũng có thể bấm nút 'Chat Cho Tiệm' hoặc gọi hotline 0974 449 708 để nhân viên kiểm tra tức thì vị trí đơn hàng.",
+      answer: "Sau khi shop gửi hàng, mã vận đơn sẽ được gửi tin nhắn SMS xác nhận cho bạn. Bạn cũng có thể bấm nút 'Chat Cho Tiệm' hoặc gọi hotline 0974 449 708 để nhân viên kiểm tra tức thì vị trí đơn hàng.",
       relatedIds: [69, 71, 100],
       action: { type: "contact", label: "Kiểm Tra Đơn Qua Hotline ➔" }
     },
@@ -689,15 +689,15 @@ const MAMMAM_FAQ_DATA = {
       category: "return",
       question: "Quy trình xử lý bảo hành thực phẩm mất bao lâu?",
       keywords: ["quy trinh bao hanh", "mat bao lau", "toc do xu ly"],
-      answer: "Chỉ từ 15 đến 30 phút sau khi tiệm nhận được phản hồi qua hotline hoặc Telegram! Tiệm ưu tiên tối đa quyền lợi khách hàng, không thủ tục rườm rà.",
+      answer: "Chỉ từ 15 đến 30 phút sau khi tiệm nhận được phản hồi qua hotline hoặc form Chat Cho Tiệm! Tiệm ưu tiên tối đa quyền lợi khách hàng, không thủ tục rườm rà.",
       relatedIds: [73, 76, 82]
     },
     {
       id: 82,
       category: "return",
       question: "Kênh nào tiếp nhận khiếu nại và hỗ trợ nhanh nhất?",
-      keywords: ["kenh khieu nai", "hotline", "chat telegram", "ho tro nhanh"],
-      answer: "Hotline trực tiếp: 0974 449 708 (gọi điện/Zalo) hoặc bấm nút 'Chat Cho Tiệm' qua Telegram ngay trên website để được bộ phận chăm sóc khách hàng tiếp nhận xử lý ngay lập tức.",
+      keywords: ["kenh khieu nai", "hotline", "chat truc tiep", "ho tro nhanh"],
+      answer: "Hotline trực tiếp: 0974 449 708 (gọi điện/Zalo) hoặc bấm nút 'Chat Cho Tiệm' ngay trên website để được bộ phận chăm sóc khách hàng tiếp nhận xử lý ngay lập tức.",
       relatedIds: [81, 99, 100],
       action: { type: "contact", label: "Gọi Hotline 0974 449 708 ➔" }
     },
@@ -836,7 +836,7 @@ const MAMMAM_FAQ_DATA = {
       category: "payment",
       question: "Sau khi chuyển khoản MoMo tôi cần làm gì để xác nhận đơn?",
       keywords: ["xac nhan chuyen khoan", "sau khi ck", "thong bao chuyen tien"],
-      answer: "Sau khi quét mã MoMo thành công, hệ thống website sẽ tự động lưu trạng thái chờ duyệt. Bạn có thể chụp màn hình giao dịch gửi qua Telegram hoặc số hotline để nhân viên tích xanh xác nhận trong 1 phút!",
+      answer: "Sau khi quét mã MoMo thành công, hệ thống website sẽ tự động lưu trạng thái chờ duyệt. Bạn có thể chụp màn hình giao dịch gửi qua hotline/Zalo hoặc form chat để nhân viên xác nhận trong 1 phút!",
       relatedIds: [97, 99, 100]
     },
     {
@@ -852,7 +852,7 @@ const MAMMAM_FAQ_DATA = {
       category: "payment",
       question: "Làm sao để liên hệ trực tiếp với nhân viên tư vấn The Măm Măm?",
       keywords: ["lien he shop", "so dien thoai hotline", "chat truc tiep", "nhan vien ho tro"],
-      answer: "Bạn có thể liên hệ trực tiếp qua: 1) Hotline/Zalo: 0974 449 708; 2) Bấm nút 'Chat Cho Tiệm' qua Telegram trực tuyến; 3) Hoặc để lại lời nhắn trong form tư vấn. Đội ngũ The Măm Măm luôn sẵn sàng phục vụ bạn 24/7!",
+      answer: "Bạn có thể liên hệ trực tiếp qua: 1) Hotline/Zalo: 0974 449 708; 2) Bấm nút 'Chat Cho Tiệm' trực tuyến; 3) Hoặc để lại lời nhắn trong form tư vấn. Đội ngũ The Măm Măm luôn sẵn sàng phục vụ bạn 24/7!",
       relatedIds: [82, 94, 97],
       action: { type: "contact", label: "Gọi Ngay Hotline 0974 449 708 ➔" }
     }

@@ -1433,7 +1433,7 @@
       statusBox.style.background = '#e0f2fe';
       statusBox.style.color = '#0369a1';
       statusBox.style.border = '1px solid #7dd3fc';
-      statusBox.innerHTML = 'Đang chuyển tin nhắn tới Telegram của tiệm...';
+      statusBox.innerHTML = 'Đang gửi tin nhắn tới tiệm...';
     }
 
     const timeStr = new Date().toLocaleString('vi-VN', {
@@ -1491,12 +1491,7 @@
           🎉 ĐÃ GỬI THÀNH CÔNG CHO TIỆM!
         </div>
         <div>
-          Cảm ơn bạn <strong>${name}</strong>! Đội ngũ The Măm Măm đã nhận được thông tin và sẽ gọi điện hoặc nhắn tin tư vấn lại qua số <strong>${cleanPhone}</strong> trong ít phút.
-        </div>
-        <div style="margin-top:8px;">
-          <a href="https://t.me/${botUser}" target="_blank" rel="noopener noreferrer" style="display:inline-block; background:#0088cc; color:#fff; padding:4px 12px; border-radius:999px; text-decoration:none; font-size:0.8rem; font-weight:700;">
-            ✈️ Mở ứng dụng Telegram chat tiếp ➔
-          </a>
+          Cảm ơn bạn <strong>${name}</strong>! Đội ngũ The Măm Măm đã nhận được thông tin và sẽ liên hệ tư vấn lại cho bạn qua số <strong>${cleanPhone}</strong> trong ít phút.
         </div>
       `;
     }

@@ -159,8 +159,8 @@
       <a href="chinh-sach.html" class="nav-pill" style="border-color:rgba(76,174,79,0.35); color:#2e7d32;" title="Chính Sách & Tiêu Chuẩn Chất Lượng">
         <span>🛡️</span> <span>Chính Sách</span>
       </a>
-      <button type="button" class="nav-pill nav-pill-ai" id="navFaqBotBtn" title="Trợ Lý Ảo AI - 100 Câu Hỏi Đáp Nhanh">
-        <span>🤖</span> <span>Hỏi Đáp AI</span>
+      <button type="button" class="nav-pill nav-pill-ai" id="navFaqBotBtn" title="Hỏi Đáp Nhanh - 100 Câu Hỏi Phổ Biến">
+        <span>💡</span> <span>Hỏi Đáp Nhanh</span>
         <span class="nav-hot-tag">100+</span>
       </button>
       <button class="nav-pill" id="navUserBtn" title="Tài Khoản / Đăng Nhập">
@@ -194,7 +194,7 @@
       <a href="#about" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Câu Chuyện</a>
       <a href="chinh-sach.html" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer')">Chính Sách Chất Lượng</a>
       <button type="button" class="mobile-nav-item" onclick="window.mammamApp.closeModal('mobileDrawer'); window.mammamApp.openModal('faqBotModal');" style="display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-size:1.05rem;">
-        <span>🤖</span> <span>Hỏi Đáp Trợ Lý Ảo AI (100+ FAQ)</span>
+        <span>💡</span> <span>Hỏi Đáp Nhanh (100+ FAQ)</span>
       </button>
       <div style="margin-top:auto; display:flex; flex-direction:column; gap:0.8rem;">
         <button class="nav-pill" onclick="window.mammamApp.closeModal('mobileDrawer'); document.getElementById('navUserBtn').click();" style="justify-content:center; background:#fff; color:var(--black); font-weight:700;">
@@ -255,7 +255,7 @@
   </section>
 
   <!-- Jelly Wave Divider: Hero (Mustard) -> Game (Beige) -->
-  <div class="jelly-divider">
+  <div class="jelly-divider jelly-divider-compact">
     <svg viewBox="0 0 1536 200" fill="none" preserveAspectRatio="none">
       <path d="M0,0 C450,150 900,30 1350,130 L1536,110 L1536,200 L0,200 Z" fill="#FBF2E6"></path>
     </svg>
@@ -1018,7 +1018,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════ MODAL: CHAT CHO TIỆM (TELEGRAM BOT ROUTING) ═══════════════ -->
+  <!-- ═══════════════ MODAL: CHAT CHO TIỆM (TƯ VẤN TRỰC TIẾP) ═══════════════ -->
   <div class="modal-overlay" id="chatShopModal" role="dialog" aria-modal="true" aria-labelledby="chatShopModalTitle">
     <div class="modal-card" style="max-width:520px;">
       <button class="modal-close-btn" data-close-modal="chatShopModal">✕</button>
@@ -1032,7 +1032,7 @@
             CHAT CHO TIỆM
           </h2>
           <p style="font-size:0.85rem; color:#e1f5fe; margin-top:3px;">
-            Đội ngũ The Măm Măm nhận tin nhắn qua Telegram & gọi điện/chat tư vấn ngay!
+            Đội ngũ The Măm Măm sẽ phản hồi và gọi điện/chat tư vấn cho bạn ngay!
           </p>
         </div>
       </div>
@@ -1072,14 +1072,11 @@
 
         <div style="margin-top:1.2rem; padding-top:1.2rem; border-top:1px dashed #ddd; text-align:center;">
           <p style="font-size:0.82rem; color:#666; margin-bottom:0.5rem;">
-            Hoặc liên hệ nhanh qua:
+            Hoặc liên hệ nhanh qua hotline:
           </p>
           <div style="display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap;">
             <a href="tel:0974449708" class="quick-pill" style="color:#d32f2f; font-weight:700; text-decoration:none;">
               📞 Hotline: 0974 449 708
-            </a>
-            <a id="chatDirectTelegramLink" href="https://t.me/themammam_bot" target="_blank" rel="noopener noreferrer" class="quick-pill" style="color:#0088cc; font-weight:700; text-decoration:none;">
-              ✈️ Mở Trực Tiếp Telegram Bot
             </a>
           </div>
         </div>
@@ -1087,20 +1084,20 @@
     </div>
   </div>
 
-  <!-- ═══════════════ MODAL: TRỢ LÝ ẢO AI & HỎI ĐÁP NHANH (100 CÂU HỎI PHỔ BIẾN) ═══════════════ -->
+  <!-- ═══════════════ MODAL: HỎI ĐÁP NHANH (100 CÂU HỎI PHỔ BIẾN) ═══════════════ -->
   <div class="modal-overlay" id="faqBotModal" role="dialog" aria-modal="true" aria-labelledby="faqBotModalTitle">
     <div class="modal-card faq-bot-card">
-      <button class="modal-close-btn" data-close-modal="faqBotModal" aria-label="Đóng Trợ Lý Ảo">✕</button>
+      <button class="modal-close-btn" data-close-modal="faqBotModal" aria-label="Đóng Hỏi Đáp">✕</button>
 
       <!-- Modal Header -->
       <div class="faq-bot-header">
         <div class="faq-header-profile">
           <div class="faq-mascot-avatar" style="position:relative; width:46px; height:46px; min-width:46px; max-width:46px; min-height:46px; max-height:46px; border-radius:50%; background:#fff; border:2px solid #1b1b1b; box-shadow:2px 3px 0 #1b1b1b; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0;">
-            <img src="assets/mammam-logo.png" alt="Bé Măm Măm AI" class="faq-mascot-img" width="46" height="46" style="width:100%; height:100%; max-width:46px; max-height:46px; border-radius:50%; object-fit:cover; display:block;" />
+            <img src="assets/mammam-logo.png" alt="Bé Măm Măm" class="faq-mascot-img" width="46" height="46" style="width:100%; height:100%; max-width:46px; max-height:46px; border-radius:50%; object-fit:cover; display:block;" />
             <span class="faq-online-dot" style="position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#25d366; border-radius:50%; border:2px solid #fff;"></span>
           </div>
           <div class="faq-header-info">
-            <h2 id="faqBotModalTitle" class="faq-header-title">TRỢ LÝ ẢO THE MĂM MĂM</h2>
+            <h2 id="faqBotModalTitle" class="faq-header-title">HỎI ĐÁP NHANH THE MĂM MĂM</h2>
             <div class="faq-header-sub">
               <span>● Đang trực tuyến</span>
               <span>· 100 câu hỏi sản phẩm</span>
@@ -1111,7 +1108,7 @@
         <!-- View Switch Tabs -->
         <div class="faq-view-switch-tabs">
           <button type="button" class="faq-switch-btn active" id="faqToggleChatViewBtn">
-            <span>💬</span> <span>Trò Chuyện AI</span>
+            <span>💬</span> <span>Hỏi Đáp Nhanh</span>
           </button>
           <button type="button" class="faq-switch-btn" id="faqToggleDirViewBtn">
             <span>📚</span> <span>100 Câu Hỏi</span>
@@ -1310,17 +1307,17 @@
       <span class="fab-label">0974 449 708</span>
     </a>
 
-    <!-- Trợ Lý Ảo AI Button (Hỏi Đáp Nhanh 100 Câu Hỏi Phổ Biến) -->
+    <!-- Hỏi Đáp Nhanh Button (100 Câu Hỏi Phổ Biến) -->
     <div class="floating-ai-wrap">
-      <button type="button" class="floating-fab fab-ai" id="fabFaqBotBtn" title="Hỏi Đáp Nhanh - Trợ Lý Ảo AI (100 Câu Hỏi Phổ Biến Về Sản Phẩm)">
+      <button type="button" class="floating-fab fab-ai" id="fabFaqBotBtn" title="Hỏi Đáp Nhanh (100 Câu Hỏi Phổ Biến Về Sản Phẩm)">
         <span class="fab-pulse-ring" style="border-color:#7b2cbf;"></span>
-        <span class="fab-icon">🤖</span>
-        <span class="fab-label">Hỏi Đáp Trợ Lý AI</span>
+        <span class="fab-icon">💡</span>
+        <span class="fab-label">Hỏi Đáp Nhanh</span>
         <span class="fab-badge-pill">100+ FAQ</span>
       </button>
     </div>
 
-    <!-- Chat Cho Tiệm Button (Đơn giản, chuyển tiếp Telegram Bot) -->
+    <!-- Chat Cho Tiệm Button (Gửi tin nhắn trực tiếp) -->
     <div class="floating-telegram-wrap">
       <button type="button" class="floating-fab fab-telegram" id="fabChatShopBtn" title="Chat Cho Tiệm (Tư Vấn & Đặt Hàng)">
         <span class="fab-pulse-ring" style="border-color:#0088cc;"></span>

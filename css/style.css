@@ -377,9 +377,10 @@ a {
   height: clamp(60px, 12vw, 180px);
 }
 
+.hero-section + .jelly-divider svg,
 .jelly-divider.jelly-divider-compact svg,
 .game-section + .jelly-divider svg {
-  height: clamp(24px, 3.5vw, 48px);
+  height: clamp(24px, 3.5vw, 44px);
 }
 
 /* ═══════════════ ORGANIC BLOB BUTTONS ═══════════════ */
@@ -688,24 +689,24 @@ a {
 
 /* ═══════════════ HERO SECTION ═══════════════ */
 .hero-section {
-  min-height: 100vh;
+  min-height: auto;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding-top: clamp(6.2rem, 8.5vw, 8rem);
-  padding-bottom: 3.5rem;
+  justify-content: flex-start;
+  padding-top: clamp(4.6rem, 5.5vw, 5.5rem);
+  padding-bottom: 1rem;
   background: var(--mustard);
   overflow: hidden;
 }
 
 .hero-face-mascot {
   position: relative;
-  width: min(88vw, 560px);
-  margin: 0.5rem auto 2rem;
+  width: min(72vw, 350px);
+  margin: 0.1rem auto 0.6rem;
   cursor: pointer;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -717,7 +718,7 @@ a {
   position: relative;
   background: var(--beige);
   color: var(--black);
-  padding: clamp(2.2rem, 4vw, 4rem) clamp(1rem, 3.5vw, 4rem) clamp(0.4rem, 1vw, 0.8rem);
+  padding: clamp(1.4rem, 2.5vw, 2.4rem) clamp(1rem, 3.5vw, 3rem) clamp(0.4rem, 1vw, 0.8rem);
   text-align: center;
   overflow: hidden;
 }
@@ -816,25 +817,26 @@ a {
 
 .hero-bottom-grid {
   width: 100%;
-  max-width: 1400px;
-  padding: 0 clamp(1rem, 3vw, 4rem);
+  max-width: 1300px;
+  padding: 0 clamp(1rem, 2.8vw, 3rem);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.2rem;
   position: relative;
   z-index: 20;
+  margin-top: 0.4rem;
 }
 
 .hero-col {
-  max-width: 380px;
+  max-width: 360px;
 }
 
 .hero-col p {
   font-family: var(--font-saira);
   font-weight: 800;
-  font-size: clamp(1.15rem, 1.7vw, 1.85rem);
-  line-height: 1.2;
+  font-size: clamp(0.95rem, 1.3vw, 1.4rem);
+  line-height: 1.25;
   text-transform: uppercase;
 }
 

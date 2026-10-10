@@ -290,10 +290,10 @@
           <span class="bot-status-dot" style="position:absolute; bottom:0; right:0; width:8px; height:8px; background:#25d366; border-radius:50%; border:1.5px solid #fff;"></span>
         </div>
         <div class="msg-bubble-wrap">
-          <div class="msg-sender-name">Bé Măm Măm 🥔 (Trợ Lý Ảo AI)</div>
+          <div class="msg-sender-name">Bé Măm Măm 🥔 (Hỏi Đáp Nhanh)</div>
           <div class="msg-bubble">
-            <p>Xin chào bạn! Mình là <strong>Bé Măm Măm</strong> – Trợ lý ảo thông minh của tiệm <strong>The Măm Măm</strong> Đà Lạt.</p>
-            <p style="margin-top:0.4rem;">Mình được trang bị dữ liệu <strong>100 câu hỏi đáp chi tiết nhất</strong> về hương vị bánh, đặc sản Đà Lạt, hạn sử dụng, bảo quản, đóng gói ship 63 tỉnh và cách săn voucher giảm giá!</p>
+            <p>Xin chào bạn! Mình là <strong>Bé Măm Măm</strong> – Tư vấn giải đáp nhanh của tiệm <strong>The Măm Măm</strong> Đà Lạt.</p>
+            <p style="margin-top:0.4rem;">Dưới đây là dữ liệu <strong>100 câu hỏi đáp chi tiết nhất</strong> về hương vị bánh, đặc sản Đà Lạt, hạn sử dụng, bảo quản, đóng gói ship 63 tỉnh và cách săn voucher giảm giá!</p>
             <p style="margin-top:0.4rem; font-weight:700;">🔥 Bạn có thể bấm chọn nhanh các câu hỏi được quan tâm nhất hôm nay:</p>
             <div class="faq-quick-chips-row">
               <button type="button" class="faq-chip" onclick="window.mammamApp.askFaqQuestion(1)">Khoai tây sấy có những vị nào?</button>
@@ -411,8 +411,8 @@
           <a href="tel:0974449708" class="faq-action-btn" style="background:#25d366; text-decoration:none;">
             📞 Gọi Hotline 0974 449 708
           </a>
-          <button type="button" class="faq-action-btn" onclick="window.mammamApp.handleFaqAction('chatShop')" style="background:#0088cc;">
-            ✈️ Chat Telegram Với Nhân Viên
+          <button type="button" class="faq-action-btn" onclick="window.mammamApp.handleFaqAction('chatShop')" style="background:#0284c7;">
+            💬 Chat Cho Tiệm (Gửi Tin Nhắn)
           </button>
         </div>
       `);

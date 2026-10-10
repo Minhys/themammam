@@ -1237,30 +1237,50 @@ a {
   gap: 1.5rem;
 }
 
+.menu-main-title {
+  font-family: var(--font-saira);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 6.4vw, 5.5rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0.4rem auto 0.8rem;
+  text-align: center;
+}
+
+.menu-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
 .category-tabs-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem 0.75rem;
+  width: 100%;
 }
 
 .cat-tab {
-  padding: 0.7rem 1.6rem;
+  padding: 0.65rem 0.4rem;
   border-radius: var(--radius-full);
   border: 2px solid var(--black);
   background: var(--white);
   color: var(--black);
   font-family: var(--font-saira);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: clamp(0.82rem, 0.96vw, 1.1rem);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   box-shadow: 2px 3px 0px #1b1b1b;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 
 .cat-tab:hover {
@@ -2753,14 +2773,16 @@ a {
     margin: 1rem auto;
   }
 
-  /* Category Bar - Horizontal Swipe Carousel (Food App Standard) */
+  /* Category Bar - 2 Neat Rows (Food App Standard) */
   .category-tabs-wrap {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: grid !important;
+    grid-template-rows: repeat(2, auto) !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: max-content !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     white-space: nowrap !important;
-    gap: 8px !important;
+    gap: 8px 10px !important;
     padding: 8px 12px 14px !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;

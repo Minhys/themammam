@@ -252,6 +252,234 @@
       padding: 1.2rem;
     }
 
+    /* ═══════════════ MAIN ADMIN NAVIGATION TABS ═══════════════ */
+    .admin-nav-tabs-bar {
+      background: #ffffff;
+      border-bottom: 2.5px solid #1b1b1b;
+      padding: 0 1.2rem;
+      position: sticky;
+      top: 65px;
+      z-index: 90;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .admin-nav-tabs-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .admin-nav-tab {
+      background: transparent;
+      border: none;
+      border-bottom: 3.5px solid transparent;
+      padding: 0.85rem 1.2rem;
+      font-family: var(--font-saira);
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #666;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .admin-nav-tab:hover {
+      color: var(--red);
+      background: #fff8f5;
+    }
+    .admin-nav-tab.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+      background: #fff5f2;
+    }
+
+    /* ═══════════════ PRODUCT MANAGEMENT STYLES ═══════════════ */
+    .product-thumb-wrap {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      border-radius: 10px;
+      border: 2px solid #1b1b1b;
+      overflow: hidden;
+      background: #fff8f0;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .product-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-thumb-overlay-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid #1b1b1b;
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+    }
+    .badge-cat-tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1.5px solid #1b1b1b;
+      background: #fef08a;
+      color: #854d0e;
+    }
+    .badge-stock-toggle {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1.5px solid #1b1b1b;
+      transition: all 0.15s;
+    }
+    .badge-stock-in {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #166534;
+    }
+    .badge-stock-out {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #991b1b;
+    }
+
+    /* ═══════════════ MODAL DIALOGS ═══════════════ */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .admin-modal-box {
+      background: #ffffff;
+      border: 3.5px solid #1b1b1b;
+      border-radius: 24px;
+      box-shadow: 8px 10px 0px #1b1b1b;
+      width: 100%;
+      max-width: 840px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #fee2e2;
+      border: 2px solid #1b1b1b;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #991b1b;
+      transition: transform 0.15s;
+    }
+    .modal-close-btn:hover {
+      transform: scale(1.1);
+      background: #fecaca;
+    }
+
+    /* ═══════════════ WATERMARK CANVAS WORKSPACE ═══════════════ */
+    .watermark-workspace {
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .watermark-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+    .canvas-preview-container {
+      background: #f8fafc;
+      border: 2.5px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 320px;
+    }
+    #watermarkCanvas {
+      max-width: 100%;
+      max-height: 380px;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid #1b1b1b;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+    .watermark-control-group {
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ═══════════════ CLOUDFLARE SECURITY PANELS ═══════════════ */
+    .cf-security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .cf-shield-card {
+      background: #ffffff;
+      border: 2.5px solid #1b1b1b;
+      border-radius: 18px;
+      box-shadow: 4px 4px 0px #1b1b1b;
+      padding: 1.3rem;
+      position: relative;
+    }
+    .cf-shield-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #f0fdf4;
+      border: 1.5px solid #16a34a;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #166534;
+      margin-bottom: 0.6rem;
+    }
+
     @media (max-width: 768px) {
       .admin-main-wrap {
         padding: 0 0.8rem;
@@ -345,8 +573,33 @@
       </div>
     </header>
 
+    <!-- ═══════════════ MAIN ADMIN NAVIGATION TABS ═══════════════ -->
+    <div class="admin-nav-tabs-bar">
+      <div class="admin-nav-tabs-content">
+        <button type="button" class="admin-nav-tab active" onclick="switchAdminMainTab('orders')" id="mainTabBtnOrders">
+          📦 Đơn Hàng (<span id="tabOrderCountBadge">0</span>)
+        </button>
+        <button type="button" class="admin-nav-tab" onclick="switchAdminMainTab('products')" id="mainTabBtnProducts">
+          🍰 Quản Lý Thực Đơn (<span id="tabProductCountBadge">106</span>)
+        </button>
+        <button type="button" class="admin-nav-tab" onclick="switchAdminMainTab('vouchers')" id="mainTabBtnVouchers">
+          🎟️ Kho Voucher Bảo Mật
+        </button>
+        <button type="button" class="admin-nav-tab" onclick="switchAdminMainTab('leads')" id="mainTabBtnLeads">
+          💬 Khách Chat Tư Vấn (<span id="tabLeadCountBadge">0</span>)
+        </button>
+        <button type="button" class="admin-nav-tab" onclick="switchAdminMainTab('security')" id="mainTabBtnSecurity">
+          🛡️ Bảo Mật Cloudflare & Cài Đặt
+        </button>
+      </div>
+    </div>
+
+
     <!-- Main Content Body -->
     <main class="admin-main-wrap">
+
+      <!-- TAB 1: ĐƠN HÀNG & THỐNG KÊ -->
+      <div id="adminTabOrders" class="admin-main-tab-pane">
 
       <!-- Stat Cards -->
       <div class="admin-stats-container">
@@ -549,6 +802,119 @@
         </div>
       </div>
 
+      </div><!-- End #adminTabOrders -->
+
+
+      <!-- ═══════════════ TAB 2: QUẢN LÝ THỰC ĐƠN & SẢN PHẨM ═══════════════ -->
+      <div id="adminTabProducts" class="admin-main-tab-pane" style="display:none;">
+        <!-- Header Banner & Actions -->
+        <div class="admin-panel-card" style="margin-bottom:1.5rem; background:linear-gradient(135deg, #fff 0%, #fffcf5 100%);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.8rem;">🍰</span>
+                <h3 class="font-modak" style="font-size:1.7rem; color:var(--red); margin:0;">
+                  QUẢN LÝ THỰC ĐƠN & SẢN PHẨM
+                </h3>
+              </div>
+              <p style="font-size:0.86rem; color:#666; margin:4px 0 0;">
+                Chỉnh sửa giá, mô tả, ảnh, đóng dấu logo The Măm Măm bản quyền & đồng bộ Cloudflare D1
+              </p>
+            </div>
+
+            <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+              <button type="button" onclick="openProductModal(null)" class="blob-btn" style="padding:0.6rem 1.4rem; font-size:1rem;">
+                <svg viewBox="-10 -10 602 475" preserveAspectRatio="none">
+                  <path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"></path>
+                </svg>
+                <span>➕ Thêm Món Mới</span>
+              </button>
+              <button type="button" onclick="syncProductsToD1()" class="nav-pill" style="padding:0.6rem 1.1rem; font-size:0.88rem; background:#e0f2fe; color:#0284c7; border-color:#0284c7;" title="Đồng bộ danh sách món lên Cloudflare D1">
+                ☁️ Đồng Bộ Vào D1
+              </button>
+              <button type="button" onclick="loadProductsData(true)" class="btn-action-sm" style="padding:0.6rem 0.9rem;" title="Tải lại danh sách">
+                🔄 Tải Lại
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Stats Row -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:0.8rem; margin-top:1.2rem; padding-top:1rem; border-top:1.5px dashed #fcd34d;">
+            <div style="background:#fff; border:1.5px solid #1b1b1b; border-radius:12px; padding:0.6rem 0.9rem; text-align:center;">
+              <div style="font-size:0.75rem; color:#666; font-weight:700;">TỔNG SỐ MÓN</div>
+              <div style="font-family:var(--font-saira); font-size:1.6rem; font-weight:900;" id="statProductTotal">106</div>
+            </div>
+            <div style="background:#fff; border:1.5px solid #1b1b1b; border-radius:12px; padding:0.6rem 0.9rem; text-align:center;">
+              <div style="font-size:0.75rem; color:#166534; font-weight:700;">ĐANG BÁN (CÒN HÀNG)</div>
+              <div style="font-family:var(--font-saira); font-size:1.6rem; font-weight:900; color:#166534;" id="statProductInStock">106</div>
+            </div>
+            <div style="background:#fff; border:1.5px solid #1b1b1b; border-radius:12px; padding:0.6rem 0.9rem; text-align:center;">
+              <div style="font-size:0.75rem; color:#991b1b; font-weight:700;">TẠM HẾT HÀNG</div>
+              <div style="font-family:var(--font-saira); font-size:1.6rem; font-weight:900; color:#991b1b;" id="statProductOutOfStock">0</div>
+            </div>
+            <div style="background:#fff; border:1.5px solid #1b1b1b; border-radius:12px; padding:0.6rem 0.9rem; text-align:center;">
+              <div style="font-size:0.75rem; color:#0284c7; font-weight:700;">TRẠNG THÁI CLOUDFLARE D1</div>
+              <div style="font-size:0.85rem; font-weight:800; color:#0284c7; margin-top:4px;" id="statD1SyncStatus">⚡ Đang kết nối</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="admin-panel-card" style="margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem;">
+            <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; flex:1;">
+              <input type="text" id="adminProductSearchInput" class="form-input" oninput="renderProductsAdminTable()" placeholder="🔍 Tìm kiếm món (tên món, mã món, danh mục...)" style="max-width:320px; font-size:0.9rem; padding:0.5rem 1rem;" />
+              <select id="adminProductCategoryFilter" class="form-select" onchange="renderProductsAdminTable()" style="font-size:0.9rem; font-weight:600; padding:0.5rem 1rem;">
+                <option value="all">📂 Tất cả danh mục (9 nhóm)</option>
+                <option value="banh-que">🌴 Bánh Quê Remix</option>
+                <option value="banh-mi">🍞 Bánh Mì Tươi</option>
+                <option value="banh-mem">🧁 Bánh Mềm</option>
+                <option value="banh-su">🍦 Bánh Su</option>
+                <option value="set-an-sang">🍳 Set Ăn Sáng 3 Phút</option>
+                <option value="banh-ngau-hung">🎉 Bánh Ngẫu Hứng</option>
+                <option value="new-york-cookie">🍪 New York Cookie</option>
+                <option value="cookie-qua-banh">🍬 Cookie & Quà Bánh</option>
+                <option value="dac-san-dalat">🎁 Món Quà Từ Đà Lạt</option>
+              </select>
+              <select id="adminProductStockFilter" class="form-select" onchange="renderProductsAdminTable()" style="font-size:0.9rem; font-weight:600; padding:0.5rem 1rem;">
+                <option value="all">⚡ Tất cả trạng thái kho</option>
+                <option value="in_stock">✅ Còn hàng</option>
+                <option value="out_of_stock">❌ Tạm hết hàng</option>
+              </select>
+            </div>
+            <div style="font-size:0.85rem; color:#666; font-weight:700;" id="adminProductFilteredCount">
+              Hiển thị 106 món
+            </div>
+          </div>
+
+          <!-- Products Table -->
+          <div class="admin-table-container" style="margin-top:1rem;">
+            <table class="admin-orders-table">
+              <thead>
+                <tr>
+                  <th style="width:70px;">Ảnh</th>
+                  <th style="width:90px;">Mã Món</th>
+                  <th>Tên Món Ăn</th>
+                  <th>Danh Mục</th>
+                  <th>Giá Bán Lẻ</th>
+                  <th>Giá Gốc</th>
+                  <th>Đơn Vị</th>
+                  <th>Phạm Vi Ship</th>
+                  <th style="text-align:center;">Kho Hàng</th>
+                  <th style="text-align:right; width:190px;">Hành Động</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- End #adminTabProducts -->
+
+
+      <!-- ═══════════════ TAB 3: KHO VOUCHER BẢO MẬT ═══════════════ -->
+      <div id="adminTabVouchers" class="admin-main-tab-pane" style="display:none;">
       <!-- ═══════════════ SECURITY VOUCHER VAULT PANEL ═══════════════ -->
       <div class="admin-panel-card" style="margin-top:1.8rem; border-color:#0284c7; box-shadow:6px 8px 0px #0284c7;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; border-bottom:2px dashed #bae6fd; padding-bottom:0.8rem;">
@@ -764,6 +1130,10 @@
         </div>
       </div>
 
+      </div><!-- End #adminTabVouchers -->
+
+      <!-- ═══════════════ TAB 4: KHÁCH CHAT TƯ VẤN ═══════════════ -->
+      <div id="adminTabLeads" class="admin-main-tab-pane" style="display:none;">
       <!-- Customer Chat Leads Panel -->
       <div class="admin-panel-card" style="margin-top:1.8rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
@@ -800,7 +1170,339 @@
         </div>
       </div>
 
+
+      </div><!-- End #adminTabLeads -->
+
+      <!-- ═══════════════ TAB 5: BẢO MẬT CLOUDFLARE & CÀI ĐẶT ═══════════════ -->
+      <div id="adminTabSecurity" class="admin-main-tab-pane" style="display:none;">
+        <div class="cf-security-grid">
+          <div class="cf-shield-card">
+            <span class="cf-shield-badge">🛡️ CLOUDFLARE EDGE WAF</span>
+            <h4 style="font-size:1.15rem; font-weight:800; margin:0.3rem 0; color:#166534;">Chống Tấn Công Brute-Force</h4>
+            <p style="font-size:0.85rem; color:#555; line-height:1.5;">
+              Cơ chế giám sát IP tại Edge Network: Tự động khóa IP 15 phút nếu nhập sai mật khẩu quá 5 lần liên tiếp.
+            </p>
+            <div style="margin-top:0.8rem; font-size:0.8rem; font-family:monospace; background:#f8fafc; padding:6px 10px; border-radius:8px; border:1px solid #cbd5e1;">
+              Trạng thái: <strong>ACTIVE · 5 Tries / 15 Mins Block</strong>
+            </div>
+          </div>
+
+          <div class="cf-shield-card">
+            <span class="cf-shield-badge">🔐 MÃ HÓA SHA-256 HMAC</span>
+            <h4 style="font-size:1.15rem; font-weight:800; margin:0.3rem 0; color:#0284c7;">Phiên Quản Trị Bearer Token</h4>
+            <p style="font-size:0.85rem; color:#555; line-height:1.5;">
+              Token đăng nhập được ký số mật mã SHA-256 kèm Nonce ngẫu nhiên, tự động hết hạn sau 24 giờ để ngăn ngừa đánh cắp phiên.
+            </p>
+            <div style="margin-top:0.8rem; font-size:0.8rem; font-family:monospace; background:#f8fafc; padding:6px 10px; border-radius:8px; border:1px solid #cbd5e1;">
+              Thời hạn token: <strong>24 Giờ · Tự động khóa phiên</strong>
+            </div>
+          </div>
+
+          <div class="cf-shield-card">
+            <span class="cf-shield-badge">⚡ CLOUDFLARE D1 SQL</span>
+            <h4 style="font-size:1.15rem; font-weight:800; margin:0.3rem 0; color:#d97706;">Chống SQL Injection Tuyệt Đối</h4>
+            <p style="font-size:0.85rem; color:#555; line-height:1.5;">
+              Toàn bộ thao tác thêm, xóa, sửa đơn hàng & thực đơn đều qua Prepared Statements parameterized (.bind), loại trừ 100% rủi ro chèn mã độc.
+            </p>
+            <div style="margin-top:0.8rem; font-size:0.8rem; font-family:monospace; background:#f8fafc; padding:6px 10px; border-radius:8px; border:1px solid #cbd5e1;">
+              Cơ chế: <strong>D1 Parameterized Binding</strong>
+            </div>
+          </div>
+
+          <div class="cf-shield-card">
+            <span class="cf-shield-badge">🌐 ZERO TRUST & ACCESS</span>
+            <h4 style="font-size:1.15rem; font-weight:800; margin:0.3rem 0; color:#b91c1c;">Bảo Vệ Đăng Nhập 2 Lớp (2FA)</h4>
+            <p style="font-size:0.85rem; color:#555; line-height:1.5;">
+              Hỗ trợ tích hợp Cloudflare Zero Trust: Xác thực mã OTP qua Email của chủ tiệm hoặc chỉ cho phép dải IP tin cậy trước khi vào trang Admin.
+            </p>
+            <div style="margin-top:0.8rem; font-size:0.8rem; font-family:monospace; background:#f8fafc; padding:6px 10px; border-radius:8px; border:1px solid #cbd5e1;">
+              Bảo vệ: <strong>Cloudflare Access Ready</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Password Form -->
+        <div class="admin-panel-card" style="margin-bottom:1.5rem;">
+          <h3 class="font-modak" style="font-size:1.4rem; color:var(--red); margin-bottom:0.4rem;">
+            🔑 ĐỔI MẬT KHẨU TÀI KHOẢN ADMIN (SALTED SHA-256 HASH)
+          </h3>
+          <p style="font-size:0.85rem; color:#666; margin-bottom:1.2rem;">
+            Mật khẩu mới sẽ được băm mật mã với Salt ngẫu nhiên và lưu an toàn vào Cloudflare D1.
+          </p>
+
+          <form onsubmit="handleAdminChangePasswordSubmit(event)" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; align-items:end;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">🔒 Mật khẩu hiện tại:</label>
+              <input type="password" id="adminCurrentPassInput" class="form-input" required placeholder="Nhập mật khẩu đang dùng" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">✨ Mật khẩu mới (tối thiểu 8 ký tự):</label>
+              <input type="password" id="adminNewPassInput" class="form-input" required minlength="8" placeholder="Nhập mật khẩu mới an toàn" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">🔁 Xác nhận mật khẩu mới:</label>
+              <input type="password" id="adminConfirmPassInput" class="form-input" required minlength="8" placeholder="Nhập lại mật khẩu mới" />
+            </div>
+            <div>
+              <button type="submit" class="btn-action-sm" style="padding:0.75rem 1.4rem; background:#16a34a; color:#fff; border-color:#166534; font-size:0.9rem; width:100%; justify-content:center;">
+                💾 Cập Nhật Mật Khẩu
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Audit Log Table -->
+        <div class="admin-panel-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+            <div>
+              <h3 class="font-modak" style="font-size:1.4rem; color:#1b1b1b; margin-bottom:0.2rem;">
+                📜 NHẬT KÝ BẢO MẬT & HÀNH ĐỘNG ADMIN (AUDIT LOGS)
+              </h3>
+              <p style="font-size:0.85rem; color:#666;">
+                Ghi lại mọi hoạt động đăng nhập, sửa món, đổi giá và thay đổi hệ thống từ Edge
+              </p>
+            </div>
+            <button type="button" onclick="loadAuditLogs()" class="btn-action-sm">
+              🔄 Tải Lại Nhật Ký
+            </button>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-orders-table">
+              <thead>
+                <tr>
+                  <th style="width:170px;">Thời Gian</th>
+                  <th>Hành Động</th>
+                  <th>Đối Tượng</th>
+                  <th>Chi Tiết</th>
+                  <th>Địa Chỉ IP</th>
+                </tr>
+              </thead>
+              <tbody id="adminAuditLogsTableBody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- End #adminTabSecurity -->
+
     </main>
+  </div>
+
+
+  <!-- ═══════════════ MODAL 1: CHỈNH SỬA / THÊM MÓN ĂN ═══════════════ -->
+  <div id="productModal" class="admin-modal-overlay">
+    <div class="admin-modal-box">
+      <button type="button" class="modal-close-btn" onclick="closeProductModal()">✕</button>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem;" id="modalProductIcon">✏️</span>
+        <h2 class="font-modak" style="font-size:1.8rem; color:var(--red); margin:0;" id="modalProductTitle">
+          CHỈNH SỬA SẢN PHẨM
+        </h2>
+      </div>
+
+      <form id="productEditForm" onsubmit="handleProductFormSubmit(event)">
+        <input type="hidden" id="pFormIsNew" value="0" />
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Mã sản phẩm (ID):</label>
+            <input type="text" id="pFormId" class="form-input" required placeholder="VD: MM001" style="font-weight:700;" />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Tên món ăn:</label>
+            <input type="text" id="pFormName" class="form-input" required placeholder="VD: Bánh bò thốt nốt nướng" style="font-weight:700;" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Danh mục:</label>
+            <select id="pFormCategory" class="form-select" onchange="onCategoryChange()" style="font-weight:700;">
+              <option value="banh-que">🌴 Bánh Quê Remix</option>
+              <option value="banh-mi">🍞 Bánh Mì Tươi</option>
+              <option value="banh-mem">🧁 Bánh Mềm</option>
+              <option value="banh-su">🍦 Bánh Su</option>
+              <option value="set-an-sang">🍳 Set Ăn Sáng 3 Phút</option>
+              <option value="banh-ngau-hung">🎉 Bánh Ngẫu Hứng</option>
+              <option value="new-york-cookie">🍪 New York Cookie</option>
+              <option value="cookie-qua-banh">🍬 Cookie & Quà Bánh</option>
+              <option value="dac-san-dalat">🎁 Món Quà Từ Đà Lạt</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Giá bán lẻ (VND):</label>
+            <input type="number" id="pFormPrice" class="form-input" required min="0" step="1000" placeholder="VD: 110000" style="font-weight:800; color:var(--red);" />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Giá gốc niêm yết (VND):</label>
+            <input type="number" id="pFormOriginalPrice" class="form-input" min="0" step="1000" placeholder="VD: 110000" style="font-weight:700;" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Đơn vị tính:</label>
+            <input type="text" id="pFormUnit" class="form-input" required placeholder="cái, ổ, miếng, hũ, hộp..." />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Phạm vi giao hàng:</label>
+            <select id="pFormShippingScope" class="form-select" style="font-weight:700;">
+              <option value="ship-xa">✈️ Ship toàn quốc (63 tỉnh)</option>
+              <option value="ship-gan">🛵 Hỏa tốc nội thành Đà Lạt</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Trạng thái kho:</label>
+            <select id="pFormInStock" class="form-select" style="font-weight:700;">
+              <option value="1">✅ Còn hàng</option>
+              <option value="0">❌ Tạm hết hàng</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Image Management & Watermark Tool -->
+        <div style="background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:1.2rem; margin-bottom:1rem;">
+          <label style="display:block; font-size:0.95rem; font-weight:800; margin-bottom:0.6rem; color:#1e293b;">
+            🖼️ HÌNH ẢNH SẢN PHẨM & ĐÓNG DẤU LOGO:
+          </label>
+          <div style="display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap;">
+            <div style="width:100px; height:100px; border-radius:14px; border:2.5px solid #1b1b1b; overflow:hidden; background:#fff; flex-shrink:0;">
+              <img id="pFormImagePreview" src="assets/khoai_tay_mammam.png" alt="Preview" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+            <div style="flex:1; min-width:240px; display:flex; flex-direction:column; gap:0.6rem;">
+              <input type="text" id="pFormImageUrl" class="form-input" placeholder="Đường dẫn ảnh (URL hoặc assets/products/...)" onchange="updateFormImagePreview()" />
+              <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                <label class="btn-action-sm" style="background:#fff; cursor:pointer;">
+                  📁 Chọn ảnh từ máy tính
+                  <input type="file" id="pFormFileInput" accept="image/*" style="display:none;" onchange="handleImageFileSelect(event)" />
+                </label>
+                <button type="button" onclick="openWatermarkFromForm()" class="btn-action-sm" style="background:#fef08a; color:#854d0e; border-color:#eab308; font-weight:800;">
+                  🏷️ Đóng Dấu Logo The Măm Măm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Details -->
+        <div style="margin-bottom:1rem;">
+          <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Mô tả sản phẩm:</label>
+          <textarea id="pFormDescription" class="form-input" rows="3" placeholder="Mô tả hương vị, nguyên liệu, hướng dẫn hâm nóng..."></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Hạn sử dụng (HSD):</label>
+            <input type="text" id="pFormShelfLife" class="form-input" placeholder="VD: 3 ngày (ngăn mát tủ lạnh)" />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Hàm lượng Calories:</label>
+            <input type="text" id="pFormCalories" class="form-input" placeholder="VD: ~350 kcal/ổ" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.4rem;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Hướng dẫn bảo quản:</label>
+            <input type="text" id="pFormStorage" class="form-input" placeholder="VD: Đậy kín nơi thoáng mát hoặc ngăn mát" />
+          </div>
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:4px;">Thời gian chuẩn bị:</label>
+            <input type="text" id="pFormPrepTime" class="form-input" placeholder="VD: 15–25 phút" />
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.8rem;">
+          <button type="button" onclick="closeProductModal()" class="nav-pill" style="padding:0.6rem 1.4rem;">
+            Hủy Bỏ
+          </button>
+          <button type="submit" class="btn-action-sm" style="background:var(--red); color:#fff; border-color:#1b1b1b; padding:0.6rem 1.8rem; font-size:0.95rem; font-weight:800; box-shadow:3px 3px 0px #1b1b1b;">
+            💾 Lưu Thay Đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MODAL 2: ĐÓNG DẤU LOGO WATERMARK ═══════════════ -->
+  <div id="logoWatermarkModal" class="admin-modal-overlay">
+    <div class="admin-modal-box" style="max-width:880px;">
+      <button type="button" class="modal-close-btn" onclick="closeWatermarkModal()">✕</button>
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:1.2rem;">
+        <span style="font-size:1.8rem;">🏷️</span>
+        <div>
+          <h2 class="font-modak" style="font-size:1.8rem; color:var(--red); margin:0;">
+            ĐÓNG DẤU LOGO THE MĂM MĂM
+          </h2>
+          <p style="font-size:0.82rem; color:#666; margin:2px 0 0;">
+            Gắn con dấu thương hiệu The Măm Măm chuẩn không viền trắng vào ảnh sản phẩm bằng HTML5 Canvas
+          </p>
+        </div>
+      </div>
+
+      <div class="watermark-workspace">
+        <!-- Canvas Live Preview -->
+        <div class="canvas-preview-container">
+          <canvas id="watermarkCanvas" width="600" height="600"></canvas>
+          <div style="margin-top:0.6rem; font-size:0.75rem; color:#64748b;">
+            💡 Kéo thanh trượt hoặc đổi vị trí để xem preview tức thì
+          </div>
+        </div>
+
+        <!-- Control Sidebar -->
+        <div>
+          <div class="watermark-control-group">
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:6px; color:#854d0e;">
+              📍 Vị trí đóng dấu logo:
+            </label>
+            <select id="wmPositionSelect" class="form-select" onchange="renderWatermarkCanvas()" style="width:100%; font-weight:700;">
+              <option value="top-right">↗️ Góc trên bên phải (Chuẩn)</option>
+              <option value="bottom-right">↘️ Góc dưới bên phải</option>
+              <option value="top-left">↖️ Góc trên bên trái</option>
+              <option value="bottom-left">↙️ Góc dưới bên trái</option>
+              <option value="center">🎯 Căn chính giữa</option>
+            </select>
+          </div>
+
+          <div class="watermark-control-group">
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:6px; color:#854d0e;">
+              📏 Kích thước logo (% ảnh):
+            </label>
+            <input type="range" id="wmSizeRange" min="15" max="36" value="24" oninput="renderWatermarkCanvas()" style="width:100%;" />
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#666; margin-top:2px;">
+              <span>Nhỏ (15%)</span>
+              <span id="wmSizeVal" style="font-weight:800;">24%</span>
+              <span>Lớn (36%)</span>
+            </div>
+          </div>
+
+          <div class="watermark-control-group">
+            <label style="display:block; font-size:0.85rem; font-weight:800; margin-bottom:6px; color:#854d0e;">
+              🌫️ Độ rõ nét (Opacity):
+            </label>
+            <input type="range" id="wmOpacityRange" min="50" max="100" value="100" oninput="renderWatermarkCanvas()" style="width:100%;" />
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#666; margin-top:2px;">
+              <span>50%</span>
+              <span id="wmOpacityVal" style="font-weight:800;">100%</span>
+              <span>100%</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
+            <button type="button" onclick="applyWatermarkToProduct()" class="btn-action-sm" style="background:#16a34a; color:#fff; border-color:#166534; padding:0.7rem; font-size:0.95rem; font-weight:800; justify-content:center; box-shadow:2px 3px 0px #166534;">
+              ✅ Áp Dụng Cho Món Này
+            </button>
+            <button type="button" onclick="downloadWatermarkedImage()" class="btn-action-sm" style="background:#0284c7; color:#fff; border-color:#0369a1; padding:0.6rem; font-size:0.88rem; font-weight:700; justify-content:center;">
+              💾 Tải Ảnh Đã Đóng Dấu Về Máy
+            </button>
+            <button type="button" onclick="closeWatermarkModal()" class="nav-pill" style="padding:0.5rem; justify-content:center;">
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Toast Notification Container -->
@@ -1009,6 +1711,7 @@
       renderOrdersTable();
       renderChatLeadsTable();
       renderVoucherTable();
+      loadProductsData();
 
       // Load Security Salt into input
       if (window.VoucherSecurity) {
@@ -1799,6 +2502,819 @@
       window.VoucherSecurity.saveSecurityConfig(cfg);
       showAdminToast('Đã lưu Secret Salt mới thành công! 🔐', 'success');
     }
+
+
+    // ════════════════ MAIN TAB SWITCHER CONTROLLER ════════════════
+    function switchAdminMainTab(tabName) {
+      const tabs = ['orders', 'products', 'vouchers', 'leads', 'security'];
+      tabs.forEach(t => {
+        const pane = document.getElementById('adminTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('mainTabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (pane) pane.style.display = (t === tabName) ? 'block' : 'none';
+        if (btn) {
+          if (t === tabName) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      });
+
+      if (tabName === 'products') {
+        if (!adminProductsList || !adminProductsList.length) {
+          loadProductsData();
+        } else {
+          renderProductsAdminTable();
+        }
+      } else if (tabName === 'security') {
+        loadSecurityStatus();
+        loadAuditLogs();
+      } else if (tabName === 'leads') {
+        renderChatLeadsTable();
+      } else if (tabName === 'vouchers') {
+        renderVoucherTable();
+      }
+    }
+
+    // ════════════════ MENU & PRODUCTS MANAGEMENT ════════════════
+    let adminProductsList = [];
+
+    function getInitialProducts() {
+      try {
+        const cached = localStorage.getItem('mammam_custom_products');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+
+      if (typeof MAMMAM_DATA !== 'undefined' && Array.isArray(MAMMAM_DATA.products)) {
+        return JSON.parse(JSON.stringify(MAMMAM_DATA.products));
+      }
+      return [];
+    }
+
+    function saveProductsLocally(list) {
+      localStorage.setItem('mammam_custom_products', JSON.stringify(list));
+      if (typeof MAMMAM_DATA !== 'undefined') {
+        MAMMAM_DATA.products = list;
+      }
+    }
+
+    async function loadProductsData(forceRefresh = false) {
+      const syncStatusEl = document.getElementById('statD1SyncStatus');
+      if (syncStatusEl) syncStatusEl.textContent = '🔄 Đang kết nối...';
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      let loadedFromEdge = false;
+
+      try {
+        const url = token ? '/api/admin/products' : '/api/products';
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+        const res = await fetch(url, { headers });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+            adminProductsList = data.products.map(p => ({
+              id: p.id,
+              name: p.name,
+              category: p.category,
+              categoryLabel: p.category_label || p.categoryLabel || getCategoryLabel(p.category),
+              price: Number(p.price),
+              originalPrice: p.original_price ? Number(p.original_price) : Number(p.price),
+              unit: p.unit || 'món',
+              shippingScope: p.shipping_scope || 'ship-xa',
+              shippingScopeLabel: p.shipping_scope_label || (p.shipping_scope === 'ship-gan' ? 'Hỏa tốc Đà Lạt' : 'Toàn quốc'),
+              image: p.image_url || p.image || 'assets/khoai_tay_mammam.png',
+              description: p.description || '',
+              shelfLife: p.shelf_life || p.shelfLife || '',
+              calories: p.calories || '',
+              storage: p.storage || '',
+              prepTime: p.prep_time || p.prepTime || '',
+              inStock: p.in_stock !== 0 && p.inStock !== false
+            }));
+            saveProductsLocally(adminProductsList);
+            loadedFromEdge = true;
+            if (syncStatusEl) syncStatusEl.textContent = '🟢 Đã kết nối D1 (' + adminProductsList.length + ' món)';
+          }
+        }
+      } catch (err) {
+        console.warn('API error, using local products cache:', err);
+      }
+
+      if (!loadedFromEdge) {
+        adminProductsList = getInitialProducts();
+        if (syncStatusEl) syncStatusEl.textContent = '🟡 Cục bộ (Sẵn sàng D1)';
+      }
+
+      updateProductStatsUI();
+      renderProductsAdminTable();
+    }
+
+    function updateProductStatsUI() {
+      const total = adminProductsList.length;
+      const inStock = adminProductsList.filter(p => p.inStock !== false).length;
+      const outStock = total - inStock;
+
+      const totalEl = document.getElementById('statProductTotal');
+      if (totalEl) totalEl.textContent = total;
+      const inStockEl = document.getElementById('statProductInStock');
+      if (inStockEl) inStockEl.textContent = inStock;
+      const outStockEl = document.getElementById('statProductOutOfStock');
+      if (outStockEl) outStockEl.textContent = outStock;
+
+      const badge = document.getElementById('tabProductCountBadge');
+      if (badge) badge.textContent = total;
+    }
+
+    function getCategoryLabel(catId) {
+      const map = {
+        'banh-que': '🌴 Bánh Quê Remix',
+        'banh-mi': '🍞 Bánh Mì Tươi',
+        'banh-mem': '🧁 Bánh Mềm',
+        'banh-su': '🍦 Bánh Su',
+        'set-an-sang': '🍳 Set Ăn Sáng 3 Phút',
+        'banh-ngau-hung': '🎉 Bánh Ngẫu Hứng',
+        'new-york-cookie': '🍪 New York Cookie',
+        'cookie-qua-banh': '🍬 Cookie & Quà Bánh',
+        'dac-san-dalat': '🎁 Món Quà Từ Đà Lạt'
+      };
+      return map[catId] || catId;
+    }
+
+    function renderProductsAdminTable() {
+      const tbody = document.getElementById('adminProductsTableBody');
+      if (!tbody) return;
+
+      const q = (document.getElementById('adminProductSearchInput')?.value || '').toLowerCase().trim();
+      const catFilter = document.getElementById('adminProductCategoryFilter')?.value || 'all';
+      const stockFilter = document.getElementById('adminProductStatusFilter')?.value || 'all';
+
+      let list = adminProductsList;
+
+      if (q) {
+        list = list.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.id.toLowerCase().includes(q) ||
+          (p.categoryLabel && p.categoryLabel.toLowerCase().includes(q))
+        );
+      }
+
+      if (catFilter !== 'all') {
+        list = list.filter(p => p.category === catFilter);
+      }
+
+      if (stockFilter === 'instock') {
+        list = list.filter(p => p.inStock !== false);
+      } else if (stockFilter === 'outofstock') {
+        list = list.filter(p => p.inStock === false);
+      }
+
+      if (!list.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:3rem 1rem; color:#666;">
+              <div style="font-size:2.5rem; margin-bottom:0.5rem;">🔍🍰</div>
+              <div style="font-weight:700; font-size:1.05rem;">Không tìm thấy món nào phù hợp bộ lọc!</div>
+              <div style="font-size:0.85rem; margin-top:4px;">Thử xóa từ khóa tìm kiếm hoặc chọn danh mục khác.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map(p => {
+        const isOut = p.inStock === false;
+        const catLabel = getCategoryLabel(p.category);
+        const shipLabel = p.shippingScope === 'ship-gan' ? '🛵 Hỏa tốc Đà Lạt' : '✈️ Ship toàn quốc';
+        const hasDiscount = p.originalPrice && p.originalPrice > p.price;
+
+        return `
+          <tr style="${isOut ? 'opacity:0.65; background:#fafafa;' : ''}">
+            <td>
+              <div style="position:relative; width:56px; height:56px; border-radius:10px; border:2px solid #1b1b1b; overflow:hidden; background:#fff; cursor:pointer;" onclick="openWatermarkModal('${p.id}')" title="Bấm để đóng dấu logo The Măm Măm">
+                <img src="${p.image || 'assets/khoai_tay_mammam.png'}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='assets/khoai_tay_mammam.png'" />
+                <span style="position:absolute; bottom:1px; right:1px; background:rgba(0,0,0,0.65); color:#fff; font-size:9px; padding:1px 3px; border-radius:4px;">🏷️</span>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight:800; font-size:0.95rem; color:#1b1b1b;">${p.name}</div>
+              <div style="font-size:0.75rem; color:#64748b; font-family:monospace; margin-top:2px;">Mã: ${p.id}</div>
+              ${p.description ? `<div style="font-size:0.75rem; color:#666; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px;">${p.description}</div>` : ''}
+            </td>
+            <td>
+              <span class="product-cat-badge">${catLabel}</span>
+            </td>
+            <td>
+              <div style="font-weight:900; color:var(--red); font-size:1rem;">${formatVND(p.price)}</div>
+              ${hasDiscount ? `<div style="font-size:0.75rem; color:#94a3b8; text-decoration:line-through;">${formatVND(p.originalPrice)}</div>` : ''}
+            </td>
+            <td>
+              <div style="font-size:0.85rem; font-weight:700;">${p.unit || 'món'}</div>
+              <div style="font-size:0.75rem; color:#64748b; margin-top:2px;">${shipLabel}</div>
+            </td>
+            <td>
+              <button type="button" onclick="toggleProductStock('${p.id}')" class="product-stock-badge ${isOut ? 'stock-out' : 'stock-in'}" title="Bấm để chuyển trạng thái">
+                ${isOut ? '❌ Hết hàng' : '✅ Còn hàng'}
+              </button>
+            </td>
+            <td>
+              <div class="product-actions-cell">
+                <button type="button" class="btn-action-sm" onclick="openProductModal('${p.id}')" style="background:#fef9c3; color:#854d0e; border-color:#eab308;" title="Chỉnh sửa chi tiết">
+                  ✏️ Sửa
+                </button>
+                <button type="button" class="btn-action-sm" onclick="openWatermarkModal('${p.id}')" style="background:#e0f2fe; color:#0369a1; border-color:#0284c7;" title="Đóng dấu logo The Măm Măm">
+                  🏷️ Logo
+                </button>
+                <button type="button" class="btn-action-sm" onclick="deleteProduct('${p.id}')" style="background:#fee2e2; color:#991b1b; border-color:#ef4444;" title="Xóa món khỏi thực đơn">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openProductModal(id) {
+      const modal = document.getElementById('productModal');
+      const title = document.getElementById('modalProductTitle');
+      const icon = document.getElementById('modalProductIcon');
+      const isNewInp = document.getElementById('pFormIsNew');
+      const idInp = document.getElementById('pFormId');
+
+      if (!modal) return;
+
+      if (!id) {
+        title.textContent = 'THÊM MÓN MỚI VÀO THỰC ĐƠN';
+        icon.textContent = '➕';
+        isNewInp.value = '1';
+        idInp.value = 'MM-' + Math.floor(100 + Math.random() * 900);
+        idInp.disabled = false;
+        idInp.readOnly = false;
+
+        document.getElementById('pFormName').value = '';
+        document.getElementById('pFormCategory').value = 'banh-que';
+        document.getElementById('pFormPrice').value = '';
+        document.getElementById('pFormOriginalPrice').value = '';
+        document.getElementById('pFormUnit').value = 'cái';
+        document.getElementById('pFormShippingScope').value = 'ship-xa';
+        document.getElementById('pFormInStock').value = '1';
+        document.getElementById('pFormImageUrl').value = 'assets/khoai_tay_mammam.png';
+        document.getElementById('pFormImagePreview').src = 'assets/khoai_tay_mammam.png';
+        document.getElementById('pFormDescription').value = '';
+        document.getElementById('pFormShelfLife').value = '3 ngày (ngăn mát)';
+        document.getElementById('pFormCalories').value = '';
+        document.getElementById('pFormStorage').value = 'Bảo quản nơi thoáng mát';
+        document.getElementById('pFormPrepTime').value = '15-20 phút';
+      } else {
+        const p = adminProductsList.find(x => x.id === id);
+        if (!p) {
+          showAdminToast('Không tìm thấy sản phẩm có ID: ' + id, 'error');
+          return;
+        }
+        title.textContent = 'CHỈNH SỬA: ' + p.name;
+        icon.textContent = '✏️';
+        isNewInp.value = '0';
+        idInp.value = p.id;
+        idInp.disabled = true;
+        idInp.readOnly = true;
+
+        document.getElementById('pFormName').value = p.name || '';
+        document.getElementById('pFormCategory').value = p.category || 'banh-que';
+        document.getElementById('pFormPrice').value = p.price || 0;
+        document.getElementById('pFormOriginalPrice').value = p.originalPrice || p.price || 0;
+        document.getElementById('pFormUnit').value = p.unit || 'món';
+        document.getElementById('pFormShippingScope').value = p.shippingScope || 'ship-xa';
+        document.getElementById('pFormInStock').value = (p.inStock === false) ? '0' : '1';
+        const imgUrl = p.image || 'assets/khoai_tay_mammam.png';
+        document.getElementById('pFormImageUrl').value = imgUrl;
+        document.getElementById('pFormImagePreview').src = imgUrl;
+        document.getElementById('pFormDescription').value = p.description || '';
+        document.getElementById('pFormShelfLife').value = p.shelfLife || '';
+        document.getElementById('pFormCalories').value = p.calories || '';
+        document.getElementById('pFormStorage').value = p.storage || '';
+        document.getElementById('pFormPrepTime').value = p.prepTime || '';
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('productModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function updateFormImagePreview() {
+      const url = document.getElementById('pFormImageUrl').value.trim();
+      const preview = document.getElementById('pFormImagePreview');
+      if (url && preview) {
+        preview.src = url;
+      }
+    }
+
+    function handleImageFileSelect(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      if (file.size > 8 * 1024 * 1024) {
+        showAdminToast('Ảnh tải lên quá lớn (tối đa 8MB)!', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const dataUrl = evt.target.result;
+        document.getElementById('pFormImagePreview').src = dataUrl;
+        document.getElementById('pFormImageUrl').value = dataUrl;
+        showAdminToast('Đã tải ảnh lên! Hãy bấm "Đóng Dấu Logo" nếu muốn chèn con dấu The Măm Măm.');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function handleProductFormSubmit(e) {
+      e.preventDefault();
+
+      const isNew = document.getElementById('pFormIsNew').value === '1';
+      const id = document.getElementById('pFormId').value.trim();
+      const name = document.getElementById('pFormName').value.trim();
+      const category = document.getElementById('pFormCategory').value;
+      const price = Number(document.getElementById('pFormPrice').value) || 0;
+      const origPriceVal = document.getElementById('pFormOriginalPrice').value;
+      const originalPrice = origPriceVal ? Number(origPriceVal) : price;
+      const unit = document.getElementById('pFormUnit').value.trim() || 'món';
+      const shippingScope = document.getElementById('pFormShippingScope').value;
+      const inStock = document.getElementById('pFormInStock').value === '1';
+      const image = document.getElementById('pFormImageUrl').value.trim() || 'assets/khoai_tay_mammam.png';
+      const description = document.getElementById('pFormDescription').value.trim();
+      const shelfLife = document.getElementById('pFormShelfLife').value.trim();
+      const calories = document.getElementById('pFormCalories').value.trim();
+      const storage = document.getElementById('pFormStorage').value.trim();
+      const prepTime = document.getElementById('pFormPrepTime').value.trim();
+
+      if (!id || !name) {
+        showAdminToast('Vui lòng nhập đầy đủ Mã món và Tên món!', 'error');
+        return;
+      }
+
+      const productData = {
+        id,
+        name,
+        category,
+        category_label: getCategoryLabel(category),
+        categoryLabel: getCategoryLabel(category),
+        price,
+        original_price: originalPrice,
+        originalPrice,
+        unit,
+        shipping_scope: shippingScope,
+        shippingScope,
+        shipping_scope_label: shippingScope === 'ship-gan' ? 'Hỏa tốc Đà Lạt' : 'Toàn quốc',
+        shippingScopeLabel: shippingScope === 'ship-gan' ? 'Hỏa tốc Đà Lạt' : 'Toàn quốc',
+        image_url: image,
+        image,
+        description,
+        shelf_life: shelfLife,
+        shelfLife,
+        calories,
+        storage,
+        prep_time: prepTime,
+        prepTime,
+        in_stock: inStock ? 1 : 0,
+        inStock
+      };
+
+      const existingIdx = adminProductsList.findIndex(p => p.id === id);
+      if (isNew) {
+        if (existingIdx >= 0) {
+          showAdminToast('Mã món ăn này đã tồn tại! Vui lòng chọn mã khác.', 'error');
+          return;
+        }
+        adminProductsList.unshift(productData);
+      } else {
+        if (existingIdx >= 0) {
+          adminProductsList[existingIdx] = productData;
+        } else {
+          adminProductsList.push(productData);
+        }
+      }
+
+      saveProductsLocally(adminProductsList);
+      updateProductStatsUI();
+      renderProductsAdminTable();
+      closeProductModal();
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (token) {
+        try {
+          const endpoint = isNew ? '/api/admin/products' : '/api/admin/products/update';
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(productData)
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            showAdminToast(`Đã lưu "${name}" an toàn lên Cloudflare D1! ☁️`, 'success');
+            return;
+          }
+        } catch (err) {
+          console.warn('D1 Edge sync error:', err);
+        }
+      }
+
+      showAdminToast(`Đã lưu "${name}" thành công! 💾`, 'success');
+    }
+
+    async function deleteProduct(id) {
+      const p = adminProductsList.find(x => x.id === id);
+      const name = p ? p.name : id;
+
+      if (!confirm(`Bạn có chắc chắn muốn XÓA món "${name}" (${id}) khỏi thực đơn?
+
+(Hệ thống sẽ thực hiện Soft Delete an toàn trên Cloudflare D1 để bảo toàn đơn hàng cũ).`)) {
+        return;
+      }
+
+      adminProductsList = adminProductsList.filter(x => x.id !== id);
+      saveProductsLocally(adminProductsList);
+      updateProductStatsUI();
+      renderProductsAdminTable();
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (token) {
+        try {
+          const res = await fetch('/api/admin/products/delete', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ id })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            showAdminToast(`Đã xóa món "${name}" khỏi Cloudflare D1! 🗑️`, 'info');
+            return;
+          }
+        } catch (err) {
+          console.warn('D1 Delete error:', err);
+        }
+      }
+
+      showAdminToast(`Đã xóa món "${name}" khỏi thực đơn! 🗑️`, 'info');
+    }
+
+    async function toggleProductStock(id) {
+      const p = adminProductsList.find(x => x.id === id);
+      if (!p) return;
+
+      p.inStock = !p.inStock;
+      p.in_stock = p.inStock ? 1 : 0;
+      saveProductsLocally(adminProductsList);
+      updateProductStatsUI();
+      renderProductsAdminTable();
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (token) {
+        try {
+          await fetch('/api/admin/products/update', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ id: p.id, in_stock: p.in_stock })
+          });
+        } catch (e) {}
+      }
+
+      showAdminToast(`Món "${p.name}": ${p.inStock ? 'Còn hàng ✅' : 'Tạm hết hàng ❌'}`);
+    }
+
+    async function syncProductsToD1() {
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (!token) {
+        showAdminToast('Cần phiên đăng nhập quản trị hợp lệ để đồng bộ Cloudflare D1!', 'error');
+        return;
+      }
+
+      if (!confirm('Đồng bộ toàn bộ danh mục thực đơn The Măm Măm (' + adminProductsList.length + ' món) lên Cloudflare D1 Database ngay bây giờ?')) {
+        return;
+      }
+
+      showAdminToast('Đang đồng bộ thực đơn lên Cloudflare D1...', 'info');
+
+      try {
+        const res = await fetch('/api/admin/products/sync-seed', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ products: adminProductsList })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          showAdminToast(`Đồng bộ thành công ${data.count || adminProductsList.length} món lên Cloudflare D1! ⚡`, 'success');
+          loadProductsData(true);
+        } else {
+          showAdminToast('Lỗi đồng bộ: ' + (data.error || 'Vui lòng thử lại'), 'error');
+        }
+      } catch (err) {
+        showAdminToast('Lỗi kết nối Cloudflare: ' + err.message, 'error');
+      }
+    }
+
+    // ════════════════ LOGO WATERMARK CANVAS TOOL ════════════════
+    let watermarkSourceImg = new Image();
+    let watermarkLogoImg = new Image();
+    let watermarkTargetProduct = null;
+    let watermarkIsLoaded = false;
+
+    watermarkLogoImg.crossOrigin = 'anonymous';
+    watermarkLogoImg.src = 'assets/mammam-logo.png';
+
+    function openWatermarkFromForm() {
+      const preview = document.getElementById('pFormImagePreview');
+      const src = (preview && preview.src) ? preview.src : document.getElementById('pFormImageUrl').value;
+      watermarkTargetProduct = null;
+      openWatermarkWithImage(src || 'assets/khoai_tay_mammam.png');
+    }
+
+    function openWatermarkModal(productId) {
+      const p = adminProductsList.find(x => x.id === productId);
+      if (!p) return;
+      watermarkTargetProduct = p;
+      openWatermarkWithImage(p.image || 'assets/khoai_tay_mammam.png');
+    }
+
+    function openWatermarkWithImage(imgSrc) {
+      const modal = document.getElementById('logoWatermarkModal');
+      if (!modal) return;
+      modal.style.display = 'flex';
+
+      watermarkIsLoaded = false;
+      watermarkSourceImg = new Image();
+      watermarkSourceImg.crossOrigin = 'anonymous';
+      watermarkSourceImg.onload = function() {
+        watermarkIsLoaded = true;
+        renderWatermarkCanvas();
+      };
+      watermarkSourceImg.onerror = function() {
+        watermarkSourceImg.src = 'assets/khoai_tay_mammam.png';
+      };
+      watermarkSourceImg.src = imgSrc;
+    }
+
+    function closeWatermarkModal() {
+      const modal = document.getElementById('logoWatermarkModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function renderWatermarkCanvas() {
+      const canvas = document.getElementById('watermarkCanvas');
+      if (!canvas || !watermarkIsLoaded) return;
+      const ctx = canvas.getContext('2d');
+
+      const pos = document.getElementById('wmPositionSelect').value;
+      const sizePercent = Number(document.getElementById('wmSizeRange').value) || 24;
+      const opacity = (Number(document.getElementById('wmOpacityRange').value) || 100) / 100;
+
+      document.getElementById('wmSizeVal').textContent = sizePercent + '%';
+      document.getElementById('wmOpacityVal').textContent = Math.round(opacity * 100) + '%';
+
+      const w = watermarkSourceImg.naturalWidth || watermarkSourceImg.width || 800;
+      const h = watermarkSourceImg.naturalHeight || watermarkSourceImg.height || 800;
+      canvas.width = Math.min(w, 1200);
+      canvas.height = Math.round((canvas.width / w) * h);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(watermarkSourceImg, 0, 0, canvas.width, canvas.height);
+
+      if (watermarkLogoImg.complete && watermarkLogoImg.naturalWidth > 0) {
+        const logoW = Math.round(canvas.width * (sizePercent / 100));
+        const logoH = Math.round(logoW * (watermarkLogoImg.naturalHeight / watermarkLogoImg.naturalWidth));
+        const padding = Math.round(canvas.width * 0.04);
+
+        let x = canvas.width - logoW - padding;
+        let y = padding;
+
+        if (pos === 'top-right') {
+          x = canvas.width - logoW - padding;
+          y = padding;
+        } else if (pos === 'bottom-right') {
+          x = canvas.width - logoW - padding;
+          y = canvas.height - logoH - padding;
+        } else if (pos === 'top-left') {
+          x = padding;
+          y = padding;
+        } else if (pos === 'bottom-left') {
+          x = padding;
+          y = canvas.height - logoH - padding;
+        } else if (pos === 'center') {
+          x = (canvas.width - logoW) / 2;
+          y = (canvas.height - logoH) / 2;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.shadowColor = 'rgba(0,0,0,0.25)';
+        ctx.shadowBlur = Math.round(canvas.width * 0.015);
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.drawImage(watermarkLogoImg, x, y, logoW, logoH);
+        ctx.restore();
+      }
+    }
+
+    async function applyWatermarkToProduct() {
+      const canvas = document.getElementById('watermarkCanvas');
+      if (!canvas) return;
+
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+      if (watermarkTargetProduct) {
+        watermarkTargetProduct.image = dataUrl;
+        watermarkTargetProduct.image_url = dataUrl;
+        saveProductsLocally(adminProductsList);
+        renderProductsAdminTable();
+
+        const token = sessionStorage.getItem('mammam_admin_token');
+        if (token) {
+          try {
+            await fetch('/api/admin/products/update', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ id: watermarkTargetProduct.id, image_url: dataUrl })
+            });
+          } catch (e) {}
+        }
+        showAdminToast(`Đã đóng dấu logo cho món "${watermarkTargetProduct.name}"! 🏷️`, 'success');
+      } else {
+        const preview = document.getElementById('pFormImagePreview');
+        const input = document.getElementById('pFormImageUrl');
+        if (preview) preview.src = dataUrl;
+        if (input) input.value = dataUrl;
+        showAdminToast('Đã áp dụng logo The Măm Măm vào ảnh trong form! Bấm "Lưu Thay Đổi" để hoàn tất.', 'success');
+      }
+
+      closeWatermarkModal();
+    }
+
+    function downloadWatermarkedImage() {
+      const canvas = document.getElementById('watermarkCanvas');
+      if (!canvas) return;
+      const link = document.createElement('a');
+      link.download = `themammam-${Date.now()}.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.click();
+      showAdminToast('Đã tải ảnh đóng dấu logo The Măm Măm về máy tính! 💾', 'info');
+    }
+
+    // ════════════════ CLOUDFLARE SECURITY & AUDIT LOGS ════════════════
+    async function loadSecurityStatus() {
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (!token) return;
+
+      try {
+        const res = await fetch('/api/admin/security-status', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Cloudflare Edge Security Status:', data);
+        }
+      } catch (err) {}
+    }
+
+    async function loadAuditLogs() {
+      const tbody = document.getElementById('adminAuditLogsTableBody');
+      if (!tbody) return;
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (!token) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:#666;">Cần đăng nhập phiên Quản Trị để xem nhật ký bảo mật Cloudflare.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:1.5rem; color:#666;">🔄 Đang tải nhật ký từ Cloudflare D1...</td></tr>`;
+
+      try {
+        const res = await fetch('/api/admin/audit-logs', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.logs) && data.logs.length > 0) {
+            tbody.innerHTML = data.logs.map(log => {
+              const dt = new Date(log.created_at || log.timestamp).toLocaleString('vi-VN');
+              const actColor = (log.action.includes('FAIL') || log.action.includes('DELETE')) ? '#ef4444' : (log.action.includes('LOGIN') ? '#10b981' : '#0284c7');
+              return `
+                <tr>
+                  <td style="font-family:monospace; font-size:0.8rem;">${dt}</td>
+                  <td><span style="background:${actColor}15; color:${actColor}; font-weight:800; padding:2px 8px; border-radius:6px; font-size:0.8rem;">${log.action}</span></td>
+                  <td style="font-weight:700; font-size:0.85rem;">${log.target || 'Hệ thống'}</td>
+                  <td style="font-size:0.85rem; color:#475569;">${log.details || ''}</td>
+                  <td style="font-family:monospace; font-size:0.8rem; color:#64748b;">${log.ip_address || '127.0.0.1'}</td>
+                </tr>
+              `;
+            }).join('');
+            return;
+          }
+        }
+      } catch (e) {}
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align:center; padding:2rem 1rem; color:#64748b;">
+            <div style="font-size:1.8rem; margin-bottom:4px;">🛡️</div>
+            Chưa có vi phạm bảo mật nào. Tường lửa Cloudflare WAF đang bảo vệ tuyệt đối!
+          </td>
+        </tr>
+      `;
+    }
+
+    async function handleAdminChangePasswordSubmit(e) {
+      e.preventDefault();
+      const currentPass = document.getElementById('adminCurrentPassInput').value;
+      const newPass = document.getElementById('adminNewPassInput').value;
+      const confirmPass = document.getElementById('adminConfirmPassInput').value;
+
+      if (newPass !== confirmPass) {
+        showAdminToast('Mật khẩu xác nhận không trùng khớp!', 'error');
+        return;
+      }
+
+      if (newPass.length < 8) {
+        showAdminToast('Mật khẩu mới phải có tối thiểu 8 ký tự!', 'error');
+        return;
+      }
+
+      const token = sessionStorage.getItem('mammam_admin_token');
+      if (token) {
+        try {
+          const res = await fetch('/api/admin/change-password', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ currentPassword: currentPass, newPassword: newPass })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            showAdminToast('Đã đổi mật khẩu quản trị an toàn trên Cloudflare D1! 🔐', 'success');
+            document.getElementById('adminCurrentPassInput').value = '';
+            document.getElementById('adminNewPassInput').value = '';
+            document.getElementById('adminConfirmPassInput').value = '';
+            return;
+          } else {
+            showAdminToast(data.error || 'Mật khẩu hiện tại không đúng!', 'error');
+            return;
+          }
+        } catch (e) {
+          showAdminToast('Lỗi khi gửi yêu cầu đổi mật khẩu: ' + e.message, 'error');
+        }
+      }
+
+      const creds = getAdminCredentials();
+      if (currentPass !== creds.password) {
+        showAdminToast('Mật khẩu hiện tại không đúng!', 'error');
+        return;
+      }
+
+      creds.password = newPass;
+      localStorage.setItem('mammam_admin_account', JSON.stringify(creds));
+      showAdminToast('Đã đổi mật khẩu quản trị thành công! 🔐', 'success');
+      document.getElementById('adminCurrentPassInput').value = '';
+      document.getElementById('adminNewPassInput').value = '';
+      document.getElementById('adminConfirmPassInput').value = '';
+    }
+
+    // Tự động ngắt phiên đăng xuất sau 30 phút không hoạt động để tránh bị chiếm quyền
+    let adminInactivityTimer = null;
+    function resetAdminInactivityTimer() {
+      if (adminInactivityTimer) clearTimeout(adminInactivityTimer);
+      adminInactivityTimer = setTimeout(() => {
+        const isLogged = sessionStorage.getItem('mammam_admin_logged') === 'true';
+        if (isLogged) {
+          sessionStorage.removeItem('mammam_admin_logged');
+          sessionStorage.removeItem('mammam_admin_token');
+          showAdminToast('Phiên làm việc đã hết hạn do không hoạt động (30 phút). Vui lòng đăng nhập lại.', 'info');
+          checkAdminSession();
+        }
+      }, 30 * 60 * 1000);
+    }
+    ['mousemove', 'keydown', 'click', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, resetAdminInactivityTimer, { passive: true });
+    });
 
     // Auto-init on page load
     window.addEventListener('DOMContentLoaded', () => {

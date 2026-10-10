@@ -89,3 +89,46 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- Mật khẩu mặc định: admin123 (SHA-256 băm kèm salt)
 INSERT OR IGNORE INTO admin_users (username, password_hash, salt, role)
 VALUES ('admin', '420a4066c10319caab92cb1f2eb0a649c090be4df08a108a7ae79bb77b5a5b5f', 'themammam_salt_2026', 'superadmin');
+
+-- 6. BẢNG SẢN PHẨM & THỰC ĐƠN (PRODUCTS)
+CREATE TABLE IF NOT EXISTS products (
+    id TEXT PRIMARY KEY,                       -- Mã món, ví dụ: MM001
+    name TEXT NOT NULL,                        -- Tên món
+    category TEXT NOT NULL,                    -- Mã danh mục (banh-que, banh-mi, dac-san-dalat...)
+    category_label TEXT,                       -- Tên danh mục hiển thị
+    price INTEGER NOT NULL,                    -- Giá bán lẻ (VND)
+    original_price INTEGER,                    -- Giá gốc niêm yết (VND)
+    unit TEXT DEFAULT 'cái',                   -- Đơn vị tính (ổ, cái, miếng, hũ, hộp...)
+    image TEXT,                                -- Đường dẫn ảnh hoặc WebP/Base64
+    description TEXT,                          -- Mô tả chi tiết món ăn
+    prep_time TEXT DEFAULT '15–25 phút',       -- Thời gian chuẩn bị
+    tags_json TEXT,                            -- Mảng JSON tags
+    calories TEXT,                             -- Hàm lượng calories
+    storage TEXT,                              -- Hướng dẫn bảo quản
+    shelf_life TEXT,                           -- Hạn sử dụng (HSD)
+    shipping_scope TEXT DEFAULT 'ship-xa',     -- 'ship-xa' (Toàn quốc) hoặc 'ship-gan' (Đà Lạt)
+    shipping_badge TEXT DEFAULT '✈️ Ship toàn quốc',
+    shipping_note TEXT,
+    in_stock INTEGER DEFAULT 1,                -- 1 = Còn hàng, 0 = Tạm hết
+    is_deleted INTEGER DEFAULT 0,              -- 0 = Hoạt động, 1 = Đã xóa
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
+CREATE INDEX IF NOT EXISTS idx_products_stock ON products(in_stock);
+CREATE INDEX IF NOT EXISTS idx_products_deleted ON products(is_deleted);
+
+-- 7. BẢNG NHẬT KÝ BẢO MẬT & HÀNH ĐỘNG ADMIN (ADMIN AUDIT LOGS)
+CREATE TABLE IF NOT EXISTS admin_audit_logs (
+    id TEXT PRIMARY KEY,
+    action TEXT NOT NULL,                      -- LOGIN, EDIT_PRODUCT, ADD_PRODUCT, DELETE_PRODUCT, CHANGE_PASSWORD...
+    target_id TEXT,                            -- ID sản phẩm hoặc đối tượng bị tác động
+    details_json TEXT,                         -- Chi tiết thay đổi
+    ip_address TEXT,                           -- Địa chỉ IP của Client qua Cloudflare Edge
+    user_agent TEXT,                           -- Trình duyệt & thiết bị
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_created ON admin_audit_logs(created_at DESC);
+

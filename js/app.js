@@ -1508,9 +1508,55 @@
     showToast('Đã gửi tin nhắn tới tiệm The Măm Măm! 💬');
   }
 
+  function syncMenuProducts() {
+    // 1. Kiểm tra cache tùy chỉnh từ Admin để nạp ngay lập tức
+    try {
+      const cached = localStorage.getItem('mammam_custom_products');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          MAMMAM_DATA.products = parsed;
+        }
+      }
+    } catch (e) {}
+
+    // 2. Đồng bộ danh sách thực đơn mới nhất từ Cloudflare Edge API (D1)
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+          MAMMAM_DATA.products = data.products.map(p => ({
+            id: p.id,
+            name: p.name,
+            category: p.category,
+            categoryLabel: p.category_label || p.categoryLabel || '',
+            price: Number(p.price),
+            originalPrice: p.original_price ? Number(p.original_price) : Number(p.price),
+            unit: p.unit || 'món',
+            shippingScope: p.shipping_scope || 'ship-xa',
+            shippingScopeLabel: p.shipping_scope_label || (p.shipping_scope === 'ship-gan' ? 'Hỏa tốc Đà Lạt' : 'Toàn quốc'),
+            image: p.image_url || p.image || 'assets/khoai_tay_mammam.png',
+            description: p.description || '',
+            shelfLife: p.shelf_life || p.shelfLife || '',
+            calories: p.calories || '',
+            storage: p.storage || '',
+            prepTime: p.prep_time || p.prepTime || '',
+            inStock: p.in_stock !== 0 && p.inStock !== false
+          }));
+          localStorage.setItem('mammam_custom_products', JSON.stringify(MAMMAM_DATA.products));
+          renderCategoryTabs();
+          renderProducts();
+        }
+      })
+      .catch(() => {
+        // Fallback tự nhiên nếu chạy offline hoặc worker chưa chạy
+      });
+  }
+
   // ════════════════ INITIALIZATION ════════════════
   document.addEventListener('DOMContentLoaded', () => {
     loadStorage();
+    syncMenuProducts();
     initPreloader();
     initEyeTracking();
     initStickers();

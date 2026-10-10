@@ -2752,21 +2752,23 @@ a {
   transform: scale(0.96);
 }
 
-/* ═══════════════ MOBILE APP BOTTOM NAVIGATION BAR ═══════════════ */
+/* ═══════════════ MOBILE APP BOTTOM NAVIGATION BAR (APPLE HIG DOCK) ═══════════════ */
 .mobile-app-bottom-nav {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background: #ffffff;
-  border-top: 2.5px solid #1b1b1b;
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.06);
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
   z-index: 975;
   justify-content: space-around;
   align-items: center;
-  padding: 0 6px;
+  padding: 0 8px env(safe-area-inset-bottom, 0px);
 }
 
 .mobile-nav-tab {
@@ -2775,7 +2777,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #555;
+  color: #8E8E93;
   text-decoration: none;
   font-size: 0.72rem;
   font-weight: 700;
@@ -2783,6 +2785,12 @@ a {
   border: none;
   cursor: pointer;
   padding: 4px 0;
+  transition: color 0.15s ease, transform 0.15s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.mobile-nav-tab:active {
+  transform: scale(0.94);
 }
 
 .mobile-nav-tab.active,
@@ -2816,7 +2824,7 @@ a {
   border: 1px solid #1b1b1b;
 }
 
-/* ═══════════════ RESPONSIVE ADJUSTMENTS (FOOD APP STANDARD) ═══════════════ */
+/* ═══════════════ RESPONSIVE ADJUSTMENTS (APPLE HIG / SAAS STANDARD) ═══════════════ */
 @media (max-width: 768px) {
   /* Show mobile app bottom navigation */
   .mobile-app-bottom-nav {
@@ -2824,64 +2832,77 @@ a {
   }
 
   body {
-    padding-bottom: 72px;
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
   }
 
-  /* Floating contact buttons position safely above sticky order bar & bottom nav */
+  /* Completely hide floating contact buttons on mobile to avoid blocking cards & actions */
   .floating-contact-group {
-    bottom: 126px;
-    right: 12px;
-    gap: 8px;
+    display: none !important;
   }
 
-  .floating-fab {
-    padding: 8px 12px;
-    font-size: 0.92rem;
-  }
-
-  .fab-label {
-    display: none;
-  }
-
-  .floating-fab .fab-icon {
-    font-size: 1.3rem;
-  }
-
-  /* Mobile Sticky Order Bar */
+  /* Mobile Sticky Order Bar positioned cleanly above bottom dock */
   .mobile-sticky-order-bar {
-    bottom: 68px;
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    right: 10px;
+  }
+
+  /* Compact Hero Mascot & Section for fast mobile scanning */
+  .face-mascot-box {
+    width: min(65vw, 240px) !important;
+    margin: 0.6rem auto 0 !important;
+  }
+
+  .mascot-click-challenge-hint {
+    font-size: 0.78rem !important;
+    padding: 0.3rem 0.8rem !important;
+    top: -20px !important;
+    max-width: 90vw !important;
+    white-space: normal !important;
+    text-align: center !important;
   }
 
   .hero-bottom-grid {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.75rem !important;
+    margin-top: 0.5rem !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .hero-col {
+    padding: 0.75rem 1rem !important;
+    border-radius: 16px !important;
+    font-size: 0.85rem !important;
   }
 
   .hero-centerpiece-wrap {
-    margin: 1rem auto;
+    margin: 0.5rem auto !important;
   }
 
-  /* Category Bar - 2 Neat Rows (Food App Standard) */
+  /* Category Bar - Smooth Apple HIG Single-Row Horizontal Momentum Carousel */
   .category-tabs-wrap {
-    display: grid !important;
-    grid-template-rows: repeat(2, auto) !important;
-    grid-auto-flow: column !important;
-    grid-auto-columns: max-content !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     white-space: nowrap !important;
-    gap: 8px 10px !important;
-    padding: 8px 12px 14px !important;
+    gap: 8px !important;
+    padding: 8px 16px 12px !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
     position: sticky !important;
-    top: 60px !important;
-    background: var(--beige) !important;
+    top: 56px !important;
+    background: rgba(255, 253, 249, 0.96) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
     z-index: 50 !important;
     margin: 0 -1rem 1rem !important;
-    border-bottom: 2px solid rgba(27,27,27,0.08) !important;
+    border-bottom: 1px solid rgba(43, 22, 12, 0.08) !important;
   }
 
   .category-tabs-wrap::-webkit-scrollbar {
@@ -2889,10 +2910,26 @@ a {
   }
 
   .cat-tab {
-    flex-shrink: 0 !important;
-    padding: 6px 14px !important;
-    font-size: 0.88rem !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    padding: 8px 16px !important;
+    font-size: 0.86rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
     border-radius: var(--radius-full) !important;
+    border: 1.5px solid rgba(43, 22, 12, 0.12) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: var(--black) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    letter-spacing: 0.01em !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .cat-tab.active {
+    background: var(--red-gradient) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: 0 4px 14px rgba(229, 46, 46, 0.32) !important;
   }
 
   /* Toast notification on mobile at top */
@@ -2906,17 +2943,14 @@ a {
     align-items: center !important;
   }
 
-  /* Hide floating buttons and sticky bar when drawer or modal is open */
-  body:has(#cartDrawer.open) .floating-contact-group,
-  body:has(#checkoutModal.open) .floating-contact-group,
-  body:has(#orderSuccessModal.open) .floating-contact-group,
+  /* Hide sticky order bar when cart drawer or modal is open */
   body:has(#cartDrawer.open) .mobile-sticky-order-bar,
   body:has(#checkoutModal.open) .mobile-sticky-order-bar,
   body:has(#orderSuccessModal.open) .mobile-sticky-order-bar {
     display: none !important;
   }
 
-  /* 2-Column Product Cards Grid on Mobile (Standard Food Delivery App) */
+  /* 2-Column Product Cards Grid on Mobile (Apple Card Grid) */
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
@@ -2925,9 +2959,11 @@ a {
 
   .product-card {
     padding: 8px !important;
-    border-width: 2px !important;
-    border-radius: 16px !important;
-    box-shadow: 3px 3px 0px #1b1b1b !important;
+    border-width: 1.5px !important;
+    border-radius: 18px !important;
+    border-color: rgba(43, 22, 12, 0.14) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    background: #ffffff !important;
   }
 
   .product-card:hover {
@@ -2936,7 +2972,13 @@ a {
 
   .card-thumb-wrap {
     margin-bottom: 6px !important;
-    border-radius: 12px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Touch / Mobile: Disable hover overlay completely so food photos are never obscured */
+  .card-hover-overlay {
+    display: none !important;
   }
 
   .card-badge-id {
@@ -3018,6 +3060,160 @@ a {
     right: 0 !important;
     border-radius: 22px 0 0 22px !important;
   }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════
+   APPLE iOS ACTION SHEET (SUPPORT & QUICK ACTIONS)
+   ═════════════════════════════════════════════════════════════════════════ */
+.ios-action-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  padding: 0 12px calc(14px + env(safe-area-inset-bottom, 0px));
+}
+
+.ios-action-sheet-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ios-action-sheet-panel {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ios-action-sheet-overlay.open .ios-action-sheet-panel {
+  transform: translateY(0);
+}
+
+.ios-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  margin: 0 auto 4px;
+}
+
+.ios-sheet-group {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.ios-sheet-header {
+  padding: 14px 18px 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ios-sheet-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1c1c1e;
+  margin: 0 0 2px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+.ios-sheet-subtitle {
+  font-size: 0.78rem;
+  color: #8e8e93;
+  margin: 0;
+}
+
+.ios-sheet-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  transition: background 0.15s ease;
+}
+
+.ios-sheet-item:last-child {
+  border-bottom: none;
+}
+
+.ios-sheet-item:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ios-sheet-icon {
+  font-size: 1.45rem;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(229, 46, 46, 0.1);
+  border-radius: 10px;
+}
+
+.ios-sheet-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ios-sheet-main {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.ios-sheet-sub {
+  font-size: 0.76rem;
+  color: #8e8e93;
+  margin-top: 1px;
+}
+
+.ios-sheet-arrow {
+  color: #c7c7cc;
+  font-size: 0.85rem;
+}
+
+.ios-sheet-cancel-btn {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #007aff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  transition: background 0.15s ease;
+}
+
+.ios-sheet-cancel-btn:active {
+  background: #f2f2f7;
 }
 
 /* ═════════════════════════════════════════════════════════════════════════

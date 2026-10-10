@@ -1331,7 +1331,7 @@
   </div>
 
   <!-- ═══════════════ MOBILE STICKY BOTTOM ORDER BAR (Requirement 5) ═══════════════ -->
-  <div class="mobile-sticky-order-bar" id="mobileStickyOrderBar">
+  <div class="mobile-sticky-order-bar" id="mobileStickyOrderBar" style="display:none;">
     <div class="sticky-bar-content" onclick="window.mammamApp.openModal('cartDrawer')">
       <div class="sticky-bar-left">
         <div class="sticky-cart-icon-wrap">
@@ -1367,11 +1367,51 @@
       </div>
       <span class="tab-label">Giỏ Hàng</span>
     </button>
-    <a href="tel:0974449708" class="mobile-nav-tab">
-      <span class="tab-icon">📞</span>
-      <span class="tab-label">Hotline</span>
-    </a>
+    <button type="button" class="mobile-nav-tab" onclick="window.mammamApp.openSupportSheet()">
+      <span class="tab-icon">💬</span>
+      <span class="tab-label">Hỗ Trợ</span>
+    </button>
   </nav>
+
+  <!-- ═══════════════ APPLE IOS ACTION SHEET: SUPPORT MODAL ═══════════════ -->
+  <div class="ios-action-sheet-overlay" id="supportActionSheet" onclick="window.mammamApp.closeSupportSheet(event)">
+    <div class="ios-action-sheet-panel" onclick="event.stopPropagation()">
+      <div class="ios-sheet-handle"></div>
+      <div class="ios-sheet-group">
+        <div class="ios-sheet-header">
+          <h3 class="ios-sheet-title">Trung Tâm Hỗ Trợ The Măm Măm</h3>
+          <p class="ios-sheet-subtitle">Hỗ trợ tư vấn đặt hàng, phí ship & CSKH 24/7</p>
+        </div>
+        <a href="tel:0974449708" class="ios-sheet-item" onclick="window.mammamApp.closeSupportSheet()">
+          <span class="ios-sheet-icon">📞</span>
+          <div class="ios-sheet-text">
+            <span class="ios-sheet-main" style="color:#d63031;">Gọi Hotline 24/7 (0974.449.708)</span>
+            <span class="ios-sheet-sub">Bấm gọi ngay cho tiệm để đặt hàng nhanh</span>
+          </div>
+          <span class="ios-sheet-arrow">➔</span>
+        </a>
+        <a href="https://zalo.me/0974449708" target="_blank" rel="noopener" class="ios-sheet-item" onclick="window.mammamApp.closeSupportSheet()">
+          <span class="ios-sheet-icon" style="background:rgba(0,122,255,0.1);">💬</span>
+          <div class="ios-sheet-text">
+            <span class="ios-sheet-main" style="color:#007aff;">Chat Zalo Với Bếp Tiệm</span>
+            <span class="ios-sheet-sub">Nhắn tin trực tiếp với nhân viên tiệm</span>
+          </div>
+          <span class="ios-sheet-arrow">➔</span>
+        </a>
+        <button type="button" class="ios-sheet-item" onclick="window.mammamApp.closeSupportSheet(); window.mammamApp.openFaqBot ? window.mammamApp.openFaqBot() : window.mammamApp.openModal('faqModal');">
+          <span class="ios-sheet-icon" style="background:rgba(255,149,0,0.1);">❓</span>
+          <div class="ios-sheet-text">
+            <span class="ios-sheet-main" style="color:#f39c12;">100+ Hỏi Đáp Nhanh & Trợ Lý Bếp</span>
+            <span class="ios-sheet-sub">Tra cứu phí ship toàn quốc, bảo quản & HSD</span>
+          </div>
+          <span class="ios-sheet-arrow">➔</span>
+        </button>
+      </div>
+      <button type="button" class="ios-sheet-cancel-btn" onclick="window.mammamApp.closeSupportSheet()">
+        Đóng / Hủy
+      </button>
+    </div>
+  </div>
 
   <!-- Toast Notification Container -->
   <div id="toastContainer"></div>

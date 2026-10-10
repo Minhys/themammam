@@ -212,6 +212,10 @@
         state.currentCategory = btn.dataset.cat;
         renderCategoryTabs();
         renderProducts();
+        const activeTab = container.querySelector('.cat-tab.active');
+        if (activeTab) {
+          activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       });
     });
   }
@@ -2829,6 +2833,23 @@
     startPotatoGame();
   }
 
+  function openSupportSheet() {
+    const sheet = document.getElementById('supportActionSheet');
+    if (!sheet) return;
+    sheet.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSupportSheet(e) {
+    if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('ios-sheet-cancel-btn') && !e.target.closest('.ios-sheet-item')) {
+      return;
+    }
+    const sheet = document.getElementById('supportActionSheet');
+    if (!sheet) return;
+    sheet.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   // Export globally for inline onclick handlers
   window.mammamApp = {
     addToCart,
@@ -2851,6 +2872,8 @@
     spinLuckyWheel,
     applyLuckyVoucher,
     retryPotatoFromWheel,
+    openSupportSheet,
+    closeSupportSheet,
     openFaqBot: () => openModal('faqBotModal'),
     askFaqQuestion: (id) => window.mammamFaqBot && window.mammamFaqBot.ask(id),
     handleFaqAction: (type) => window.mammamFaqBot && window.mammamFaqBot.handleAction(type),

@@ -836,31 +836,69 @@ a {
 }
 
 .hero-col {
-  max-width: 370px;
-  background: rgba(255, 255, 255, 0.68);
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 20px;
-  padding: 0.95rem 1.4rem;
+  padding: 1.1rem 1.4rem;
   box-shadow: 0 10px 28px rgba(180, 100, 20, 0.1);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-col:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 14px 34px rgba(180, 100, 20, 0.15);
 }
 
-.hero-col p {
-  font-family: var(--font-saira);
+.hero-col-tag {
+  display: inline-block;
+  font-size: 0.74rem;
   font-weight: 800;
-  font-size: clamp(0.88rem, 1.15vw, 1.18rem);
-  line-height: 1.35;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
   text-transform: uppercase;
-  color: var(--black);
-  letter-spacing: 0.025em;
+  letter-spacing: 0.04em;
+}
+
+.hero-col-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-weight: 800;
+  font-size: 1.12rem;
+  line-height: 1.3;
+  color: #1C1C1E;
+  margin: 0 0 6px;
+}
+
+.hero-col-desc {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #4b5563;
+  margin: 0;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.hero-trust-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.trust-chip {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(229, 46, 46, 0.08);
+  color: var(--red);
+  padding: 3px 8px;
+  border-radius: 999px;
 }
 
 /* ═══════════════ SECTION: ABOUT / STORY ═══════════════ */
@@ -2853,34 +2891,85 @@ a {
     margin: 0.6rem auto 0 !important;
   }
 
+  /* Mascot Tooltip neatly positioned above mascot without covering face */
   .mascot-click-challenge-hint {
-    font-size: 0.78rem !important;
-    padding: 0.3rem 0.8rem !important;
-    top: -20px !important;
-    max-width: 90vw !important;
+    position: relative !important;
+    top: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto 10px !important;
+    display: inline-block !important;
+    font-size: 0.76rem !important;
+    padding: 0.35rem 0.9rem !important;
+    max-width: 92vw !important;
     white-space: normal !important;
     text-align: center !important;
   }
 
+  /* Single, elegant Apple Hero Card on mobile - No redundant 2nd box */
   .hero-bottom-grid {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
     gap: 0.75rem !important;
-    margin-top: 0.5rem !important;
-    max-width: 420px !important;
+    margin-top: 0.3rem !important;
+    max-width: 390px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding: 0 10px !important;
   }
 
-  .hero-col {
-    padding: 0.75rem 1rem !important;
-    border-radius: 16px !important;
-    font-size: 0.85rem !important;
+  .hero-col-sub {
+    display: none !important;
   }
 
-  .hero-centerpiece-wrap {
-    margin: 0.5rem auto !important;
+  .hero-col-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1rem 1.15rem !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 8px 24px rgba(180, 100, 20, 0.12) !important;
+  }
+
+  .hero-col-main .hero-col-title {
+    font-size: 1.05rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .hero-col-main .hero-col-desc {
+    font-size: 0.83rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .hero-col-main .hero-trust-chips {
+    justify-content: center !important;
+  }
+
+  .hero-cta-box {
+    margin-top: 0.4rem !important;
+    margin-bottom: 0.2rem !important;
+    width: 100% !important;
+  }
+
+  .hero-cta-box .blob-btn {
+    width: 100% !important;
+    max-width: 330px !important;
+    padding: 12px 22px !important;
+    font-size: 0.95rem !important;
+    border-radius: var(--radius-full) !important;
+  }
+
+  .hero-section {
+    padding-bottom: 0.8rem !important;
+    overflow: hidden !important;
+  }
+
+  .hero-section + .jelly-divider {
+    margin-top: -1px !important;
   }
 
   /* Category Bar - Smooth Apple HIG Single-Row Horizontal Momentum Carousel */

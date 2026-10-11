@@ -244,8 +244,8 @@ a {
 }
 
 .loader-mascot-box {
-  width: min(70vw, 240px);
-  height: min(70vw, 240px);
+  width: min(85vw, 315px);
+  height: min(85vw, 315px);
   position: relative;
   display: flex;
   align-items: center;
@@ -253,16 +253,16 @@ a {
 }
 
 .loader-brand-seal-wrap {
-  width: min(55vw, 190px);
-  height: min(55vw, 190px);
-  background: #ffffff;
+  width: min(72vw, 250px);
+  height: min(72vw, 250px);
+  background: transparent;
   border-radius: 50%;
-  border: 4px solid #1b1b1b;
-  box-shadow: 6px 8px 0px #1b1b1b, 0 12px 35px rgba(0,0,0,0.3);
+  border: none;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px;
+  padding: 0;
   animation: brandPulse 1.8s infinite ease-in-out;
 }
 
@@ -270,6 +270,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.45));
 }
 
 @keyframes brandPulse {

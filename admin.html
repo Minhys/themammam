@@ -959,7 +959,7 @@
           <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.4rem; color:#333;">
             👤 Tên đăng nhập Admin:
           </label>
-          <input type="text" id="adminLoginUsername" class="form-input" placeholder="Nhập tài khoản (vd: admin)" required autocomplete="username" />
+          <input type="text" id="adminLoginUsername" class="form-input" placeholder="Nhập tên tài khoản quản trị" required autocomplete="username" />
         </div>
 
         <div>
@@ -972,11 +972,6 @@
               👁️
             </button>
           </div>
-        </div>
-
-        <div style="background:#fff3cd; border:1.5px dashed #f4a804; border-radius:12px; padding:0.6rem 0.8rem; font-size:0.82rem; color:#856404; line-height:1.4;">
-          🔑 <strong>Tài khoản mặc định:</strong><br/>
-          Tên đăng nhập: <code>admin</code> · Mật khẩu: <code>themammam2026</code>
         </div>
 
         <button type="submit" class="blob-btn" style="width:100%; margin-top:0.4rem; justify-content:center;">
@@ -1010,7 +1005,7 @@
 
         <div class="admin-header-actions" style="display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
           <div style="background:#e8f5e9; border:1.5px solid #2e7d32; border-radius:30px; padding:4px 12px; font-size:0.82rem; font-weight:700; color:#2e7d32;">
-            👤 Quản trị viên: <span id="adminSessionUsername">admin</span>
+            👤 Quản trị viên: <span id="adminSessionUsername">booiu</span>
           </div>
           <a href="index.html" class="nav-pill" style="padding:0.4rem 1rem; font-size:0.88rem;">
             🛒 Xem Cửa Hàng
@@ -1982,19 +1977,6 @@
   <script src="js/voucher-security.js"></script>
   <script>
     // ════════════════ ADMIN CORE STATE ════════════════
-    const DEFAULT_ADMIN = {
-      username: 'admin',
-      password: 'themammam2026'
-    };
-
-    function getAdminCredentials() {
-      const stored = localStorage.getItem('mammam_admin_account');
-      if (stored) {
-        try { return JSON.parse(stored); } catch (e) {}
-      }
-      return DEFAULT_ADMIN;
-    }
-
     function checkAdminSession() {
       const isLogged = sessionStorage.getItem('mammam_admin_logged') === 'true' ||
                        localStorage.getItem('mammam_admin_logged') === 'true';
@@ -2004,8 +1986,9 @@
       if (isLogged) {
         loginView.style.display = 'none';
         portalView.style.display = 'flex';
-        const creds = getAdminCredentials();
-        document.getElementById('adminSessionUsername').textContent = creds.username;
+        const activeUser = sessionStorage.getItem('mammam_admin_username') || 'booiu';
+        const badge = document.getElementById('adminSessionUsername');
+        if (badge) badge.textContent = activeUser;
         loadAdminData();
       } else {
         loginView.style.display = 'flex';
@@ -2022,9 +2005,13 @@
       e.preventDefault();
       const user = document.getElementById('adminLoginUsername').value.trim();
       const pass = document.getElementById('adminLoginPassword').value;
-      const creds = getAdminCredentials();
 
-      // Thử xác thực với Cloudflare Serverless Edge API
+      if (!user || !pass) {
+        showAdminToast('Vui lòng nhập tên đăng nhập và mật khẩu!', 'error');
+        return;
+      }
+
+      // Xác thực độc quyền qua Cloudflare Serverless D1 API
       fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2035,28 +2022,16 @@
         if (data && data.success && data.token) {
           sessionStorage.setItem('mammam_admin_logged', 'true');
           sessionStorage.setItem('mammam_admin_token', data.token);
+          sessionStorage.setItem('mammam_admin_username', data.user ? data.user.username : user);
+          localStorage.setItem('mammam_admin_logged', 'true');
           showAdminToast('Đăng nhập Quản Trị Viên an toàn thành công! 🔐', 'success');
           checkAdminSession();
-          return;
-        }
-        // Fallback kiểm tra cục bộ
-        if (user === creds.username && pass === creds.password) {
-          sessionStorage.setItem('mammam_admin_logged', 'true');
-          showAdminToast('Đăng nhập Quản Trị Viên thành công! 🔐', 'success');
-          checkAdminSession();
         } else {
-          showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
+          showAdminToast(data && data.message ? data.message : 'Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
         }
       })
-      .catch(() => {
-        // Fallback khi chạy không có worker
-        if (user === creds.username && pass === creds.password) {
-          sessionStorage.setItem('mammam_admin_logged', 'true');
-          showAdminToast('Đăng nhập Quản Trị Viên (chế độ cục bộ) thành công! 🔐', 'success');
-          checkAdminSession();
-        } else {
-          showAdminToast('Sai Tên đăng nhập hoặc Mật khẩu quản trị!', 'error');
-        }
+      .catch((err) => {
+        showAdminToast('Lỗi kết nối máy chủ Cloudflare: ' + (err.message || 'Vui lòng thử lại sau'), 'error');
       });
     }
 
@@ -2064,7 +2039,9 @@
       if (confirm('Bạn có chắc muốn đăng xuất khỏi trang Quản Trị Admin?')) {
         sessionStorage.removeItem('mammam_admin_logged');
         sessionStorage.removeItem('mammam_admin_token');
+        sessionStorage.removeItem('mammam_admin_username');
         localStorage.removeItem('mammam_admin_logged');
+        localStorage.removeItem('mammam_admin_account');
         showAdminToast('Đã đăng xuất an toàn.');
         checkAdminSession();
       }
@@ -2530,25 +2507,46 @@
       }
     }
 
-    function handleChangeAdminPassword() {
+    async function handleChangeAdminPassword() {
       const curr = document.getElementById('changePassCurrent').value;
       const newP = document.getElementById('changePassNew').value;
-      const creds = getAdminCredentials();
+      const token = sessionStorage.getItem('mammam_admin_token');
 
-      if (curr !== creds.password) {
-        showAdminToast('Mật khẩu hiện tại không đúng!', 'error');
+      if (!curr) {
+        showAdminToast('Vui lòng nhập mật khẩu hiện tại!', 'error');
         return;
       }
-      if (!newP || newP.length < 6) {
-        showAdminToast('Mật khẩu mới phải từ 6 ký tự trở lên!', 'error');
+      if (!newP || newP.length < 8) {
+        showAdminToast('Mật khẩu mới phải từ 8 ký tự trở lên!', 'error');
         return;
       }
 
-      creds.password = newP;
-      localStorage.setItem('mammam_admin_account', JSON.stringify(creds));
-      document.getElementById('changePassCurrent').value = '';
-      document.getElementById('changePassNew').value = '';
-      showAdminToast('Đổi mật khẩu Admin thành công! Hãy ghi nhớ mật khẩu mới.', 'success');
+      if (token) {
+        try {
+          const res = await fetch('/api/admin/change-password', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ currentPassword: curr, newPassword: newP })
+          });
+          const data = await res.json();
+          if (data && data.success) {
+            showAdminToast('Đổi mật khẩu Admin trên Cloudflare D1 thành công! 🔐', 'success');
+            document.getElementById('changePassCurrent').value = '';
+            document.getElementById('changePassNew').value = '';
+            return;
+          } else {
+            showAdminToast(data.message || 'Mật khẩu hiện tại không đúng!', 'error');
+            return;
+          }
+        } catch (e) {
+          showAdminToast('Lỗi khi đổi mật khẩu: ' + e.message, 'error');
+          return;
+        }
+      }
+      showAdminToast('Phiên làm việc hết hạn, vui lòng đăng nhập lại!', 'error');
     }
 
     function printOrderInvoice(code) {
@@ -3763,18 +3761,9 @@
         }
       }
 
-      const creds = getAdminCredentials();
-      if (currentPass !== creds.password) {
-        showAdminToast('Mật khẩu hiện tại không đúng!', 'error');
-        return;
+      } else {
+        showAdminToast('Phiên làm việc hết hạn hoặc chưa đăng nhập, vui lòng đăng nhập lại!', 'error');
       }
-
-      creds.password = newPass;
-      localStorage.setItem('mammam_admin_account', JSON.stringify(creds));
-      showAdminToast('Đã đổi mật khẩu quản trị thành công! 🔐', 'success');
-      document.getElementById('adminCurrentPassInput').value = '';
-      document.getElementById('adminNewPassInput').value = '';
-      document.getElementById('adminConfirmPassInput').value = '';
     }
 
     // Tự động ngắt phiên đăng xuất sau 30 phút không hoạt động để tránh bị chiếm quyền

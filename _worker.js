@@ -408,11 +408,6 @@ export default {
             const inputHash = await sha256(password + admin.salt);
             if (inputHash === admin.password_hash) isValid = true;
           }
-        } else {
-          // Mặc định ban đầu nếu chưa có D1
-          if (username === 'admin' && (password === 'admin123' || password === env.ADMIN_DEFAULT_PASSWORD)) {
-            isValid = true;
-          }
         }
 
         if (!isValid) {

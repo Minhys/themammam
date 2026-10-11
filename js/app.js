@@ -772,6 +772,7 @@
       if (data && data.success && data.token) {
         sessionStorage.setItem('mammam_admin_logged', 'true');
         sessionStorage.setItem('mammam_admin_token', data.token);
+        sessionStorage.setItem('mammam_admin_username', data.user ? data.user.username : phoneOrEmail);
         localStorage.setItem('mammam_admin_logged', 'true');
         showToast('Đăng nhập Quản Trị Viên thành công! Đang chuyển đến trang Quản Trị... 🔐', 'success');
         closeModal('authModal');
@@ -785,24 +786,7 @@
       processCustomerLogin(phoneOrEmail, pass);
     })
     .catch(() => {
-      // Fallback khi chạy offline
-      let adminCreds = { username: 'admin', password: 'themammam2026' };
-      const storedAdmin = localStorage.getItem('mammam_admin_account');
-      if (storedAdmin) {
-        try {
-          const parsed = JSON.parse(storedAdmin);
-          if (parsed && parsed.username && parsed.password) adminCreds = parsed;
-        } catch (e) {}
-      }
-      if (phoneOrEmail.toLowerCase() === adminCreds.username.toLowerCase() && pass === adminCreds.password) {
-        sessionStorage.setItem('mammam_admin_logged', 'true');
-        localStorage.setItem('mammam_admin_logged', 'true');
-        showToast('Đăng nhập Quản Trị Viên thành công! Đang chuyển đến trang Quản Trị... 🔐', 'success');
-        closeModal('authModal');
-        updateUserUI();
-        setTimeout(() => { window.location.href = 'admin.html'; }, 500);
-        return;
-      }
+      // Khi gặp lỗi mạng/máy chủ -> Kiểm tra tài khoản khách hàng
       processCustomerLogin(phoneOrEmail, pass);
     });
   }

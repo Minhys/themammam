@@ -86,9 +86,9 @@ CREATE TABLE IF NOT EXISTS admin_users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Mật khẩu mặc định: admin123 (SHA-256 băm kèm salt)
+-- Tài khoản Quản trị viên duy nhất: booiu
 INSERT OR IGNORE INTO admin_users (username, password_hash, salt, role)
-VALUES ('admin', '420a4066c10319caab92cb1f2eb0a649c090be4df08a108a7ae79bb77b5a5b5f', 'themammam_salt_2026', 'superadmin');
+VALUES ('booiu', '31ac9d3e60c51d89364582098ed2ea7bbaf6904c84b0aef851bc9bc339cffbad', 'themammam_salt_2026', 'superadmin');
 
 -- 6. BẢNG SẢN PHẨM & THỰC ĐƠN (PRODUCTS)
 CREATE TABLE IF NOT EXISTS products (

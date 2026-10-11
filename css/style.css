@@ -391,7 +391,9 @@ a {
 
 .hero-section + .jelly-divider svg,
 .jelly-divider.jelly-divider-compact svg,
-.game-section + .jelly-divider svg {
+.game-section + .jelly-divider svg,
+.menu-section + .jelly-divider svg,
+.about-section + .jelly-divider svg {
   height: clamp(24px, 3.5vw, 44px);
 }
 
@@ -906,7 +908,7 @@ a {
 .about-section {
   position: relative;
   z-index: 20;
-  padding: clamp(3rem, 6vw, 7rem) clamp(1.2rem, 4vw, 5rem);
+  padding: clamp(1.2rem, 2.2vw, 2.4rem) clamp(1rem, 3.5vw, 3.5rem);
   text-align: center;
   background: linear-gradient(180deg, #E52E2E 0%, #C41616 100%);
 }
@@ -914,26 +916,32 @@ a {
 .section-label {
   display: inline-block;
   font-family: var(--font-coiny);
-  font-size: clamp(1.2rem, 2.2vw, 2.6rem);
-  color: var(--red);
+  font-size: clamp(0.95rem, 1.5vw, 1.35rem);
+  color: var(--mustard);
   line-height: 1.1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.15rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .about-hero-title {
   font-family: var(--font-saira);
   font-weight: 900;
-  font-size: clamp(2.2rem, 6.5vw, 5.6rem);
-  line-height: 1.18;
+  font-size: clamp(1.6rem, 3.6vw, 3.4rem);
+  line-height: 1.15;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  margin-top: 0.6rem;
+  letter-spacing: 0.01em;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
 }
 
-.about-hero-title .title-break {
+.about-hero-title .about-title-line-1 {
   display: block;
-  height: 0.35rem;
+}
+
+.about-hero-title .about-title-line-2 {
+  display: block;
+  white-space: nowrap;
 }
 
 .about-hero-title .title-dot {
@@ -960,8 +968,8 @@ a {
   -webkit-backdrop-filter: blur(14px);
   border: 2px solid rgba(255, 215, 80, 0.4);
   border-radius: var(--radius-xl);
-  padding: clamp(1.4rem, 3.2vw, 2.4rem);
-  margin: 2.2rem auto 0;
+  padding: clamp(1rem, 2.2vw, 1.8rem);
+  margin: 1.1rem auto 0;
   max-width: 860px;
   text-align: left;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
@@ -1069,7 +1077,7 @@ a {
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1rem, 2vw, 2.5rem);
   max-width: 1100px;
-  margin: 3.5rem auto 0;
+  margin: 1.6rem auto 0;
 }
 
 @media (max-width: 768px) {
@@ -2971,6 +2979,15 @@ a {
 
   .hero-section + .jelly-divider {
     margin-top: -1px !important;
+  }
+
+  .about-section {
+    padding: 1.2rem 1rem 1.6rem !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(1.15rem, 4.8vw, 1.65rem) !important;
+    line-height: 1.2 !important;
   }
 
   /* Category Bar - Smooth Apple HIG Single-Row Horizontal Momentum Carousel */

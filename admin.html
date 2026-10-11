@@ -2108,7 +2108,8 @@
             }));
             currentOrders = d1Orders;
             saveStoredOrders(currentOrders);
-            renderAdminDashboard();
+            renderAdminStats();
+            renderOrdersTable();
           }
         })
         .catch(err => console.warn('D1 Orders fetch error, using local:', err));
@@ -3759,8 +3760,6 @@
         } catch (e) {
           showAdminToast('Lỗi khi gửi yêu cầu đổi mật khẩu: ' + e.message, 'error');
         }
-      }
-
       } else {
         showAdminToast('Phiên làm việc hết hạn hoặc chưa đăng nhập, vui lòng đăng nhập lại!', 'error');
       }

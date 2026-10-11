@@ -761,11 +761,14 @@
       return;
     }
 
+    const cleanUser = (phoneOrEmail || '').trim().toLowerCase();
+    const cleanPass = (pass || '').trim();
+
     // 1. Thử xác thực Quản trị viên qua Cloudflare Serverless D1 API
     fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: phoneOrEmail, password: pass })
+      body: JSON.stringify({ username: cleanUser, password: cleanPass })
     })
     .then(res => res.json())
     .then(data => {

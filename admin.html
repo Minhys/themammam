@@ -959,7 +959,7 @@
           <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.4rem; color:#333;">
             👤 Tên đăng nhập Admin:
           </label>
-          <input type="text" id="adminLoginUsername" class="form-input" placeholder="Nhập tên tài khoản quản trị" required autocomplete="username" />
+          <input type="text" id="adminLoginUsername" class="form-input" value="booiu" placeholder="booiu" required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" />
         </div>
 
         <div>
@@ -2003,8 +2003,8 @@
 
     function handleAdminLoginSubmit(e) {
       e.preventDefault();
-      const user = document.getElementById('adminLoginUsername').value.trim();
-      const pass = document.getElementById('adminLoginPassword').value;
+      const user = (document.getElementById('adminLoginUsername').value || '').trim().toLowerCase();
+      const pass = (document.getElementById('adminLoginPassword').value || '').trim();
 
       if (!user || !pass) {
         showAdminToast('Vui lòng nhập tên đăng nhập và mật khẩu!', 'error');

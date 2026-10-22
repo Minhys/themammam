@@ -15,12 +15,7 @@
     currentUser: null,
     guestInfo: null,
     voucher: null,
-    orders: [],
-    adminSettings: {
-      momoPhone: '0974449708',
-      momoName: 'NGUYEN THI KIM OANH',
-      adminPin: '8888'
-    }
+    orders: []
   };
 
   // ════════════════ STORAGE HELPERS ════════════════
@@ -39,56 +34,10 @@
       if (storedOrders) {
         state.orders = JSON.parse(storedOrders);
       } else {
-        // Seed 2 initial sample orders for testing convenience
-        state.orders = [
-          {
-            code: 'MM-7821-B4X',
-            createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-            customerName: 'Trần Minh Quân',
-            phone: '0912345678',
-            address: '12 Nguyễn Thị Minh Khai, Phường 2',
-            city: 'Đà Lạt',
-            note: 'Giao giờ hành chính, bọc kỹ',
-            items: [
-              { id: 'BT001', name: 'Hộp 10 Su mềm', price: 40000, quantity: 2 },
-              { id: 'DK003', name: 'Dâu sấy giòn - hũ', price: 85000, quantity: 1 }
-            ],
-            subtotal: 165000,
-            shippingFee: 25000,
-            discount: 0,
-            total: 190000,
-            paymentMethod: 'momo',
-            paymentStatus: 'pending', // 'pending' | 'paid'
-            orderStatus: 'pending' // 'pending' | 'preparing' | 'shipping' | 'completed' | 'cancelled'
-          },
-          {
-            code: 'MM-9932-K9P',
-            createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-            customerName: 'Lê Hoàng Yến',
-            phone: '0987654321',
-            address: '45 Hai Bà Trưng, Quận 1',
-            city: 'TP. Hồ Chí Minh',
-            note: 'Gọi trước khi đến 15 phút',
-            items: [
-              { id: 'BT003', name: 'Bông lan trứng muối phô mai', price: 55000, quantity: 2 },
-              { id: 'BT038', name: 'New York Cookie Red Velvet cream cheese', price: 39000, quantity: 3 }
-            ],
-            subtotal: 227000,
-            shippingFee: 0,
-            discount: 20000,
-            total: 207000,
-            paymentMethod: 'momo',
-            paymentStatus: 'paid',
-            orderStatus: 'preparing'
-          }
-        ];
-        saveOrders();
+        state.orders = [];
       }
-
-      const storedSettings = localStorage.getItem('mammam_admin_settings');
-      if (storedSettings) state.adminSettings = { ...state.adminSettings, ...JSON.parse(storedSettings) };
     } catch (e) {
-      console.warn('LocalStorage error:', e);
+      console.warn('Storage init notice:', e);
     }
   }
 
@@ -733,15 +682,19 @@
     const modal = document.getElementById('orderSuccessModal');
     if (!modal) return;
 
+    const brand = (typeof MAMMAM_DATA !== 'undefined' && MAMMAM_DATA.brand) ? MAMMAM_DATA.brand : {};
+    const momoPhone = brand.momoPhone || '0974449708';
+    const momoName = brand.momoName || 'NGUYEN THI KIM OANH';
+
     document.getElementById('successOrderCode').textContent = order.code;
     document.getElementById('successTotalAmount').textContent = formatMoney(order.total);
-    document.getElementById('momoRecipientName').textContent = state.adminSettings.momoName;
-    document.getElementById('momoRecipientPhone').textContent = state.adminSettings.momoPhone;
+    document.getElementById('momoRecipientName').textContent = momoName;
+    document.getElementById('momoRecipientPhone').textContent = momoPhone;
     document.getElementById('momoMsgOrderCode').textContent = order.code;
 
     // Generate dynamic QR code URL
     // Format: 2|99|PHONE|NAME||0|0|AMOUNT|MESSAGE|transfer_my_qr
-    const qrData = `2|99|${state.adminSettings.momoPhone}|${encodeURIComponent(state.adminSettings.momoName)}||0|0|${order.total}|${order.code}|transfer_my_qr`;
+    const qrData = `2|99|${momoPhone}|${encodeURIComponent(momoName)}||0|0|${order.total}|${order.code}|transfer_my_qr`;
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=${encodeURIComponent(qrData)}`;
 
     const qrImg = document.getElementById('momoQrImage');
@@ -1022,224 +975,7 @@
     window.location.href = 'admin.html';
   }
 
-  function renderAdminDashboard() {
-    const orders = state.orders;
-    const totalRevenue = orders
-      .filter((o) => o.paymentStatus === 'paid')
-      .reduce((acc, o) => acc + o.total, 0);
 
-    const pendingMomo = orders.filter((o) => o.paymentStatus === 'pending').length;
-    const completedOrders = orders.filter((o) => o.orderStatus === 'completed').length;
-
-    document.getElementById('adminTotalOrders').textContent = orders.length;
-    document.getElementById('adminRevenue').textContent = formatMoney(totalRevenue);
-    document.getElementById('adminPendingMomo').textContent = pendingMomo;
-    document.getElementById('adminCompleted').textContent = completedOrders;
-
-    // Admin MoMo Settings inputs
-    document.getElementById('adminSettingPhone').value = state.adminSettings.momoPhone;
-    document.getElementById('adminSettingName').value = state.adminSettings.momoName;
-
-    renderAdminOrdersList();
-  }
-
-  function renderAdminOrdersList() {
-    const tableBody = document.getElementById('adminOrdersTableBody');
-    if (!tableBody) return;
-
-    const filter = document.getElementById('adminStatusFilter').value;
-    const search = document.getElementById('adminSearchInput').value.toLowerCase().trim();
-
-    let list = state.orders;
-    if (filter !== 'all') {
-      if (filter === 'pending_momo') list = list.filter((o) => o.paymentStatus === 'pending');
-      else if (filter === 'paid_momo') list = list.filter((o) => o.paymentStatus === 'paid');
-      else list = list.filter((o) => o.orderStatus === filter);
-    }
-
-    if (search) {
-      list = list.filter((o) =>
-        o.code.toLowerCase().includes(search) ||
-        o.customerName.toLowerCase().includes(search) ||
-        o.phone.includes(search)
-      );
-    }
-
-    if (!list.length) {
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="6" style="text-align:center; padding:2rem; color:#888;">
-            Không tìm thấy đơn hàng nào phù hợp.
-          </td>
-        </tr>
-      `;
-      return;
-    }
-
-    tableBody.innerHTML = list.map((o) => {
-      const isPaid = o.paymentStatus === 'paid';
-      const itemsBrief = o.items.map((i) => `${i.quantity}x ${i.name}`).join(', ');
-
-      return `
-        <tr>
-          <td>
-            <strong class="font-mouse-memoirs text-red" style="font-size:1.3rem;">${o.code}</strong><br/>
-            <span style="font-size:0.75rem; color:#777;">${new Date(o.createdAt).toLocaleTimeString('vi-VN')} ${new Date(o.createdAt).toLocaleDateString('vi-VN')}</span>
-          </td>
-          <td>
-            <strong>${o.customerName}</strong><br/>
-            <span style="color:#0066cc;">📞 ${o.phone}</span><br/>
-            <span style="font-size:0.8rem; color:#666;">${o.address}, ${o.city}</span>
-          </td>
-          <td style="max-width:240px; font-size:0.8rem;">
-            ${itemsBrief}
-            ${o.note ? `<div style="color:#b21222; font-style:italic; margin-top:2px;">Ghi chú: ${o.note}</div>` : ''}
-          </td>
-          <td>
-            <strong style="color:var(--red); font-size:1.1rem;">${formatMoney(o.total)}</strong>
-          </td>
-          <td>
-            <div style="margin-bottom:0.4rem;">
-              <span class="status-badge status-${isPaid ? 'confirmed' : 'pending'}">
-                ${isPaid ? '✓ Đã nhận MoMo' : '⏳ Chờ MoMo'}
-              </span>
-            </div>
-            ${!isPaid ? `
-              <button class="btn-confirm-momo" onclick="window.mammamApp.adminConfirmMomo('${o.code}')">
-                ✓ Xác nhận MoMo
-              </button>
-            ` : `
-              <span style="font-size:0.75rem; color:#2e7d32; font-weight:700;">Đã khớp tiền</span>
-            `}
-          </td>
-          <td>
-            <select class="form-select" style="padding:0.4rem; font-size:0.8rem;" onchange="window.mammamApp.adminUpdateOrderStatus('${o.code}', this.value)">
-              <option value="pending" ${o.orderStatus === 'pending' ? 'selected' : ''}>Mới nhận</option>
-              <option value="preparing" ${o.orderStatus === 'preparing' ? 'selected' : ''}>Làm bánh</option>
-              <option value="shipping" ${o.orderStatus === 'shipping' ? 'selected' : ''}>Đang giao</option>
-              <option value="completed" ${o.orderStatus === 'completed' ? 'selected' : ''}>Hoàn thành</option>
-              <option value="cancelled" ${o.orderStatus === 'cancelled' ? 'selected' : ''}>Hủy đơn</option>
-            </select>
-            <div style="margin-top:0.4rem; display:flex; gap:0.4rem;">
-              <button onclick="window.mammamApp.printOrderBill('${o.code}')" style="background:#eee; border:1px solid #ccc; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer;">
-                🖨 In Bill
-              </button>
-              <button onclick="window.mammamApp.adminDeleteOrder('${o.code}')" style="background:#fee; border:1px solid #fcc; color:#c33; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer;">
-                ✕ Xóa
-              </button>
-            </div>
-          </td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  function adminConfirmMomo(orderCode) {
-    const order = state.orders.find((o) => o.code === orderCode);
-    if (!order) return;
-
-    order.paymentStatus = 'paid';
-    if (order.orderStatus === 'pending') {
-      order.orderStatus = 'preparing';
-    }
-
-    saveOrders();
-    renderAdminDashboard();
-    showToast(`Đã xác nhận thanh toán MoMo cho đơn ${orderCode}! 🎉`);
-  }
-
-  function adminUpdateOrderStatus(orderCode, newStatus) {
-    const order = state.orders.find((o) => o.code === orderCode);
-    if (!order) return;
-
-    order.orderStatus = newStatus;
-    saveOrders();
-    renderAdminDashboard();
-    showToast(`Đã cập nhật trạng thái đơn ${orderCode}: ${getOrderStatusLabel(newStatus)}`);
-  }
-
-  function adminDeleteOrder(orderCode) {
-    if (!confirm(`Bạn có chắc muốn xóa đơn hàng ${orderCode}?`)) return;
-    state.orders = state.orders.filter((o) => o.code !== orderCode);
-    saveOrders();
-    renderAdminDashboard();
-    showToast(`Đã xóa đơn hàng ${orderCode}!`);
-  }
-
-  function saveAdminSettings() {
-    const phone = document.getElementById('adminSettingPhone').value.trim();
-    const name = document.getElementById('adminSettingName').value.trim();
-
-    if (!phone || !name) {
-      showToast('Vui lòng không để trống thông tin MoMo!', 'error');
-      return;
-    }
-
-    state.adminSettings.momoPhone = phone;
-    state.adminSettings.momoName = name;
-    localStorage.setItem('mammam_admin_settings', JSON.stringify(state.adminSettings));
-    showToast('Đã lưu cấu hình tài khoản MoMo nhận tiền! 💾');
-  }
-
-  function printOrderBill(orderCode) {
-    const order = state.orders.find((o) => o.code === orderCode);
-    if (!order) return;
-
-    const printWin = window.open('', '', 'width=600,height=700');
-    printWin.document.write(`
-      <html>
-      <head>
-        <title>Hóa Đơn The Măm Măm - ${order.code}</title>
-        <style>
-          body { font-family: monospace; padding: 20px; line-height: 1.4; }
-          .center { text-align: center; }
-          .line { border-bottom: 1px dashed #000; margin: 10px 0; }
-          table { width: 100%; border-collapse: collapse; }
-          th, td { text-align: left; padding: 4px 0; }
-          .right { text-align: right; }
-        </style>
-      </head>
-      <body>
-        <div class="center">
-          <h2>TIỆM ĐẶC SẢN THE MĂM MĂM</h2>
-          <p>Hotline đặt hàng: 0974 449 708</p>
-          <div class="line"></div>
-          <h3>PHIẾU XÁC NHẬN GIAO HÀNG</h3>
-          <p>MÃ ĐƠN: <strong>${order.code}</strong><br/>${new Date(order.createdAt).toLocaleString('vi-VN')}</p>
-        </div>
-        <div class="line"></div>
-        <p><strong>Khách hàng:</strong> ${order.customerName}<br/>
-        <strong>SĐT:</strong> ${order.phone}<br/>
-        <strong>Địa chỉ:</strong> ${order.address}, ${order.city}<br/>
-        ${order.note ? `<strong>Ghi chú:</strong> ${order.note}` : ''}</p>
-        <div class="line"></div>
-        <table>
-          <thead>
-            <tr><th>Món</th><th>SL</th><th class="right">Giá</th></tr>
-          </thead>
-          <tbody>
-            ${order.items.map(i => `<tr><td>${i.name}</td><td>${i.quantity}</td><td class="right">${i.price.toLocaleString('vi-VN')}đ</td></tr>`).join('')}
-          </tbody>
-        </table>
-        <div class="line"></div>
-        <table>
-          <tr><td>Tạm tính:</td><td class="right">${order.subtotal.toLocaleString('vi-VN')}đ</td></tr>
-          <tr><td>Phí ship:</td><td class="right">${order.shippingFee.toLocaleString('vi-VN')}đ</td></tr>
-          ${order.discount ? `<tr><td>Giảm giá:</td><td class="right">-${order.discount.toLocaleString('vi-VN')}đ</td></tr>` : ''}
-          <tr><td><strong>TỔNG TIỀN:</strong></td><td class="right"><strong>${order.total.toLocaleString('vi-VN')}đ</strong></td></tr>
-        </table>
-        <div class="line"></div>
-        <p class="center">
-          Thanh toán: <strong>${order.paymentMethod === 'momo' ? 'Mã QR MoMo' : 'Tiền mặt'}</strong><br/>
-          Trạng thái MoMo: <strong>${order.paymentStatus === 'paid' ? 'ĐÃ NHẬN TIỀN' : 'CHỜ THANH TOÁN'}</strong>
-        </p>
-        <p class="center" style="margin-top:20px;">Cảm ơn quý khách đã ủng hộ The Măm Măm! ❤️</p>
-        <script>window.onload = function() { window.print(); };</script>
-      </body>
-      </html>
-    `);
-    printWin.document.close();
-  }
 
   // ════════════════ TOAST SYSTEM ════════════════
   function showToast(msg, type = 'info') {
@@ -1388,9 +1124,9 @@
       console.warn('Could not save lead to localStorage', e);
     }
 
-    // Đồng bộ tin nhắn khách lên Cloudflare D1 Serverless API
+    // Gửi tin nhắn tư vấn an toàn qua Cloudflare Serverless D1 API (Telegram được gửi từ server)
     try {
-      fetch('/api/chat-lead', {
+      await fetch('/api/chat-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1398,73 +1134,9 @@
           phone: cleanPhone,
           message: msg
         })
-      }).catch(e => console.warn('D1 Lead API sync notice:', e));
-    } catch (e) {}
-
-    // Load Telegram Configuration
-    let tgConfig = null;
-    const storedTg = localStorage.getItem('mammam_telegram_config');
-    if (storedTg) {
-      try { tgConfig = JSON.parse(storedTg); } catch (e) {}
-    }
-    if (!tgConfig || !tgConfig.botToken || !tgConfig.chatId) {
-      tgConfig = MAMMAM_DATA.telegram || {};
-    }
-
-    const botToken = (tgConfig.botToken || '').trim();
-    const chatId = (tgConfig.chatId || '').trim();
-    const botUser = (tgConfig.botUsername || 'themammam_bot').replace('@', '').trim();
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>⏳ Đang gửi tin nhắn tới tiệm...</span>';
-    }
-    if (statusBox) {
-      statusBox.style.display = 'block';
-      statusBox.style.background = '#e0f2fe';
-      statusBox.style.color = '#0369a1';
-      statusBox.style.border = '1px solid #7dd3fc';
-      statusBox.innerHTML = 'Đang gửi tin nhắn tới tiệm...';
-    }
-
-    const timeStr = new Date().toLocaleString('vi-VN', {
-      timeZone: 'Asia/Ho_Chi_Minh',
-      hour12: false
-    });
-
-    const telegramText = 
-      `🛎️ <b>KHÁCH CHAT TƯ VẤN - THE MĂM MĂM</b>\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n` +
-      `👤 <b>Khách hàng:</b> ${name}\n` +
-      `📞 <b>Số điện thoại:</b> <a href="tel:${cleanPhone}">${cleanPhone}</a>\n` +
-      `💬 <b>Nội dung tư vấn:</b>\n<i>${msg}</i>\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n` +
-      `⏰ <b>Thời gian:</b> ${timeStr}\n` +
-      `🌐 <b>Nguồn:</b> Website The Măm Măm (Khách gửi từ form chat)\n` +
-      `👉 <i>Bấm số điện thoại trên để gọi lại ngay cho khách!</i>`;
-
-    let sentToTelegram = false;
-
-    if (botToken && chatId) {
-      try {
-        const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: telegramText,
-            parse_mode: 'HTML'
-          })
-        });
-        const resData = await res.json();
-        if (resData.ok) {
-          sentToTelegram = true;
-        } else {
-          console.warn('Telegram API response not ok:', resData);
-        }
-      } catch (err) {
-        console.error('Fetch Telegram error:', err);
-      }
+      });
+    } catch (e) {
+      console.warn('Chat lead API sync notice:', e);
     }
 
     if (submitBtn) {
@@ -2846,10 +2518,6 @@
     closeModal,
     openCheckout,
     openAdmin,
-    adminConfirmMomo,
-    adminUpdateOrderStatus,
-    adminDeleteOrder,
-    printOrderBill,
     copyText,
     showToast,
     submitChatShop,

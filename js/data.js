@@ -20,16 +20,6 @@ const MAMMAM_DATA = {
     "standardShipFee": 25000
 },
 
-  telegram: {
-    // ⚙️ CẤU HÌNH BOT TELEGRAM NHẬN TIN NHẮN TỪ KHÁCH HÀNG:
-    // 1. botToken: Lấy từ @BotFather trên Telegram (gõ /newbot)
-    // 2. chatId: ID cá nhân hoặc ID Group của bạn (lấy qua @userinfobot hoặc @RawDataBot)
-    // 3. botUsername: Username của bot (ví dụ: 'themammam_bot')
-    botToken: '',
-    chatId: '',
-    botUsername: 'themammam_bot'
-  },
-
   categories: [
     {
         "id": "all",

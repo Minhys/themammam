@@ -4,6 +4,6 @@
   "private": true,
   "description": "The Măm Măm - Tiệm Bánh & Ăn Vặt Đà Lạt",
   "scripts": {
-    "build": "echo 'Static assets ready'"
+    "build": "npx terser js/data.js -c -m -o js/data.min.js && npx terser js/faq-data.js -c -m -o js/faq-data.min.js && npx terser js/faq-bot.js -c -m -o js/faq-bot.min.js && npx terser js/voucher-security.js -c -m -o js/voucher-security.min.js && npx terser js/app.js -c -m -o js/app.min.js"
   }
 }

@@ -48,7 +48,7 @@ Bạn có thể chọn nhận tin nhắn vào **Tài khoản cá nhân** của b
 1. Mở trang quản trị: **`http://127.0.0.1:3000/admin.html`**
 2. Đăng nhập tài khoản Admin:
    - **Tên đăng nhập:** `booiu`
-   - **Mật khẩu:** Mật khẩu quản trị viên bạn đã thiết lập (`P@ssw0rd2811`)
+   - **Mật khẩu:** Mật khẩu quản trị viên bạn đã thiết lập
 3. Kéo xuống phần **"⚙️ CẤU HÌNH HỆ THỐNG & TÀI KHOẢN ADMIN"** -> thẻ màu xanh **"✈️ Cấu Hình Telegram Bot"**:
    - **Bot Token**: Dán mã API Token từ `@BotFather`
    - **Chat ID**: Dán Chat ID cá nhân hoặc ID Group

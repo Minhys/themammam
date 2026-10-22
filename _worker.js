@@ -153,6 +153,15 @@ export default {
       });
     }
 
+    // 0. Tự động điều hướng (301/308 Canonical Redirect) toàn bộ truy cập từ link tạm workers.dev hoặc www về tên miền chính thức duy nhất themammam.io.vn
+    const canonicalHost = 'themammam.io.vn';
+    const currentHost = url.hostname.toLowerCase();
+    if (currentHost !== canonicalHost && (currentHost.endsWith('.workers.dev') || currentHost === 'www.' + canonicalHost)) {
+      const targetUrl = `https://${canonicalHost}${url.pathname}${url.search}`;
+      const statusCode = (request.method === 'GET' || request.method === 'HEAD') ? 301 : 308;
+      return Response.redirect(targetUrl, statusCode);
+    }
+
     // ════════════════ ROUTER: API ENDPOINTS ════════════════
     if (url.pathname.startsWith('/api/')) {
       const path = url.pathname.replace('/api', '');

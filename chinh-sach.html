@@ -2,6 +2,11 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    if (window.location.hostname !== 'themammam.io.vn' && (window.location.hostname.endsWith('.workers.dev') || window.location.hostname === 'www.themammam.io.vn')) {
+      window.location.replace('https://themammam.io.vn' + window.location.pathname + window.location.search + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quy Định & Chính Sách Bán Hàng | The Măm Măm Đặc Sản Đà Lạt</title>
   <meta name="description" content="Chính sách bán hàng, đồng kiểm khi nhận hàng, đổi trả 100%, bảo mật và hướng dẫn thanh toán của The Măm Măm Đặc Sản Đà Lạt." />

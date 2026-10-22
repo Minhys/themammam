@@ -4,13 +4,14 @@
   "main": "_worker.js",
   "compatibility_date": "2024-09-23",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "run_worker_first": true
   },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "themammam-db",
-      "database_id": "289611f6-0dd1-4910-a9c6-66e737c00ee2"
+      "database_id": "befc8f63-62a2-4bdd-9f60-994d22b84542"
     }
   ]
 }

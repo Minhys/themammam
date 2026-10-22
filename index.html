@@ -2,6 +2,11 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    if (window.location.hostname !== 'themammam.io.vn' && (window.location.hostname.endsWith('.workers.dev') || window.location.hostname === 'www.themammam.io.vn')) {
+      window.location.replace('https://themammam.io.vn' + window.location.pathname + window.location.search + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Măm Măm | Chuyên Đặc Sản Đà Lạt & Bánh Ngon Handmade</title>
   <meta name="description" content="Thương hiệu The Măm Măm — Chuyên đặc sản Đà Lạt thượng hạng: Khoai tây sấy giòn rong biển, dâu tây sấy thăng hoa, hoa quả sấy dẻo và bánh tươi nướng mỗi ngày. Đặt online giao hỏa tốc toàn quốc!" />
